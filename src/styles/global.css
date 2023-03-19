@@ -1,0 +1,88 @@
+/*======================Google Font========================*/
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+:root{
+    /*=======================Color==================*/
+    --color-primary: #444BF2;
+    --color-secondary: #C9CBFF;
+    --color-state-info: #577590;
+    --color-state-success: #90BE6D;
+    --color-state-warning: #F9C74F;
+    --color-state-error: #F94144;
+
+    /*======================Font and Typography==================*/
+    --body-font: 'Open Sans', sans-serif;
+
+    /*====Heading=====*/
+    --h1-font-size: 56px;
+    --h2-font-size: 48px;
+    --h3-font-size: 40px;
+    --h4-font-size: 32px;
+    --h5-font-size: 24px;
+
+    /*=====Body=====*/
+    --normal-font-size: 16px;
+    --small-font-size: 14px;
+
+    /*=====Font Weight=====*/
+    --font-normal: 400;
+    --font-semi-bold:600;
+    --font-bold:700;
+}
+
+/*=======================Root Responsives======================*/
+@media screen and (max-width: 992px) {
+    
+}
+@media screen and (max-width: 768px) {
+    
+}
+
+@media screen and (max-width: 480px) {
+    
+}
+
+@media screen and (max-width: 320px) {
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+    font-family: var(--body-font) !important;
+    font-size: var(--normal-font-size) !important;
+}
+
+h1, h2, h3 {
+    font-weight: var(--font-bold) !important;
+  }
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
