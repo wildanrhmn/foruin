@@ -1,26 +1,29 @@
-import { 
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
- } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
- //Import Pages & Components
- import Login from "./pages/login/Login";
- import RootLayout from "./components/layout/RootLayout";
+//Import Pages & Components
+import Layout from "./components/layout/Layout";
+import Dashboard from "./pages/dashboard/Dashboard";
+import LandingPage from "./pages/home/LandingPage";
+import Login from "./pages/login/Login";
+import PrivateRoutes from "./utils/ProtectedRoutes";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-        <Route index element={<Login />} />
-    </Route>
-  )
-)
-
-function Router() {
+function AppRouter() {
   return (
-    <RouterProvider router={router} />
+    <Layout>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route element={<Dashboard />} path="/dashboard-admin" exact />
+          </Route>
+          <Route element={<Login />} path="/login" />
+        </Routes>
+      </Router>
+    </Layout>
   );
 }
 
-export default Router;
+export default AppRouter;

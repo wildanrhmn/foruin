@@ -1,0 +1,39 @@
+.header {
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 11;
+    transition: all .3s ease;
+    border-bottom: 1px solid transparent;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.header_container {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.header_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    gap: 55px;
+    margin: 0;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    position: relative;
+    gap: 24px;
+}
+
+.button_wrapper {
+    display: flex;
+    gap: 15px;
+}

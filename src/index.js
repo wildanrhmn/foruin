@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Router from './Router'
+import AppRouter from './Router'
 
 //Redux Toolkit
 import { store } from './state/store';
@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router />
+      <AppRouter />
     </Provider>
   </React.StrictMode>
 );
