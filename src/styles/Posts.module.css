@@ -1,0 +1,14 @@
+.descriptionText {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .description {
+    margin-bottom: 0px !important;
+  }
+
+
+  
