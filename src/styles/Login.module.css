@@ -1,0 +1,48 @@
+.loginWrapper{
+    padding: 235px 0;
+}
+
+.loginForm{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.btnInLogin{
+    font-weight: 600 !important;
+    height: 45px !important;
+}
+
+.btnLogin{
+    background-color: var(--color-primary) !important;
+}
+
+.btnLogin:hover{
+    background-color: var(--color-primary) !important;
+}
+
+.btnDaftar{
+    background-color: var(--color-secondary) !important;
+    color: black !important;
+    border: 1px solid var(--color-secondary) !important;
+}
+
+.btnDaftar:hover{
+    background-color: var(--color-secondary) !important;
+    color: black !important; 
+}
+
+.loginFormControl{
+    border: 1px solid #000;
+}
+
+.checkbox{
+    font-size: 16px;
+    font-weight: var(--font-semi-bold);
+}
+
+.checkbox input[type=checkbox] {
+  -webkit-transform: scale(1.1);
+  border: 2px solid #000;
+}
+
+

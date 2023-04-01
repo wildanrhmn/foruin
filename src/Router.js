@@ -9,8 +9,8 @@ import PrivateRoutes from "./utils/ProtectedRoutes";
 
 function AppRouter() {
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Layout>
         <Routes>
           <Route path="/" element={<LandingPage />} />
         </Routes>
@@ -21,8 +21,8 @@ function AppRouter() {
           </Route>
           <Route element={<Login />} path="/login" />
         </Routes>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
 

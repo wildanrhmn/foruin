@@ -8,12 +8,14 @@ import { ReactComponent as Settings } from "../../assets/icons/settings.svg";
 import { ReactComponent as Profile } from "../../assets/icons/profile-2.svg";
 import { ReactComponent as Square } from "../../assets/icons/Add_square.svg";
 import { Nav, Navbar, Form, Button, InputGroup } from "react-bootstrap";
-import { NavLink, BrowserRouter as Router } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Styles from "../../styles/Navbar.module.css";
+import { useNavigate } from 'react-router-dom';
 
 function Navigation() {
+  const navigate = useNavigate();
+
   return (
-    <Router>
       <div className={Styles.navContainer}>
         <div className={Styles.verticalNav}>
           <div className={Styles.logoContainer}>
@@ -22,8 +24,8 @@ function Navigation() {
           <div className={Styles.iconContainer}>
             <Home style={{cursor: 'pointer'}}/>
             <Hashtag style={{cursor: 'pointer'}} />
-            <Notification style={{cursor: 'pointer'}}  />
-            <Profile style={{cursor: 'pointer'}}  />
+            <Notification style={{cursor: 'pointer'}} />
+            <Profile style={{cursor: 'pointer'}} onClick={() => navigate('/login')} />
             <Square style={{cursor: 'pointer'}}  />
             <Settings style={{cursor: 'pointer'}} />
           </div>
@@ -48,6 +50,7 @@ function Navigation() {
             <Form.Control
               placeholder="Cari"
               aria-label="Cari"
+              className={Styles.myFormControl}
             />
           <Button className={Styles.buttonForm}>
             <FaSearch size={24} color="#444BF2" />
@@ -55,7 +58,6 @@ function Navigation() {
           </InputGroup>
         </Navbar>
       </div>
-    </Router>
   );
 }
 
