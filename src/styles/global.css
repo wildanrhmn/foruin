@@ -56,6 +56,11 @@ html{
     scroll-behavior: smooth;
 }
 
+.container-fluid{
+    --bs-gutter-x: 0 !important;
+    overflow-x: hidden ;
+}
+
 body,
 button,
 input,

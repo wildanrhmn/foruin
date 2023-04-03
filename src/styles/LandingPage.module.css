@@ -1,0 +1,47 @@
+.organizationListContainer{
+    background-color: rgba(201, 203, 255, 0.33);
+    padding: 10px;
+    border-radius: 18px;
+}
+
+.containerRightBar{
+    padding-top: 55px;
+    padding-right: 75px !important;
+}
+
+@media screen and (max-width: 1400px) {
+    .containerRightBar{
+        padding-top: 35px;
+        padding-right: 40px !important;
+    }
+
+}
+
+.listOrganization{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageOrganization{
+    width: 45px;
+    height: 45px;
+}
+
+.buttonVisit{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: #1e1e1e !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) ;
+    border-radius: 30px !important;
+    border: 1px solid #1e1e1e !important;
+    width: 70px;
+    height: 30px;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+.list{
+    border-bottom: 1px solid #000;
+}

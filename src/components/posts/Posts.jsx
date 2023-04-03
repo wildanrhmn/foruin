@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Card, Image, Button } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
 import { FaEllipsisH } from "react-icons/fa";
@@ -34,7 +34,7 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
 
   return (
     <Card style={{ borderRadius: "0", border: "0.1px solid #ccc" }}>
-      <Card.Body className="d-flex">
+      <Card.Body className="d-flex p-3">
         <div className="flex-shrink-0 me-3">
           <Image
             src={profilePic}
@@ -100,11 +100,11 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
               </p>
             </div>
             {description.length > 100 && (
-              <Button variant="link" onClick={toggleExpanded}>
+              <button  onClick={toggleExpanded} style={{backgroundColor: 'transparent', color: 'blue'}} >
                 {expanded
-                  ? "Tampilkan lebih sedikit..."
-                  : "Tampilkan lebih banyak..."}
-              </Button>
+                  ? <span style={{fontSize: '14px'}}>Tampilkan lebih sedikit...</span>
+                  : <span style={{fontSize: '14px'}}>Tampilkan lebih banyak...</span>}
+              </button>
             )}
           </div>
           {imageSrc && (

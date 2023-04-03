@@ -16,6 +16,12 @@
     overflow: hidden;
     margin: 0;
     animation: close 0.1s linear 0.1s forwards;
+  }
+  
+  @media screen and (max-width: 1400px) {
+    .text{
+      font-size: 15px;   
+    }
     
   }
 
