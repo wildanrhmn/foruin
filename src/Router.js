@@ -6,15 +6,18 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import LandingPage from "./pages/home/LandingPage";
 import Login from "./pages/login/Login";
 import PrivateRoutes from "./utils/ProtectedRoutes";
+import ScrollToTop from "./components/tools/scrollToTop";
 
 function AppRouter() {
+
+  
   return (
     <Router>
       <Layout>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
         </Routes>
-
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/dashboard-admin" exact />

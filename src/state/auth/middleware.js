@@ -14,7 +14,7 @@ export const AsyncLogin = createAsyncThunk(
   async ({ email, password }, { dispatch }) => {
     try {
       const response = await api.Login(email, password);
-
+      console.info(response)
       cookies.remove("refreshToken");
       cookies.add("refreshToken", response.data.access_token, 7);
 

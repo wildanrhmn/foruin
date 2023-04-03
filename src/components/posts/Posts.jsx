@@ -1,13 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, Image, Button } from "react-bootstrap";
 import Styles from "../../styles/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
+import { FaEllipsisH } from "react-icons/fa";
 
 function Posts({ profilePic, name, username, description, imageSrc }) {
   const [expanded, setExpanded] = useState(false);
+  const [show, setShow] = useState(false);
   const isMd = useMediaQuery({
     query: "(max-width: 1400px)",
   });
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setShow(false);
+      }
+    }
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [containerRef]);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -37,14 +56,34 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
                 @{username}
               </small>
             </div>
-            {/* <div>
-              <Button size="sm">Follow</Button>
-            </div> */}
+            <div className={Styles.menuPost} ref={containerRef}>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <a href="#">
+                <FaEllipsisH
+                  style={{
+                    color: "#C2C9D1",
+                    fontSize: "20px",
+                    cursor: "pointer",
+                    margin: "0 15px 15px 0",
+                  }}
+                  onClick={() => setShow(!show)}
+                />
+                <ul className={`${Styles.subMenu} ${show ? Styles.show : ""}`}>
+                  {/* This will be based on role */}
+                  <li>Tidak tertarik dengan postingan ini</li>
+                  <li>Bisukan @traveloak</li>
+                  <li>Blokir @traveloak</li>
+                  <li>Laporkan Postingan</li>
+                </ul>
+              </a>
+            </div>
           </div>
-          <div className="mt-2">
-            <p
+          <div>
+            <div
               className={`${Styles.description} ${
-                expanded ? "" : Styles.descriptionText
+                expanded
+                  ? `${Styles.descriptionText} ${Styles.open}`
+                  : `${Styles.descriptionText} ${Styles.close}`
               }`}
               style={
                 isMd
@@ -52,17 +91,31 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
                   : { fontSize: "16px", lineHeight: "30px" }
               }
             >
-              {description}
-            </p>
+              <p
+                className={
+                  expanded ? `${Styles.open} ${Styles.text}` : `${Styles.text}`
+                }
+              >
+                {description}
+              </p>
+            </div>
             {description.length > 100 && (
               <Button variant="link" onClick={toggleExpanded}>
-                {expanded ? "Tampilkan lebih sedikit..." : "Tampilkan lebih banyak..."}
+                {expanded
+                  ? "Tampilkan lebih sedikit..."
+                  : "Tampilkan lebih banyak..."}
               </Button>
             )}
           </div>
           {imageSrc && (
             <div className="mt-3 d-flex justify-content-center">
-              <Image src={imageSrc} alt="Post" fluid style={{borderRadius: '18px'}} />
+              <Image
+                src={imageSrc}
+                alt="Post"
+                fluid
+                style={{ borderRadius: "18px" }}
+                className={Styles.imagePost}
+              />
             </div>
           )}
         </div>
