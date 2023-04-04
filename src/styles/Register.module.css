@@ -1,43 +1,45 @@
-.loginWrapper {
-    padding: 235px 0;
+.registerWrapper {
+    padding: 40px 0 100px 0;
 }
 
-.loginForm {
-    max-width: 500px;
+.registerForm {
+    max-width: 445px;
     margin: 0 auto;
 }
 
-.btnInLogin {
+.btnInRegister {
     font-weight: 600 !important;
-    height: 45px !important;
+    height: 50px !important;
+    font-size: 24px !important;
+}
+
+.btnRegister {
+    background-color: var(--color-primary) !important;
+}
+
+.btnRegister:hover {
+    background-color: var(--color-primary) !important;
 }
 
 .btnLogin {
-    background-color: var(--color-primary) !important;
-}
-
-.btnLogin:hover {
-    background-color: var(--color-primary) !important;
-}
-
-.btnDaftar {
     background-color: var(--color-secondary) !important;
     color: black !important;
     border: 1px solid var(--color-secondary) !important;
+
 }
 
-.btnDaftar:hover {
+.btnLogin:hover {
     background-color: var(--color-secondary) !important;
     color: black !important;
 }
 
-.loginFormControl {
+.registerFormControl {
     border: 1px solid #000;
 }
 
 .checkbox {
-    font-size: 16px;
-    font-weight: var(--font-semi-bold);
+    font-size: 14px;
+    font-weight: var(--font-normal);
 }
 
 .checkbox input[type=checkbox] {

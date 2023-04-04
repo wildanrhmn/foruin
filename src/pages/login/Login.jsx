@@ -4,7 +4,8 @@ import { Form, FloatingLabel, Button } from "react-bootstrap";
 import Styles from "../../styles/Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AsyncLogin } from "../../state/auth/middleware";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 const Login = () => {
   const [email, setUsername] = useState("");
@@ -13,16 +14,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   // const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(AsyncLogin({ email, password }));
     navigate('/');
   };
 
   useEffect(() => {
-    if(auth.token ){
+    if (auth.token) {
       /* eslint-disable */
       navigate('/')
     }
@@ -86,8 +87,11 @@ const Login = () => {
               >
                 Login
               </Button>
-              <Button className={`${Styles.btnInLogin} ${Styles.btnDaftar}`}>
-                Daftar Organisasi
+              <Button
+                className={`${Styles.btnInLogin} ${Styles.btnDaftar}`}
+                type="button"
+              >
+                <Link to={`/register`}>Daftar Organisasi</Link>
               </Button>
             </div>
           </Form>

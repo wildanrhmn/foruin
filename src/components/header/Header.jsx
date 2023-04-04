@@ -16,23 +16,23 @@ function Navigation() {
   return (
     <div className={Styles.navContainer}>
       <div className={Styles.verticalNav}>
-        <div className={Styles.logoContainer} style={{cursor: 'pointer'}} onClick={() => navigate('/')}>
+        <div className={Styles.logoContainer} style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
           <Logo className={Styles.logo} />
         </div>
         <div className={Styles.iconContainer}>
           <div className={Styles.sideIcon}>
             <Home className={Styles.sideLink}
-             onClick={() => navigate("/")}
+              onClick={() => navigate("/")}
             />
           </div>
-          <div  className={Styles.sideIcon}>
+          <div className={Styles.sideIcon}>
             <Notification
               className={Styles.sideLink}
             />
           </div>
-          <div  className={Styles.sideIcon}>
+          <div className={Styles.sideIcon}>
             <Profile
-            
+
               onClick={() => navigate("/login")}
               className={Styles.sideLink}
             />
@@ -45,15 +45,15 @@ function Navigation() {
       <Navbar className={Styles.horizontalNav}>
         <Nav className={`mr-auto ${Styles.navLinks}`}>
           <Nav.Link as={NavLink} to="/"
-          style={location.pathname === '/' ? {color: '#444BF2'} : {}}>
+            style={location.pathname === '/' ? { color: '#444BF2' } : {}}>
             Beranda
           </Nav.Link>
           <Nav.Link as={NavLink} to="/terbaru"
-          style={location.pathname === '/terbaru' ? {color: '#444BF2'} : {}}>
+            style={location.pathname === '/terbaru' ? { color: '#444BF2' } : {}}>
             Terbaru
           </Nav.Link>
           <Nav.Link as={NavLink} to="/organisasi"
-          style={location.pathname === '/organisasi' ? {color: '#444BF2'} : {}}>
+            style={location.pathname === '/organisasi' ? { color: '#444BF2' } : {}}>
             Organisasi
           </Nav.Link>
           <Nav.Link as={NavLink} className={Styles.hasSubMenu}>
