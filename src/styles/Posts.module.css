@@ -52,6 +52,7 @@
 
   .description {
     margin-bottom: 0px !important;
+    max-width: 1200px;
   }
 
   .imagePost{
@@ -100,5 +101,12 @@
     transform: translateY(0);
 }
 
+.cardPosts{
+  border-top: none !important;
+  border-left: none !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid #EBEBEB !important;
+  border-right: 1px solid #EBEBEB !important;
+}
 
   

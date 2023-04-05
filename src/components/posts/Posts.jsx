@@ -33,7 +33,7 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
   };
 
   return (
-    <Card style={{ borderRadius: "0", border: "0.1px solid #ccc" }}>
+    <Card className={Styles.cardPosts}>
       <Card.Body className="d-flex p-3">
         <div className="flex-shrink-0 me-3">
           <Image

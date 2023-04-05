@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     <div className="app_layout">
       <Header />
       <main style={{
-        marginLeft: '83px',
+        marginLeft: '83px', marginTop: '83px'
       }}>{children}</main>
       {/* <Footer /> */}
     </div>

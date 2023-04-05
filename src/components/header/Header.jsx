@@ -1,10 +1,10 @@
 import React from "react";
 import { ReactComponent as Logo } from "../../assets/logo/Logo.svg";
-import { FaSearch } from "react-icons/fa";
 import { ReactComponent as Home } from "../../assets/icons/Home.svg";
 import { ReactComponent as Notification } from "../../assets/icons/notification-on.svg";
 import { ReactComponent as Profile } from "../../assets/icons/profile-2.svg";
 import { ReactComponent as Square } from "../../assets/icons/Add_square.svg";
+import { ReactComponent as Search } from "../../assets/icons/Search.svg";
 import { Nav, Navbar, Form, Button, InputGroup } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Styles from "../../styles/Navbar.module.css";
@@ -17,7 +17,7 @@ function Navigation() {
     <div className={Styles.navContainer}>
       <div className={Styles.verticalNav}>
         <div className={Styles.logoContainer} style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-          <Logo className={Styles.logo} />
+          <Logo className={Styles.logo} width={55} />
         </div>
         <div className={Styles.iconContainer}>
           <div className={Styles.sideIcon}>
@@ -100,7 +100,7 @@ function Navigation() {
             className={Styles.myFormControl}
           />
           <Button className={Styles.buttonForm}>
-            <FaSearch size={24} color="#444BF2" />
+            <Search />
           </Button>
         </InputGroup>
       </Navbar>
