@@ -2,17 +2,38 @@ export const dataOrganisasi = [
     {
         id: 1,
         namaOrganisasi: "Dema U",
-        username: "demaulala"
+        username: "demaulala",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
     {
         id: 2,
         namaOrganisasi: "Dema I",
-        username: "demaulili"
+        username: "demaulili",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
     {
         id: 3,
         namaOrganisasi: "Dema E",
-        username: "demaulele"
+        username: "demaulele",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
+    },
+    {
+        id: 3,
+        namaOrganisasi: "Dema E",
+        username: "demaulele",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
+    },
+    {
+        id: 3,
+        namaOrganisasi: "Dema E",
+        username: "demaulele",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
+    },
+    {
+        id: 3,
+        namaOrganisasi: "Dema E",
+        username: "demaulele",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
 ]
 

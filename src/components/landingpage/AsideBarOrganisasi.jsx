@@ -11,7 +11,7 @@ const AsideBarOrganisasi = ({ data }) => {
         Organisasi
       </h3>
       <ul style={{ paddingLeft: "0" }} className={Styles.list}>
-        {data.map((item) => (
+        {data.slice(0,4).map((item) => (
           <li className={`mb-3 ${Styles.listOrganization}`} key={item.id}>
             <div
               className="media-body"

@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import PrivateRoutes from "./utils/ProtectedRoutes";
 import ScrollToTop from "./components/tools/scrollToTop";
 import Register from "./pages/register/Register";
+import OrganizationList from "./pages/organization_list/OrganizationList";
 
 function AppRouter() {
 
@@ -18,6 +19,7 @@ function AppRouter() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path= "/organization-list" element={<OrganizationList />} />
         </Routes>
         <Routes>
           <Route element={<PrivateRoutes />}>
