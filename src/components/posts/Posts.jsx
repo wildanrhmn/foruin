@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Card, Image } from "react-bootstrap";
-import Styles from "../../styles/Posts.module.css";
+import Styles from "../../styles/posts/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
 import { FaEllipsisH } from "react-icons/fa";
 

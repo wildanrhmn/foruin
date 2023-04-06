@@ -1,59 +1,167 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+
 import { ReactComponent as Logo } from "../../assets/logo/Logo.svg";
-import { ReactComponent as Home } from "../../assets/icons/Home.svg";
-import { ReactComponent as Notification } from "../../assets/icons/notification-on.svg";
-import { ReactComponent as Profile } from "../../assets/icons/profile-2.svg";
-import { ReactComponent as Square } from "../../assets/icons/Add_square.svg";
 import { ReactComponent as Search } from "../../assets/icons/Search.svg";
+import { ReactComponent as CloseIcon } from '../../assets/icons/Expand_left_stop.svg';
 import { Nav, Navbar, Form, Button, InputGroup } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import Styles from "../../styles/Navbar.module.css";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlinePersonOutline } from "react-icons/md";
+import { FiHome } from "react-icons/fi";
+import { BiMessageSquareAdd } from "react-icons/bi";
+
 import { useNavigate, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Styles from "../../styles/headerfooter/Navbar.module.css";
+
+import { animated as a, useSpring } from "@react-spring/web";
 
 function Navigation() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [sidebarToggle, setSidebarToggle] = useState(false);
+  const ref = useRef(null);
+  const navAnimation = useSpring({
+    to: {
+      maxWidth: sidebarToggle ? "220px" : "83px",
+    },
+    config: {
+      tension: 250,
+      friction: 20,
+      duration: sidebarToggle ? 200 : 200,
+    },
+  });
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target)
+      ) {
+        setSidebarToggle(false);
+      }
+    }
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [ref]);
+
+  const closeExpandedAnimation = useSpring({
+    to: { 
+      transform: sidebarToggle ? 'translateX(0)' : 'translateX(-10px)',
+      display : sidebarToggle ? 'block' : 'none',
+      visibility : 'visible',
+      opacity : sidebarToggle ? 1 : 0,
+    },
+    config: {
+      tension: 250,
+      friction: 20,
+      duration: sidebarToggle ? 200 : 200,
+    },
+  })
+
+  const springProps = useSpring({
+    to: {
+      opacity: sidebarToggle ? 1 : 0,
+      transform: sidebarToggle ? "translateX(0)" : "translateX(-20px)",
+    },
+    config: {
+      tension: 250,
+      friction: 20,
+      duration: sidebarToggle ? 200 : 200,
+    }
+  });
+
   return (
     <div className={Styles.navContainer}>
-      <div className={Styles.verticalNav}>
-        <div className={Styles.logoContainer} style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-          <Logo className={Styles.logo} width={55} />
+      <a.div className={Styles.verticalNav} style={navAnimation} ref={ref}>
+        <div className={`${Styles.logoContainer} ${sidebarToggle ? Styles.expanded : ''}`} style={{ cursor: "pointer" }}>
+          <Logo
+            className={Styles.logo}
+            onClick={() => setSidebarToggle(true)}
+          />
+          <a.div style={closeExpandedAnimation} className={Styles.closeExpanded} onClick={() => setSidebarToggle(false)}>
+              <CloseIcon />
+          </a.div>
         </div>
         <div className={Styles.iconContainer}>
-          <div className={Styles.sideIcon}>
-            <Home className={Styles.sideLink}
-              onClick={() => navigate("/")}
+          <div
+            className={`${Styles.sideIcon} ${
+              sidebarToggle ? Styles.expanded : ""
+            } ${location.pathname === "/" ? Styles.active : ""}`}
+            onClick={() => navigate("/")}
+          >
+            <FiHome
+              className={`${Styles.sideLink} ${
+                location.pathname === "/" ? Styles.active : ""
+              }`}
             />
+            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Beranda</a.span>}
           </div>
-          <div className={Styles.sideIcon}>
-            <Notification
-              className={Styles.sideLink}
+          <div
+            className={`${Styles.sideIcon} ${
+              sidebarToggle ? Styles.expanded : ""
+            } ${location.pathname === "/notification" ? Styles.active : ""}`}
+          >
+            <IoMdNotificationsOutline
+              className={`${Styles.sideLink} ${
+                location.pathname === "/notification" ? Styles.active : ""
+              }`}
             />
+            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Notifikasi</a.span>}
           </div>
-          <div className={Styles.sideIcon}>
-            <Profile
-
-              onClick={() => navigate("/login")}
-              className={Styles.sideLink}
+          <div
+            className={`${Styles.sideIcon} ${
+              sidebarToggle ? Styles.expanded : ""
+            } 
+              ${location.pathname === "/login" ? Styles.active : ""}`}
+            onClick={() => navigate("/login")}
+          >
+            <MdOutlinePersonOutline
+              className={`${Styles.sideLink} ${
+                location.pathname === "/login" ? Styles.active : ""
+              }`}
             />
+            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Profile</a.span>}
           </div>
-          <div className={Styles.sideIcon}>
-            <Square className={Styles.sideLink} />
+          <div
+            className={`${Styles.sideIcon} ${
+              sidebarToggle ? Styles.expanded : ""
+            } ${location.pathname === "/create-post" ? Styles.active : ""}`}
+          >
+            <BiMessageSquareAdd
+              className={`${Styles.sideLink} ${
+                location.pathname === "/create-post" ? Styles.active : ""
+              }`}
+            />
+            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Buat Posting</a.span>}
           </div>
         </div>
-      </div>
+      </a.div>
+
       <Navbar className={Styles.horizontalNav}>
         <Nav className={`mr-auto ${Styles.navLinks}`}>
-          <Nav.Link as={NavLink} to="/"
-            style={location.pathname === '/' ? { color: '#444BF2' } : {}}>
+          <Nav.Link
+            as={NavLink}
+            to="/"
+            style={location.pathname === "/" ? { color: "#444BF2" } : {}}
+          >
             Beranda
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/terbaru"
-            style={location.pathname === '/terbaru' ? { color: '#444BF2' } : {}}>
+          <Nav.Link
+            as={NavLink}
+            to="/terbaru"
+            style={location.pathname === "/terbaru" ? { color: "#444BF2" } : {}}
+          >
             Terbaru
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/organisasi"
-            style={location.pathname === '/organisasi' ? { color: '#444BF2' } : {}}>
+          <Nav.Link
+            as={NavLink}
+            to="/organisasi"
+            style={
+              location.pathname === "/organisasi" ? { color: "#444BF2" } : {}
+            }
+          >
             Organisasi
           </Nav.Link>
           <Nav.Link as={NavLink} className={Styles.hasSubMenu}>

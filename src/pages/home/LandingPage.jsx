@@ -1,7 +1,7 @@
 import React from "react";
 import Posts from "../../components/posts/Posts";
 
-import Styles from "../../styles/LandingPage.module.css";
+import Styles from "../../styles/landingpage/LandingPage.module.css";
 import { useMediaQuery } from "react-responsive";
 
 import AsideBarOrganisasi from "../../components/landingpage/AsideBarOrganisasi";

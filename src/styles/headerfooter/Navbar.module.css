@@ -7,7 +7,7 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    width: 83px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -15,20 +15,27 @@
     z-index: 1;
     border: 1px solid #EBEBEB;
     padding: 20px;
+    z-index: 9999;
   }
   
   .logoContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 50px;
+    transition: all .3s ease;
+  }
+
+  .logoContainter .expanded{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .iconContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     flex-grow: 1;
     gap: 55px;
   }
@@ -54,7 +61,7 @@
     background-color: #fff;
     border: 1px solid #EBEBEB;
     position: fixed !important;
-    z-index: 9999;
+    z-index: 9998;
   }
   
   .navbar-nav .nav-link {
@@ -192,25 +199,78 @@
 }
 
 .sideIcon{
-  /* background: linear-gradient(99.93deg, #444BF2 0%, #C9CBFF 107.98%); */
+  gap: 5px;
+  border-radius: 50%;
   width: 45px;
   height: 45px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all .3s ease-in;
+  transition: all .3s ease-in-out;
   cursor: pointer;
+}
+
+.sideIcon > span {
+  font-weight: 500;
+  color: var(--color-primary);
+  visibility: hidden;
+  transition: all .3s ease-in-out;
+}
+
+.sideIcon.expanded > span{
+ visibility: visible;
+}
+
+.sideIcon.expanded.active > span{
+  color: #fff;
+}
+
+.sideIcon.active{
+  position: relative;
+  background: linear-gradient(99.93deg, #444BF2 0%, #C9CBFF 107.98%);
+}
+
+.sideIcon.active.expanded{
+  position: relative;
+}
+
+.sideIcon.active.expanded::before{
+  content: '';
+  background: linear-gradient(99.93deg, #444BF2 0%, #C9CBFF 107.98%);
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.sideIcon.expanded{
+  width: 100%;
+  height: 45px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
 }
 
 .sideLink{
   z-index: 10;
   transition: all .3s ease;
+  font-size: 24px;
+  color: var(--color-primary);
+}
+
+.sideLink.active{
+  color: #fff;
 }
 
 .sideLink:hover{
   padding: 1px 0;
 }
+
 
 
 
