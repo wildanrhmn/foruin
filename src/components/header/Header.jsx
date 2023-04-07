@@ -17,17 +17,30 @@ import { ReactComponent as Reports } from '../../assets/icons/Reports.svg';
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import Styles from "../../styles/headerfooter/Navbar.module.css";
-import { useSelector } from "react-redux";
-
 import { animated as a, useSpring } from "@react-spring/web";
+
+import { useSelector, useDispatch } from "react-redux";
+import { AsyncGetPosts } from "../../state/posts/middleware";
+
+import Styles from "../../styles/headerfooter/Navbar.module.css";
+
 
 function Navigation() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { auth = {} } = useSelector(states => states);
-  const [sidebarToggle, setSidebarToggle] = useState(false);
   const ref = useRef(null);
+
+  const { auth = {} } = useSelector(states => states);
+  const dispatch = useDispatch()
+
+  const [sidebarToggle, setSidebarToggle] = useState(false);
+
+  // Starter State
+  useEffect(() => {
+    dispatch(AsyncGetPosts())
+  }, [dispatch])
+
+  // Animation
   const navAnimation = useSpring({
     to: {
       maxWidth: sidebarToggle ? "220px" : "83px",
@@ -55,11 +68,11 @@ function Navigation() {
   }, [ref]);
 
   const closeExpandedAnimation = useSpring({
-    to: { 
+    to: {
       transform: sidebarToggle ? 'translateX(0)' : 'translateX(-10px)',
-      display : sidebarToggle ? 'block' : 'none',
-      visibility : 'visible',
-      opacity : sidebarToggle ? 1 : 0,
+      display: sidebarToggle ? 'block' : 'none',
+      visibility: 'visible',
+      opacity: sidebarToggle ? 1 : 0,
     },
     config: {
       tension: 250,
@@ -80,157 +93,147 @@ function Navigation() {
     }
   });
 
-  if(auth.role === 'SysAdmin'){
-    return(
+  if (auth.role === 'SysAdmin') {
+    return (
       <div className={Styles.navContainer}>
-      <a.div className={Styles.verticalNav} style={auth.role === 'SysAdmin' ? {...navAnimation, width: '220px'} : {...navAnimation}} ref={ref}>
-        <div className={`${Styles.logoContainer} ${sidebarToggle ? Styles.expanded : ''}`} style={{ cursor: "pointer" }}>
-          <Logo
-            className={Styles.logo}
-            onClick={() => setSidebarToggle(true)}
-          />
-          <a.div style={closeExpandedAnimation} className={Styles.closeExpanded} onClick={() => setSidebarToggle(false)}>
+        <a.div className={Styles.verticalNav} style={auth.role === 'SysAdmin' ? { ...navAnimation, width: '220px' } : { ...navAnimation }} ref={ref}>
+          <div className={`${Styles.logoContainer} ${sidebarToggle ? Styles.expanded : ''}`} style={{ cursor: "pointer" }}>
+            <Logo
+              className={Styles.logo}
+              onClick={() => setSidebarToggle(true)}
+            />
+            <a.div style={closeExpandedAnimation} className={Styles.closeExpanded} onClick={() => setSidebarToggle(false)}>
               <CloseIcon />
-          </a.div>
-        </div>
-        <div className={Styles.iconContainer}>
-        <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/deleted-post" ? Styles.active : ""}`}
-          >
-            <Trash
-              className={`${Styles.sideLink} ${
-                location.pathname === "/deleted-post" ? Styles.active : ""
-              }`}
-            />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Hapus Posting</a.span>}
+            </a.div>
           </div>
-        <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/banned-account" ? Styles.active : ""}`}
-          >
-            <Banned
-              className={`${Styles.sideLink} ${
-                location.pathname === "/banned-account" ? Styles.active : ""
-              }`}
-            />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Akun Banned</a.span>}
+          <div className={Styles.iconContainer}>
+            <div
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } ${location.pathname === "/deleted-post" ? Styles.active : ""}`}
+            >
+              <Trash
+                className={`${Styles.sideLink} ${location.pathname === "/deleted-post" ? Styles.active : ""
+                  }`}
+              />
+              {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>Hapus Posting</a.span>}
+            </div>
+            <div
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } ${location.pathname === "/banned-account" ? Styles.active : ""}`}
+            >
+              <Banned
+                className={`${Styles.sideLink} ${location.pathname === "/banned-account" ? Styles.active : ""
+                  }`}
+              />
+              {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>Akun Banned</a.span>}
+            </div>
+            <div
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } ${location.pathname === "/reported-post" ? Styles.active : ""}`}
+            >
+              <Reports
+                className={`${Styles.sideLink} ${location.pathname === "/reported-post" ? Styles.active : ""
+                  }`}
+              />
+              {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>Persetujuan Akun</a.span>}
+            </div>
+            <div
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } ${location.pathname === "/account-permission" ? Styles.active : ""}`}
+            >
+              <Permission
+                className={`${Styles.sideLink} ${location.pathname === "/account-permission" ? Styles.active : ""
+                  }`}
+              />
+              {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>Form Submisi</a.span>}
+            </div>
+            <div
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } ${location.pathname === "/submission-form" ? Styles.active : ""}`}
+            >
+              <Submission
+                className={`${Styles.sideLink} ${location.pathname === "/submission-form" ? Styles.active : ""
+                  }`}
+              />
+              {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>Form Submisi</a.span>}
+            </div>
           </div>
-        <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/reported-post" ? Styles.active : ""}`}
-          >
-            <Reports
-              className={`${Styles.sideLink} ${
-                location.pathname === "/reported-post" ? Styles.active : ""
-              }`}
-            />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Persetujuan Akun</a.span>}
-          </div>
-        <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/account-permission" ? Styles.active : ""}`}
-          >
-            <Permission
-              className={`${Styles.sideLink} ${
-                location.pathname === "/account-permission" ? Styles.active : ""
-              }`}
-            />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Form Submisi</a.span>}
-          </div>
-        <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/submission-form" ? Styles.active : ""}`}
-          >
-            <Submission
-              className={`${Styles.sideLink} ${
-                location.pathname === "/submission-form" ? Styles.active : ""
-              }`}
-            />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap" }}>Form Submisi</a.span>}
-          </div>
-        </div>
-      </a.div>
+        </a.div>
 
-      <Navbar className={Styles.horizontalNav}>
-        <Nav className={`mr-auto ${Styles.navLinks}`}>
-          <Nav.Link
-            as={NavLink}
-            to="/"
-            style={location.pathname === "/" ? { color: "#444BF2" } : {}}
-          >
-            Beranda
-          </Nav.Link>
-          <Nav.Link
-            as={NavLink}
-            to="/terbaru"
-            style={location.pathname === "/terbaru" ? { color: "#444BF2" } : {}}
-          >
-            Terbaru
-          </Nav.Link>
-          <Nav.Link
-            as={NavLink}
-            to="/organization-list"
-            style={
-              location.pathname === "/organization-list" ? { color: "#444BF2" } : {}
-            }
-          >
-            Organisasi
-          </Nav.Link>
-          <Nav.Link as={NavLink} className={Styles.hasSubMenu}>
-            Topik
-            <ul className={Styles.subMenu}>
-              <li>
-                <Nav.Link as={NavLink} to="">
-                  Info Kampus
-                </Nav.Link>
-              </li>
-              <li>
-                <Nav.Link as={NavLink} to="">
-                  Magang
-                </Nav.Link>
-              </li>
-              <li>
-                <Nav.Link as={NavLink} to="">
-                  Lomba
-                </Nav.Link>
-              </li>
-              <li>
-                <Nav.Link as={NavLink} to="">
-                  Penelitian
-                </Nav.Link>
-              </li>
-              <li>
-                <Nav.Link as={NavLink} to="">
-                  Seminar
-                </Nav.Link>
-              </li>
-              <li>
-                <Nav.Link as={NavLink} to="">
-                  Olahraga
-                </Nav.Link>
-              </li>
-            </ul>
-          </Nav.Link>
-        </Nav>
+        <Navbar className={Styles.horizontalNav}>
+          <Nav className={`mr-auto ${Styles.navLinks}`}>
+            <Nav.Link
+              as={NavLink}
+              to="/"
+              style={location.pathname === "/" ? { color: "#444BF2" } : {}}
+            >
+              Beranda
+            </Nav.Link>
+            <Nav.Link
+              as={NavLink}
+              to="/terbaru"
+              style={location.pathname === "/terbaru" ? { color: "#444BF2" } : {}}
+            >
+              Terbaru
+            </Nav.Link>
+            <Nav.Link
+              as={NavLink}
+              to="/organization-list"
+              style={
+                location.pathname === "/organization-list" ? { color: "#444BF2" } : {}
+              }
+            >
+              Organisasi
+            </Nav.Link>
+            <Nav.Link as={NavLink} className={Styles.hasSubMenu}>
+              Topik
+              <ul className={Styles.subMenu}>
+                <li>
+                  <Nav.Link as={NavLink} to="">
+                    Info Kampus
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link as={NavLink} to="">
+                    Magang
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link as={NavLink} to="">
+                    Lomba
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link as={NavLink} to="">
+                    Penelitian
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link as={NavLink} to="">
+                    Seminar
+                  </Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link as={NavLink} to="">
+                    Olahraga
+                  </Nav.Link>
+                </li>
+              </ul>
+            </Nav.Link>
+          </Nav>
 
-        <InputGroup className={Styles.inputGroup}>
-          <Form.Control
-            placeholder="Cari"
-            aria-label="Cari"
-            className={Styles.myFormControl}
-          />
-          <Button className={Styles.buttonForm}>
-            <Search />
-          </Button>
-        </InputGroup>
-      </Navbar>
-    </div>
+          <InputGroup className={Styles.inputGroup}>
+            <Form.Control
+              placeholder="Cari"
+              aria-label="Cari"
+              className={Styles.myFormControl}
+            />
+            <Button className={Styles.buttonForm}>
+              <Search />
+            </Button>
+          </InputGroup>
+        </Navbar>
+      </div>
     )
   }
 
@@ -243,60 +246,52 @@ function Navigation() {
             onClick={() => setSidebarToggle(true)}
           />
           <a.div style={closeExpandedAnimation} className={Styles.closeExpanded} onClick={() => setSidebarToggle(false)}>
-              <CloseIcon />
+            <CloseIcon />
           </a.div>
         </div>
         <div className={Styles.iconContainer}>
           <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/" ? Styles.active : ""}`}
+            className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+              } ${location.pathname === "/" ? Styles.active : ""}`}
             onClick={() => navigate("/")}
           >
             <Home
-              className={`${Styles.sideLink} ${
-                location.pathname === "/" ? Styles.active : ""
-              }`}
+              className={`${Styles.sideLink} ${location.pathname === "/" ? Styles.active : ""
+                }`}
             />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap", fontSize: '16px'}}>Beranda</a.span>}
+            {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap", fontSize: '16px' }}>Beranda</a.span>}
           </div>
           <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/notification" ? Styles.active : ""}`}
+            className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+              } ${location.pathname === "/notification" ? Styles.active : ""}`}
           >
             <Notification
-              className={`${Styles.sideLink} ${
-                location.pathname === "/notification" ? Styles.active : ""
-              }`}
+              className={`${Styles.sideLink} ${location.pathname === "/notification" ? Styles.active : ""
+                }`}
             />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap", fontSize: '16px' }}>Notifikasi</a.span>}
+            {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap", fontSize: '16px' }}>Notifikasi</a.span>}
           </div>
           <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } 
+            className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+              } 
               ${location.pathname === "/login" ? Styles.active : ""}`}
             onClick={() => navigate("/login")}
           >
             <Person
-              className={`${Styles.sideLink} ${
-                location.pathname === "/login" ? Styles.active : ""
-              }`}
+              className={`${Styles.sideLink} ${location.pathname === "/login" ? Styles.active : ""
+                }`}
             />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap", fontSize: '16px' }}>Profile</a.span>}
+            {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap", fontSize: '16px' }}>Profile</a.span>}
           </div>
           <div
-            className={`${Styles.sideIcon} ${
-              sidebarToggle ? Styles.expanded : ""
-            } ${location.pathname === "/create-post" ? Styles.active : ""}`}
+            className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+              } ${location.pathname === "/create-post" ? Styles.active : ""}`}
           >
             <AddSquare
-              className={`${Styles.sideLink} ${
-                location.pathname === "/create-post" ? Styles.active : ""
-              }`}
+              className={`${Styles.sideLink} ${location.pathname === "/create-post" ? Styles.active : ""
+                }`}
             />
-            {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap", fontSize: '16px' }}>Buat Posting</a.span>}
+            {sidebarToggle && <a.span style={{ ...springProps, whiteSpace: "nowrap", fontSize: '16px' }}>Buat Posting</a.span>}
           </div>
         </div>
       </a.div>

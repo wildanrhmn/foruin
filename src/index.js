@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import AppRouter from "./Router";
 
 //Redux Toolkit
-import { store, persistor } from "./state/store";
+// import { store, persistor } from "./state/store";
+import { store } from "./state/store";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+// import { PersistGate } from "redux-persist/integration/react";
 
 //global CSS
 import "./styles/global.css";
@@ -17,9 +18,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppRouter />
-      </PersistGate>
+      <AppRouter />
+      {/* <PersistGate loading={null} persistor={persistor}>
+        
+      </PersistGate> */}
     </Provider>
   </React.StrictMode>
 );
