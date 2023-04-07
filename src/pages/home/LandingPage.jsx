@@ -3,6 +3,7 @@ import Posts from "../../components/posts/Posts";
 
 import Styles from "../../styles/landingpage/LandingPage.module.css";
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
 
 import AsideBarOrganisasi from "../../components/landingpage/AsideBarOrganisasi";
 import AsideBarTopik from './../../components/landingpage/AsideBarTopik';
@@ -14,11 +15,14 @@ const LandingPage = () => {
   const isLarge = useMediaQuery({
     query: "(max-width: 1400px)",
   });
+
+  const { posts = [] } = useSelector(states => states);
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className={`${isLarge ? "col-lg-9" : "col-lg-9"}`}>
-          <Posts
+          {/* <Posts
             profilePic="https://picsum.photos/id/237/200/300"
             name="John Doe"
             username="johndoe123"
@@ -33,44 +37,21 @@ const LandingPage = () => {
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
       "
-          />
-          <Posts
-            profilePic="https://picsum.photos/id/237/200/300"
-            name="John Doe"
-            username="johndoe123"
-            imageSrc={Image}
-            description="
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      "
-          />
-          <Posts
-            profilePic="https://picsum.photos/id/237/200/300"
-            name="John Doe"
-            username="johndoe123"
-            imageSrc={Image}
-            description="
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      "
-          />
+          /> */}
+          {posts?.map(post => (
+            <Posts
+              profilePic="https://picsum.photos/id/237/200/300"
+              name={post.display_name}
+              username={post.username}
+              imageSrc={Image}
+              description={post.body}
+            />
+          ))}
         </div>
         <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`}>
           <div className={Styles.containerRightBar}>
-           <AsideBarOrganisasi data={dataOrganisasi} />
-           <AsideBarTopik data={dataTopik} />
+            <AsideBarOrganisasi data={dataOrganisasi} />
+            <AsideBarTopik data={dataTopik} />
           </div>
         </div>
       </div>

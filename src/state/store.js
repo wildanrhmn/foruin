@@ -1,25 +1,12 @@
-import { combineReducers } from "redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import authSlicer from "./auth/slicer";
-import PostsSlicer from "./posts/slicer";
+// V2 STORE
 
-const persistConfig = {
-  key: "root",
-  storage: storage,
-  whitelist: ["auth"], // Only persist the auth slice
-};
-
-const rootReducer = combineReducers({
-  auth: authSlicer,
-  posts: PostsSlicer,
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+import { configureStore } from "@reduxjs/toolkit"
+import AuhtReducer from '../state/auth/reducer'
+import PostReducer from '../state/posts/reducer'
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    auth: AuhtReducer,
+    posts: PostReducer
+  }
 });
-
-export const persistor = persistStore(store);

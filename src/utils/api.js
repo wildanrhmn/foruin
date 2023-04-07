@@ -38,12 +38,12 @@ const api = (() => {
     return response;
   }
 
-  async function Register(data) {
+  async function Register(email, password) {
     const url = baseUrl + "/auth/register";
     const formRegister = new FormData();
 
-    formRegister.append("email", data.email_register);
-    formRegister.append("password", data.password_register);
+    formRegister.append("email", email);
+    formRegister.append("password", password);
 
     const response = await axios.post(url, formRegister);
     return response;
@@ -112,7 +112,7 @@ const api = (() => {
   }
 
   //Posts
-  async function GetAllPosts(page) {
+  async function GetAllPosts(page = 1) {
     const url = baseUrl + "/posts?page=" + page;
 
     const response = await axios.get(url);
@@ -126,7 +126,7 @@ const api = (() => {
       return failTemplate;
     }
 
-    return response.data.data[0];
+    return response.data.data;
   }
 
   async function getDetailPost(_id) {
@@ -146,18 +146,18 @@ const api = (() => {
     form.append("post_image", data?.post_image || undefined);
 
     data.post_category.forEach(kategori => {
-        form.append('post_category[]', kategori)
+      form.append('post_category[]', kategori)
     })
 
     data.post_attachment.forEach(attach => {
-        form.append('post_attachment[]', attach)
+      form.append('post_attachment[]', attach)
     })
 
     const response = await axios.post(url, form);
     return response.data.data
   }
 
-  async function EditPost(data){
+  async function EditPost(data) {
     const url = baseUrl + '/post/' + data._id;
 
     const form = new FormData();
@@ -166,18 +166,18 @@ const api = (() => {
     form.append("post_image", data?.post_image || undefined);
 
     data.post_category.forEach(kategori => {
-        form.append('post_category[]', kategori)
+      form.append('post_category[]', kategori)
     })
 
     data.post_attachment.forEach(attach => {
-        form.append('post_attachment[]', attach)
+      form.append('post_attachment[]', attach)
     })
 
     const response = await axios.put(url, form);
     return response.data.data
   }
-  
-  async function LikeUnlikePost(data){
+
+  async function LikeUnlikePost(data) {
     const url = baseUrl + '/post/' + data._id;
 
     const response = await axios.put(url, data);
