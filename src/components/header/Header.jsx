@@ -39,6 +39,14 @@ function Navigation() {
     },
   });
 
+  const handleNavigate = () => {
+    if(auth){
+      navigate('/profile')
+    } else {
+      navigate('/login')
+    }
+  }
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -216,6 +224,7 @@ function Navigation() {
                 </Nav.Link>
               </li>
             </ul>
+            <Button>Logout</Button>
           </Nav.Link>
         </Nav>
 
@@ -276,12 +285,12 @@ function Navigation() {
             className={`${Styles.sideIcon} ${
               sidebarToggle ? Styles.expanded : ""
             } 
-              ${location.pathname === "/login" ? Styles.active : ""}`}
-            onClick={() => navigate("/login")}
+              ${location.pathname === "/login" || location.pathname === "/profile" ? Styles.active : ""}`}
+            onClick={handleNavigate}
           >
             <Person
               className={`${Styles.sideLink} ${
-                location.pathname === "/login" ? Styles.active : ""
+                location.pathname === "/login" || location.pathname === "/profile" ? Styles.active : ""
               }`}
             />
             {sidebarToggle && <a.span style={{...springProps ,whiteSpace: "nowrap", fontSize: '16px' }}>Profile</a.span>}
@@ -290,6 +299,7 @@ function Navigation() {
             className={`${Styles.sideIcon} ${
               sidebarToggle ? Styles.expanded : ""
             } ${location.pathname === "/create-post" ? Styles.active : ""}`}
+            onClick={() => navigate("/create-post")}
           >
             <AddSquare
               className={`${Styles.sideLink} ${
@@ -373,6 +383,7 @@ function Navigation() {
             <Search />
           </Button>
         </InputGroup>
+        <Button>Logout</Button>
       </Navbar>
     </div>
   );

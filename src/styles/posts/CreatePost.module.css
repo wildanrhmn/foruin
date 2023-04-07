@@ -1,0 +1,14 @@
+.createPostSection{
+    padding: 50px 0;
+}
+
+.pageHeader{
+    margin-bottom: 1.3rem;
+    color: var(--color-primary);
+}
+
+.addPostContainer{
+    border: 0.5px solid rgba(68, 75, 242, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+}

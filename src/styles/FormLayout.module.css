@@ -1,0 +1,534 @@
+
+.form-control,
+.form-select,
+textarea {
+    font-size: 1.6em !important;
+    padding: 6px 10px !important;
+    box-sizing: border-box;
+    border: 1.5px solid var(--primaryColor2) !important;
+    margin-bottom: 18px !important;
+    width: 100%;
+}
+
+.form-select option {
+    font-size: .9em !important;
+    padding: 10px !important;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+textarea:focus-visible {
+    outline: none;
+}
+
+.formCta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 24px 0 0 0;
+}
+
+.formSubmitButton {
+    font-size: 1.6em;
+    font-weight: 700;
+    padding: 16px 48px;
+    border: none;
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 10px;
+    transition: all .3s ease;
+}
+
+.formSubmitButton:hover {
+    background-color: #fff;
+    color: var(--color-primary);
+}
+
+.form-draft-button {
+    font-size: 1.6em;
+    font-weight: 700;
+    padding: 16px 48px;
+    border: none;
+    background-color: var(--gray4);
+    color: var(--white);
+    border-radius: 10px;
+}
+
+.draft-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.draft-card {
+    background-color: var(--gray4);
+    width: fit-content;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.draft-card span {
+    font-size: 1.5em;
+}
+
+.draft-card .use {
+    padding: 0 5px;
+    border: none;
+    font-size: 1.5em;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--primaryColor2);
+}
+
+.draft-card .delete {
+    padding: 0 5px;
+    border: none;
+    font-size: 1.5em;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--stateColorError);
+}
+
+.form-cancel-button {
+    font-size: 1.6em;
+    font-weight: 700;
+    padding: 14px 48px;
+    border: 3px solid var(--gray4);
+    background-color: var(--white);
+    color: var(--gray4);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.formImage {
+    border : 2px solid rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.formVideo {
+    border : 2px solid rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.nonImageDisplayCard {
+    width: 100%;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    border: 2px dashed var(--color-secondary);
+}
+
+.nonVideoDisplayCard {
+    width: 100%;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    border: 2px dashed var(--color-secondary);
+}
+
+.nonImageDisplayCard span {
+    font-size: 1em;
+}
+
+.nonVideoDisplayCard span {
+    font-size: 1em;
+}
+
+.nonImageDisplayCard .textBrowse {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.nonVideoDisplayCard .textBrowse {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.imageDisplayCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+}
+
+.videoDisplayCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+}
+
+.imageDisplayCard span {
+    min-width: 85%;
+    max-width: 90%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    color: var(--primaryColor2);
+    font-weight: 600;
+    font-size: 1.5em;
+    padding: 10px 20px;
+}
+
+.videoDisplayCard span {
+    min-width: 85%;
+    max-width: 90%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    color: var(--primaryColor2);
+    font-weight: 600;
+    font-size: 1.5em;
+    padding: 10px 20px;
+}
+
+.imageDisplayCard button {
+    border: none;
+    background-color: transparent;
+}
+.videoDisplayCard button {
+    border: none;
+    background-color: transparent;
+}
+
+.formImageButton {
+    font-size: 1.6em;
+    width: 100%;
+    padding: 16px 0;
+    color: var(--color-primary);
+    background: rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+    transition: .3s;
+    font-weight: 700;
+}
+
+.formImageButton {
+    font-size: 1.6em;
+    width: 100%;
+    padding: 16px 0;
+    color: var(--color-primary);
+    background: rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+    transition: .3s;
+    font-weight: 700;
+}
+
+.formVideoButton {
+    font-size: 1.6em;
+    width: 100%;
+    padding: 16px 0;
+    color: var(--color-primary);
+    background: rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+    transition: .3s;
+    font-weight: 700;
+}
+
+.form-image-btn:hover {
+    /* color: var(--gray4);
+    background-color: var(--white); */
+}
+
+.textOrg {
+    margin: 0;
+    color: #1e1e1e;
+    font-size: 1.1em !important;
+    font-weight: 700 !important;
+    margin-bottom: 18px !important;
+    text-align: left !important;
+    width: 100% !important;
+}
+
+.label-cta {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 14px;
+}
+
+.label-cta-btn {
+    font-size: 1.8em;
+    background-color: var(--primaryColor2);
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primaryColor2);
+    box-sizing: border-box;
+    color: var(--white);
+    border-radius: 12px;
+    transition: .3s;
+    font-size: 2em;
+    font-weight: bold;
+    ;
+}
+
+.label-cta-btn:hover {
+    background-color: transparent;
+    color: var(--primaryColor2)
+}
+
+.modal-content {
+    border-top-left-radius: 18px !important;
+    border-top-right-radius: 18px !important;
+}
+
+.modal-body {
+    padding: 14px 24px 24px 24px !important;
+    width: 100% !important;
+}
+
+.modal-header {
+    color: var(--white);
+    background-color: var(--primaryColor);
+    width: 100%;
+    height: 100%;
+    padding: 24px !important;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+.display-list-bubble {
+    display: flex;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.bubble-item {
+    background-color: var(--primaryColor2);
+    padding: 5px 10px 5px 15px;
+    display: flex;
+    font-size: 1.4em;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    border-radius: 8px;
+}
+
+.bubble-item button {
+    border: none;
+    font-weight: 700;
+    color: var(--white);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: transparent;
+}
+
+.ck-editor {
+    margin-bottom: 20px !important;
+}
+
+.ck-content {
+    min-height: 100px !important;
+}
+
+.corner-cta {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.invisable-form {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+}
+
+.invisable-form:focus-visible {
+    outline: none;
+}
+
+.filterHeader {
+    border: 2px solid rgba(201, 203, 255, 0.5);
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.filterHeaderButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filterHeader div span {
+    font-size: 1em;
+}
+
+.formInputLink{
+    border: 2px solid rgba(201, 203, 255, 0.5) !important;
+    border-radius: 10px !important;    
+    padding: 10px 20px !important;    
+}
+
+.katagoriInput::placeholder{
+    font-size: 14px !important;
+}
+
+.filterBody {
+    border: 1px solid var(--primaryColor2);
+    padding: 10px;
+    height: 0;
+    opacity: 0;
+    border-top: none;
+    transition: .2s;
+}
+
+.showed {
+    height: fit-content;
+    opacity: 1;
+}
+
+.filterBody ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filterBody ul li {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    font-size: 1.4em !important;
+    align-items: center;
+}
+
+.filterBody ul li button {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary);
+    width: 25px;
+    height: 25px;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.filterItemContainer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filterItem {
+    background-color: var(--color-secondary);
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 1em;
+    display: flex;
+    gap: 10px;
+    align-items: space-between;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.filterItem button {
+    background-color: transparent;
+    color: #fff !important;
+    font-size: .9em !important;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+.form-check {
+    display: flex !important;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px !important;
+}
+
+.form-check-input {
+    margin-top: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--primaryColor2) !important;
+    border-color: var(--primaryColor2) !important;
+}
+
+.form-check-label {
+    font-size: 1.4em !important;
+}
+
+.kategoriDynamicForm button {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary);
+    width: 25px;
+    height: 25px;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px !important;
+}
+
+.kategoriDynamicForm input {
+    margin-left: 10px !important;
+    font-size: 1em !important;
+    border: none !important;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    font-size: 1em;
+    border-bottom: 1px solid var(--color-secondary) !important;
+}
+
+.kategoriDynamicForm input:focus {
+    box-shadow: none;
+}
+
+.required {
+    color: red;
+    font-size: 1em;
+}
+
+.wide-coloumn {
+    width: 73% !important;
+}
+
+.arrowKategori {
+    filter: invert(87%) sepia(7%) saturate(6856%) hue-rotate(187deg) brightness(106%) contrast(113%) !important;
+}

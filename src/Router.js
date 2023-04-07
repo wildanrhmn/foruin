@@ -9,6 +9,7 @@ import PrivateRoutes from "./utils/ProtectedRoutes";
 import ScrollToTop from "./components/tools/scrollToTop";
 import Register from "./pages/register/Register";
 import OrganizationList from "./pages/organization_list/OrganizationList";
+import CreatePost from "./pages/createpost/CreatePost";
 
 function AppRouter() {
 
@@ -20,6 +21,7 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path= "/organization-list" element={<OrganizationList />} />
+          <Route path= "/create-post" element={<CreatePost />} />
         </Routes>
         <Routes>
           <Route element={<PrivateRoutes />}>

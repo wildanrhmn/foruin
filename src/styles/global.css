@@ -81,6 +81,16 @@ a{
     text-decoration: none;
 }
 
+.ck-editor__editable {
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 860px;
+}
+/*Toolbar*/
+.ck-editor__top {
+    min-width: 860px;
+}
+
 button{
     cursor: pointer;
     outline: none;
