@@ -81,7 +81,7 @@ export default function InputManyImage({ getData, currentData }) {
                             <div className={Styles.imageDisplayCard}>
                                 <FileOrg width={30} />
                                 <span style={{fontSize: '14px'}}>
-                                    {image}
+                                    {image.name}
                                 </span>
                                 <button onClick={() => deleteImage(index)}>
                                     <Delete className={Styles.deleteIcon} />
