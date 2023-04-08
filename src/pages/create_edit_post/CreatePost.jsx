@@ -3,8 +3,8 @@ import React from 'react'
 import Styles from '../../styles/posts/CreatePost.module.css'
 import FormAddPost from '../../components/posts/FormAddPost'
 
-
 const CreatePost = () => {
+
   return (
     <section className={Styles.createPostSection}>
         <div className='container'>

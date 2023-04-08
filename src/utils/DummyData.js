@@ -1,3 +1,5 @@
+
+
 export const dataOrganisasi = [
     {
         id: 1,
@@ -54,3 +56,22 @@ export const dataTopik = [
         jumlah: 9999
     },
 ]
+
+export const dataVideoImages = [
+    {
+        type: 'image',
+        src: "https://en.datosjam.net.pe/wp-content/uploads/2022/04/portada_spy-x-family-39-780x470.jpg"   
+    },
+    {
+        type: 'image',
+        src: "https://en.datosjam.net.pe/wp-content/uploads/2022/04/portada_spy-x-family-39-780x470.jpg"   
+    },
+    {
+        type: 'image',
+        src: "https://en.datosjam.net.pe/wp-content/uploads/2022/04/portada_spy-x-family-39-780x470.jpg"   
+    },
+    {
+        type: 'video',
+        src: "https://www.youtube.com/watch?v=tgFHMqdr5gM&t=931s&ab_channel=DeddyCorbuzier"  
+    }  
+  ]

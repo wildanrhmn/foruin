@@ -3,9 +3,14 @@ import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/posts/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
 import { FaEllipsisH } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import ImageSlider from "../tools/PostSlider";
+import { useNavigate } from "react-router-dom";
 
-function Posts({ profilePic, name, username, description, imageSrc }) {
+function Posts({ _id, profilePic, name, username, description, imageSrc, category }) {
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
+  const { auth } = useSelector((states) => states);
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({
     query: "(max-width: 1400px)",
@@ -13,6 +18,20 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
 
   const containerRef = useRef(null);
 
+  
+  const handleNavigate = () => {
+    const bundle = {
+      _id,
+      profilePic,
+      name,
+      username,
+      description,
+      imageSrc,
+      category
+    };
+    localStorage.setItem('postData', JSON.stringify(bundle))
+    navigate(`/update-post/${_id}`)
+  }
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -68,13 +87,27 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
                   }}
                   onClick={() => setShow(!show)}
                 />
-                <ul className={`${Styles.subMenu} ${show ? Styles.show : ""}`}>
-                  {/* This will be based on role */}
-                  <li>Tidak tertarik dengan postingan ini</li>
-                  <li>Bisukan @traveloak</li>
-                  <li>Blokir @traveloak</li>
-                  <li>Laporkan Postingan</li>
-                </ul>
+                {/* This will be based on role */}
+                {auth.role === "Verified" ? (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li onClick={handleNavigate}>
+                      Edit Post
+                    </li>
+                    <li>Delete Post</li>
+                    <li>Pin Post</li>
+                  </ul>
+                ) : (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li>Tidak tertarik dengan postingan ini</li>
+                    <li>Bisukan @traveloak</li>
+                    <li>Blokir @traveloak</li>
+                    <li>Laporkan Postingan</li>
+                  </ul>
+                )}
               </a>
             </div>
           </div>
@@ -100,24 +133,25 @@ function Posts({ profilePic, name, username, description, imageSrc }) {
               </p>
             </div>
             {description.length > 100 && (
-              <button  onClick={toggleExpanded} style={{backgroundColor: 'transparent', color: 'blue'}} >
-                {expanded
-                  ? <span style={{fontSize: '14px'}}>Tampilkan lebih sedikit...</span>
-                  : <span style={{fontSize: '14px'}}>Tampilkan lebih banyak...</span>}
+              <button
+                onClick={toggleExpanded}
+                style={{ backgroundColor: "transparent", color: "blue" }}
+              >
+                {expanded ? (
+                  <span style={{ fontSize: "14px" }}>
+                    Tampilkan lebih sedikit...
+                  </span>
+                ) : (
+                  <span style={{ fontSize: "14px" }}>
+                    Tampilkan lebih banyak...
+                  </span>
+                )}
               </button>
             )}
           </div>
-          {imageSrc && (
-            <div className="mt-3 d-flex justify-content-center">
-              <Image
-                src={imageSrc}
-                alt="Post"
-                fluid
-                style={{ borderRadius: "18px" }}
-                className={Styles.imagePost}
-              />
-            </div>
-          )}
+          <div className="d-flex justify-content-center">
+            <ImageSlider imageSrc={imageSrc} />
+          </div>
         </div>
       </Card.Body>
     </Card>

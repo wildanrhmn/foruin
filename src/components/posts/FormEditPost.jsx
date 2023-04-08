@@ -15,13 +15,17 @@ import Editor from "../tools/Editor";
 import Styles from "../../styles/FormLayout.module.css";
 import { useLocation } from "react-router-dom";
 
-export default function FormAddPost({ showForm }) {
+export default function FormEditPost({ showForm }) {
   // const dispatch = useDispatch();
   const location = useLocation();
-  const [uploadedVideo, setUploadedVideo] = useState(null);
-  const [gambarPost, setGambarPost] = useState([]);
-  const [kategoriPost, setKategoriPost] = useState([]);
-  const [isiPost, setIsiPost] = useState('');
+  const postData = JSON.parse(localStorage.getItem('postData'));
+  const filteredDataVideo = postData.imageSrc.filter(item => item.type === 'video');
+  const filteredDataImage = postData.imageSrc.filter(item => item.type === 'image').map(data => data.src);
+  const [uploadedVideo, setUploadedVideo] = useState(filteredDataVideo[0].src || null);
+  const [gambarPost, setGambarPost] = useState(filteredDataImage || []);
+  const [kategoriPost, setKategoriPost] = useState(postData?.category || []);
+  const [isiPost, setIsiPost] = useState(postData?.description || '');
+
 
   // const [error, setError] = useState(false);
 

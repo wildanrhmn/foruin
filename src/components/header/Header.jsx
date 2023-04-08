@@ -14,20 +14,35 @@ import { ReactComponent as Permission } from '../../assets/icons/Permission.svg'
 import { ReactComponent as Submission } from '../../assets/icons/Submission.svg';
 import { ReactComponent as Reports } from '../../assets/icons/Reports.svg';
 
+import { useSelector, useDispatch } from "react-redux";
+import { AsyncGetPosts } from "../../state/posts/middleware";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Styles from "../../styles/headerfooter/Navbar.module.css";
-import { useSelector } from "react-redux";
 
 import { animated as a, useSpring } from "@react-spring/web";
+import cookies from "../../utils/cookie";
 
 function Navigation() {
   const navigate = useNavigate();
   const location = useLocation();
+
   const { auth = {} } = useSelector(states => states);
+  const dispatch = useDispatch();
+
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const ref = useRef(null);
+
+  const handleLogout = () => {
+    localStorage.removeItem('postData')
+    sessionStorage.removeItem('login_forum_info')
+    cookies.remove('refreshToken')
+
+    navigate('/login');
+    window.location.reload();
+  }
+
   const navAnimation = useSpring({
     to: {
       maxWidth: sidebarToggle ? "220px" : "83px",
@@ -39,8 +54,12 @@ function Navigation() {
     },
   });
 
+  useEffect(() => {
+    dispatch(AsyncGetPosts())
+  }, [dispatch])
+
   const handleNavigate = () => {
-    if(auth){
+    if(auth.role){
       navigate('/profile')
     } else {
       navigate('/login')
@@ -224,7 +243,7 @@ function Navigation() {
                 </Nav.Link>
               </li>
             </ul>
-            <Button>Logout</Button>
+            <Button onClick={handleLogout}>Logout</Button>
           </Nav.Link>
         </Nav>
 
@@ -383,7 +402,7 @@ function Navigation() {
             <Search />
           </Button>
         </InputGroup>
-        <Button>Logout</Button>
+        <Button onClick={handleLogout}>Logout</Button>
       </Navbar>
     </div>
   );

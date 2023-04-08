@@ -8,44 +8,33 @@ import { useSelector } from "react-redux";
 import AsideBarOrganisasi from "../../components/landingpage/AsideBarOrganisasi";
 import AsideBarTopik from './../../components/landingpage/AsideBarTopik';
 
-import { dataOrganisasi, dataTopik } from "../../utils/DummyData";
-import Image from '../../assets/images/PostImg.png'
+import { dataOrganisasi, dataTopik, dataVideoImages } from "../../utils/DummyData";
+import FormAddPost from "../../components/posts/FormEditPost";
 
 const LandingPage = () => {
   const isLarge = useMediaQuery({
     query: "(max-width: 1400px)",
   });
-
+  
   const { posts = [] } = useSelector(states => states);
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className={`${isLarge ? "col-lg-9" : "col-lg-9"}`}>
-          {/* <Posts
-            profilePic="https://picsum.photos/id/237/200/300"
-            name="John Doe"
-            username="johndoe123"
-            imageSrc={Image}
-            description="
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Donec eget fermentum neque, non faucibus nibh. Sed vel massa in enim ornare vulputate. Morbi ut ex sapien. Integer nec ultrices turpis. In tempor risus ut libero fermentum, in dignissim libero tempor.
-      "
-          /> */}
           {posts?.map(post => (
+            <>
             <Posts
+              _id={post.id}
               profilePic="https://picsum.photos/id/237/200/300"
               name={post.display_name}
               username={post.username}
-              imageSrc={Image}
+              imageSrc={dataVideoImages}
               description={post.body}
+              category={post.category}
             />
+            {/* <FormAddPost showForm={true} currentData={post} /> */}
+            </>
           ))}
         </div>
         <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`}>

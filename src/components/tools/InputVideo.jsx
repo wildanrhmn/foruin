@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap'
 import { useState, useRef, useEffect } from 'react'
 
-import { ReactComponent as FileOrg } from '../../assets/icons/file-org.svg'
+import { ReactComponent as FileOrg } from '../../assets/icons/Video_file_light.svg'
 import { ReactComponent as Delete } from '../../assets/icons/Delete.svg'
 
 import Styles from '../../styles/FormLayout.module.css'
@@ -75,12 +75,12 @@ export default function InputVideo({ getData, label, currentData }) {
                 />
                 {showImage !== null ? (
                     <div className={Styles.videoDisplayCard}>
-                        <FileOrg />
-                        <span>
+                        <FileOrg width={30} />
+                        <span style={{fontSize: '14px'}}>
                             {showImage?.name || showImage}
                         </span>
                         <button onClick={() => deleteImage()}>
-                            <Delete />
+                            <Delete className={Styles.deleteIcon} />
                         </button>
                     </div>
                 ) : (

@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap'
 import { useState, useRef, useEffect } from 'react'
 
-import { ReactComponent as FileOrg } from '../../assets/icons/file-org.svg'
+import { ReactComponent as FileOrg } from '../../assets/icons/Img_box_light.svg'
 import { ReactComponent as Delete } from '../../assets/icons/Delete.svg'
 
 import Styles from '../../styles/FormLayout.module.css'
@@ -60,7 +60,7 @@ export default function InputManyImage({ getData, currentData }) {
     useEffect(() => {
         setShowImage(currentData?.detail || currentData || null)
     }, [currentData])
-
+    
     return (
         <Form.Group>
             <div
@@ -79,12 +79,12 @@ export default function InputManyImage({ getData, currentData }) {
                     <>
                         {showImage?.map((image, index) => (
                             <div className={Styles.imageDisplayCard}>
-                                <FileOrg />
-                                <span>
-                                    {image?.name || image?.url}
+                                <FileOrg width={30} />
+                                <span style={{fontSize: '14px'}}>
+                                    {image}
                                 </span>
                                 <button onClick={() => deleteImage(index)}>
-                                    <Delete />
+                                    <Delete className={Styles.deleteIcon} />
                                 </button>
                             </div>
                         ))}

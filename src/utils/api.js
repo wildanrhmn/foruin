@@ -129,7 +129,7 @@ const api = (() => {
     return response.data.data;
   }
 
-  async function getDetailPost(_id) {
+  async function GetDetailPost(_id) {
     const url = baseUrl + "/post/" + _id;
 
     const response = await axios.get(url);
@@ -137,8 +137,8 @@ const api = (() => {
     return response.data.data;
   }
 
-  async function createPost(data) {
-    const url = baseUrl + "/post/";
+  async function CreatePost(data) {
+    const url = baseUrl + "/post";
 
     const form = new FormData();
     form.append("post_title", data.post_title);
@@ -210,8 +210,8 @@ const api = (() => {
     UpdateProfileUser,
     UpdateProfilePicture,
     GetAllPosts,
-    getDetailPost,
-    createPost,
+    GetDetailPost,
+    CreatePost,
     EditPost,
     LikeUnlikePost,
     TakedownPostAdmin,
