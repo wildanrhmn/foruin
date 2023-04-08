@@ -13,11 +13,9 @@ import InputManyImage from "../tools/InputManyImage";
 import Editor from "../tools/Editor";
 
 import Styles from "../../styles/FormLayout.module.css";
-import { useLocation } from "react-router-dom";
 
 export default function FormEditPost({ showForm }) {
   // const dispatch = useDispatch();
-  const location = useLocation();
   const postData = JSON.parse(localStorage.getItem('postData'));
   const filteredDataVideo = postData.imageSrc.filter(item => item.type === 'video');
   const filteredDataImage = postData.imageSrc.filter(item => item.type === 'image').map(data => data.src);

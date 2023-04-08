@@ -13,11 +13,8 @@ import InputManyImage from "../tools/InputManyImage";
 import Editor from "../tools/Editor";
 
 import Styles from "../../styles/FormLayout.module.css";
-import { useLocation } from "react-router-dom";
-
 export default function FormAddPost({ showForm }) {
   // const dispatch = useDispatch();
-  const location = useLocation();
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [gambarPost, setGambarPost] = useState([]);
   const [kategoriPost, setKategoriPost] = useState([]);

@@ -9,7 +9,6 @@ import AsideBarOrganisasi from "../../components/landingpage/AsideBarOrganisasi"
 import AsideBarTopik from './../../components/landingpage/AsideBarTopik';
 
 import { dataOrganisasi, dataTopik, dataVideoImages } from "../../utils/DummyData";
-import FormAddPost from "../../components/posts/FormEditPost";
 
 const LandingPage = () => {
   const isLarge = useMediaQuery({
@@ -33,7 +32,6 @@ const LandingPage = () => {
               description={post.body}
               category={post.category}
             />
-            {/* <FormAddPost showForm={true} currentData={post} /> */}
             </>
           ))}
         </div>
