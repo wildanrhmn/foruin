@@ -27,10 +27,11 @@ import cookies from "../../utils/cookie";
 function Navigation() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { auth = {} } = useSelector(states => states);
   const dispatch = useDispatch();
 
+  const { auth = {} } = useSelector(states => states);
+  const loginForumInfo = JSON.parse(sessionStorage.getItem('login_forum_info'));
+  const { role } = loginForumInfo || {}; // Add null check here
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const ref = useRef(null);
 
@@ -59,7 +60,7 @@ function Navigation() {
   }, [dispatch])
 
   const handleNavigate = () => {
-    if(auth.role){
+    if(auth.role || role){
       navigate('/profile')
     } else {
       navigate('/login')
@@ -107,7 +108,7 @@ function Navigation() {
     }
   });
 
-  if(auth.role === 'SysAdmin'){
+  if(auth.role && role === 'SysAdmin'){
     return(
       <div className={Styles.navContainer}>
       <a.div className={Styles.verticalNav} style={auth.role === 'SysAdmin' ? {...navAnimation, width: '220px'} : {...navAnimation}} ref={ref}>

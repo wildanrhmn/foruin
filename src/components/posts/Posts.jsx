@@ -11,6 +11,8 @@ function Posts({ _id, profilePic, name, username, description, imageSrc, categor
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
   const { auth } = useSelector((states) => states);
+  const loginForumInfo = JSON.parse(sessionStorage.getItem('login_forum_info'));
+  const { role } = loginForumInfo || {}; // Add null check here
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({
     query: "(max-width: 1400px)",
@@ -88,7 +90,7 @@ function Posts({ _id, profilePic, name, username, description, imageSrc, categor
                   onClick={() => setShow(!show)}
                 />
                 {/* This will be based on role */}
-                {auth.role === "Verified" ? (
+                {auth.role || role === "Verified" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >

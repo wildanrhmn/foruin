@@ -35,6 +35,10 @@ export default function InputManyImage({ getData, currentData }) {
     };
 
     function handleFile(file) {
+        if(showImage.length >= 4){
+            alert('Maksimal hanya 4 gambar.');
+            return;
+        }
         const reader = new FileReader();
         reader.onload = function () {
             const { result } = reader;
@@ -74,6 +78,7 @@ export default function InputManyImage({ getData, currentData }) {
                     ref={fileInputRef}
                     onChange={handleChange}
                     style={{ display: 'none' }}
+                    accept='image/jpg,image/png'
                 />
                 {showImage?.length > 0 ? (
                     <>
@@ -81,9 +86,9 @@ export default function InputManyImage({ getData, currentData }) {
                             <div className={Styles.imageDisplayCard}>
                                 <FileOrg width={30} />
                                 <span style={{fontSize: '14px'}}>
-                                    {image.name}
+                                    {image.name || image}
                                 </span>
-                                <button onClick={() => deleteImage(index)}>
+                                <button onClick={() => deleteImage(index)} type='button'>
                                     <Delete className={Styles.deleteIcon} />
                                 </button>
                             </div>

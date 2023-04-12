@@ -60,18 +60,14 @@ export const dataTopik = [
 export const dataVideoImages = [
     {
         type: 'image',
-        src: "https://en.datosjam.net.pe/wp-content/uploads/2022/04/portada_spy-x-family-39-780x470.jpg"   
+        src: "https://res.cloudinary.com/dr00ghniy/image/upload/v1674266340/iqeekqxymmifjmilbgoo.jpg"   
     },
     {
         type: 'image',
-        src: "https://en.datosjam.net.pe/wp-content/uploads/2022/04/portada_spy-x-family-39-780x470.jpg"   
-    },
-    {
-        type: 'image',
-        src: "https://en.datosjam.net.pe/wp-content/uploads/2022/04/portada_spy-x-family-39-780x470.jpg"   
+        src: "https://res.cloudinary.com/dr00ghniy/image/upload/v1674262655/ad6q1aoufczk2mbjlzoj.png"   
     },
     {
         type: 'video',
-        src: "https://www.youtube.com/watch?v=tgFHMqdr5gM&t=931s&ab_channel=DeddyCorbuzier"  
+        src: "https://www.youtube.com/watch?v=2GWqd_tRslM&ab_channel=FerryIrwandi"  
     }  
   ]
