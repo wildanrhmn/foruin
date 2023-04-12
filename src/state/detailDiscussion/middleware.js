@@ -1,12 +1,11 @@
-import { GetAllPostsAction } from "./action";
-import { GetDetailPostAction } from "../detailPost/action";
+import { GetPostsAction } from "./action";
 import api from "../../utils/api";
 
-function AsyncGetPosts(page = 1, category = null) {
+function AsyncGetPosts(page = 1) {
     return async dispatch => {
         try {
-            const data = await api.GetAllPosts(page, category);
-            dispatch(GetAllPostsAction(data));
+            const data = await api.GetAllPosts(page);
+            dispatch(GetPostsAction(data));
         } catch (err) {
             console.error(err);
         }
@@ -25,8 +24,6 @@ function AsyncCreatePost(data) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // Redirect to Profile
         } catch (err) {
             console.error(err);
         }
@@ -34,7 +31,7 @@ function AsyncCreatePost(data) {
 }
 
 function AsyncUpdatePost(id = null, data) {
-    return async dispatch => {
+    return async () => {
         try {
             if (id === null) {
                 throw new Error()
@@ -45,15 +42,6 @@ function AsyncUpdatePost(id = null, data) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // Get Detail Post
-            const details = await api.getDetailPost(id);
-
-            if (!result) {
-                throw new Error()
-            }
-
-            dispatch(GetDetailPostAction(details))
         } catch (err) {
             console.error(err);
         }
@@ -72,8 +60,6 @@ function AsyncLikePost(id = null) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // Like Unlike Setup
         } catch (err) {
             console.error(err);
         }
@@ -92,8 +78,6 @@ function AsyncAdminTakedownPost(id = null) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // Refresh Profile
         } catch (err) {
             console.error(err);
         }
@@ -112,8 +96,6 @@ function AsyncVerifiedTakedownPost(id = null) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // Refresh Profile
         } catch (err) {
             console.error(err);
         }
