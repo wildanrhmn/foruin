@@ -1,43 +1,87 @@
-import { GetPostsAction } from "./action";
+import { GetDiscussionAction } from "./action";
+import { GetDetailDiscussionAction } from '../detailDiscussion/action'
 import api from "../../utils/api";
 
-function AsyncGetPosts(page = 1) {
+function AsyncGetDiscussionLayer(page = 1, id_layer) {
     return async dispatch => {
         try {
-            const data = await api.GetAllPosts(page);
-            dispatch(GetPostsAction(data));
+            const data = await api.GetAllDiscussionLayer(page, id_layer);
+            dispatch(GetDiscussionAction(data));
         } catch (err) {
             console.error(err);
         }
     }
 }
 
-function AsyncCreatePost(data) {
+function AsyncGetDiscussionTopic(page = 1, id_topic) {
+    return async dispatch => {
+        try {
+            const data = await api.GetAllDiscussionTopic(page, id_topic);
+            dispatch(GetDiscussionAction(data));
+        } catch (err) {
+            console.error(err);
+        }
+    }
+}
+
+function AsyncCreateDiscussion(data, id_topic) {
     return async () => {
         try {
             if (data.body === "") {
                 throw new Error()
             }
 
-            const result = await api.createPost(data);
+            const result = await api.CreateDiscussion(data, id_topic);
 
             if (result.info !== undefined) {
                 throw new Error()
             }
+
+            // const discussions = await api.CreateDiscussion(data, id_topic);
+
+            // if (result.info !== undefined) {
+            //     throw new Error()
+            // }
         } catch (err) {
             console.error(err);
         }
     }
 }
 
-function AsyncUpdatePost(id = null, data) {
+function AsyncUpdateDiscussion(id = null, data) {
+    return async dispatch => {
+        try {
+            if (id === null) {
+                throw new Error()
+            }
+
+            const result = await api.EditDiscussion(id, data);
+
+            if (result.info !== undefined) {
+                throw new Error()
+            }
+
+            const detail = await api.GetDetailDiscussion(id);
+
+            if (detail._id !== undefined) {
+                throw new Error()
+            }
+
+            dispatch(GetDetailDiscussionAction(detail))
+        } catch (err) {
+            console.error(err);
+        }
+    }
+}
+
+function AsyncAdminTakedownDiscussion(id = null) {
     return async () => {
         try {
             if (id === null) {
                 throw new Error()
             }
 
-            const result = await api.EditPost(id, data);
+            const result = await api.TakedownDiscussionAdmin(id);
 
             if (result.info !== undefined) {
                 throw new Error()
@@ -48,14 +92,14 @@ function AsyncUpdatePost(id = null, data) {
     }
 }
 
-function AsyncLikePost(id = null) {
+function AsyncUserTakedownDiscussion(id = null) {
     return async () => {
         try {
             if (id === null) {
                 throw new Error()
             }
 
-            const result = await api.LikeUnlikePost(id);
+            const result = await api.TakedownDiscussionUser(id);
 
             if (result.info !== undefined) {
                 throw new Error()
@@ -66,40 +110,4 @@ function AsyncLikePost(id = null) {
     }
 }
 
-function AsyncAdminTakedownPost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
-
-            const result = await api.TakedownPostAdmin(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncVerifiedTakedownPost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
-
-            const result = await api.TakedownPostVerified(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-export { AsyncGetPosts, AsyncCreatePost, AsyncUpdatePost, AsyncLikePost, AsyncAdminTakedownPost, AsyncVerifiedTakedownPost }
+export { AsyncGetDiscussionLayer, AsyncGetDiscussionTopic, AsyncCreateDiscussion, AsyncUpdateDiscussion, AsyncAdminTakedownDiscussion, AsyncUserTakedownDiscussion }

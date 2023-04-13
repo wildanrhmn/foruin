@@ -198,6 +198,78 @@ const api = (() => {
     return response.data.data;
   }
 
+  // DISCUSSION
+  async function GetAllDiscussionTopic(page = 1, id_topic = null) {
+    let url = baseUrl + "/discussion/topic/" + id_topic + "?page=" + page;
+
+    const response = await axios.get(url);
+    const failTemplate = {
+      Posts: [],
+      page: 0,
+      total: 0,
+    };
+
+    if (response.data.data.length === 0) {
+      return failTemplate;
+    }
+
+    return response.data.data;
+  }
+
+  async function GetAllDiscussionLayer(page = 1, id_layer = null) {
+    let url = baseUrl + "/discussion/layer/" + id_layer + "?page=" + page;
+
+    const response = await axios.get(url);
+    const failTemplate = {
+      Posts: [],
+      page: 0,
+      total: 0,
+    };
+
+    if (response.data.data.length === 0) {
+      return failTemplate;
+    }
+
+    return response.data.data;
+  }
+
+  async function GetDetailDiscussion(id_dicussion) {
+    const url = baseUrl + "/discussion/" + id_dicussion;
+
+    const response = await axios.get(url);
+
+    return response.data.data;
+  }
+
+  async function CreateDiscussion(data, id_topic) {
+    const url = baseUrl + "/discussion/" + id_topic;
+
+    const response = await axios.post(url, data);
+    return response.data.data
+  }
+
+  async function EditDiscussion(id_dicussion, data) {
+    const url = baseUrl + '/discussion/' + id_dicussion;
+
+    const response = await axios.put(url, data);
+    return response.data.data
+  }
+
+  async function TakedownDiscussionAdmin(id_dicussion) {
+    const url = baseUrl + "/discussion/admin/" + id_dicussion;
+
+    const response = await axios.delete(url);
+    return response.data.data;
+  }
+
+  async function TakedownDiscussionUser(id_dicussion) {
+    const url = baseUrl + "/discussion/" + id_dicussion;
+
+    const response = await axios.delete(url);
+    return response.data.data;
+  }
+
+
   // CATEGORY
   async function getAllCategory(page) {
     const url = baseUrl + "/category?page=" + page;
@@ -363,6 +435,13 @@ const api = (() => {
     LikeUnlikePost,
     TakedownPostAdmin,
     TakedownPostVerified,
+    GetAllDiscussionTopic,
+    GetAllDiscussionLayer,
+    GetDetailDiscussion,
+    CreateDiscussion,
+    EditDiscussion,
+    TakedownDiscussionAdmin,
+    TakedownDiscussionUser,
     getAllCategory,
     createReport,
     adminGetAllReport,

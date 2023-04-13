@@ -20,9 +20,9 @@ export const store = configureStore({
     auth: AuhtReducer, //done
     posts: PostReducer, //done
     category: CategoryReducer, //done
-    discussions: DiscussionReducer,
+    discussions: DiscussionReducer, //done
     detailPost: DetailPostReducer, //done
-    detailDiscussion: DetailDiscussionReducer,
+    detailDiscussion: DetailDiscussionReducer, //done
     detailReport: DetailReportReducer, //done
     detailSubmission: DetailSubmissionReducer, //done
     profile: ProfileReducer, //done

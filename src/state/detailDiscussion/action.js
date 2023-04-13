@@ -1,14 +1,14 @@
 const ActionType = {
-    GET_DETAIL_POST: 'GET_DETAIL_POST',
+    GET_DETAIL_DISCUSSION: 'GET_DETAIL_DISCUSSION',
 }
 
-function GetDetailPostAction(details) {
+function GetDetailDiscussionAction(details) {
     return {
-        type: ActionType.GET_DETAIL_POST,
+        type: ActionType.GET_DETAIL_DISCUSSION,
         payload: {
             details
         }
     }
 }
 
-export { ActionType, GetDetailPostAction }
+export { ActionType, GetDetailDiscussionAction }

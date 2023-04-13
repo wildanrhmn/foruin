@@ -1,105 +1,51 @@
-import { GetPostsAction } from "./action";
+import { GetDetailDiscussionAction } from "./action";
 import api from "../../utils/api";
 
-function AsyncGetPosts(page = 1) {
+function AsyncGetDetailDiscussion(id = null) {
     return async dispatch => {
         try {
-            const data = await api.GetAllPosts(page);
-            dispatch(GetPostsAction(data));
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncCreatePost(data) {
-    return async () => {
-        try {
-            if (data.body === "") {
-                throw new Error()
-            }
-
-            const result = await api.createPost(data);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncUpdatePost(id = null, data) {
-    return async () => {
-        try {
             if (id === null) {
                 throw new Error()
             }
 
-            const result = await api.EditPost(id, data);
+            const result = await api.GetDetailDiscussion(id);
 
-            if (result.info !== undefined) {
+            if (!result) {
                 throw new Error()
             }
+
+            dispatch(GetDetailDiscussionAction(result))
         } catch (err) {
             console.error(err);
         }
     }
 }
 
-function AsyncLikePost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
+// function AsyncLikeDiscussion(id = null) {
+//     return async dispatch => {
+//         try {
+//             if (id === null) {
+//                 throw new Error()
+//             }
 
-            const result = await api.LikeUnlikePost(id);
+//             const result = await api.LikeUnlikePost(id);
 
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
+//             if (result.info !== undefined) {
+//                 throw new Error()
+//             }
 
-function AsyncAdminTakedownPost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
+//             const details = await api.getDetailPost(id);
 
-            const result = await api.TakedownPostAdmin(id);
+//             if (!details) {
+//                 throw new Error()
+//             }
 
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
+//             dispatch(GetDetailPostAction(details))
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     }
+// }
 
-function AsyncVerifiedTakedownPost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
 
-            const result = await api.TakedownPostVerified(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-export { AsyncGetPosts, AsyncCreatePost, AsyncUpdatePost, AsyncLikePost, AsyncAdminTakedownPost, AsyncVerifiedTakedownPost }
+export { AsyncGetDetailDiscussion }
