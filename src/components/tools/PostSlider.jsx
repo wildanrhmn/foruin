@@ -20,9 +20,6 @@ const ImageSlider = ({ imageSrc }) => {
           grabCursor={true}
           spaceBetween={30}
           loop={true}
-          pagination={{
-            clickable: true,
-          }}
           navigation={true}
           modules={[Pagination, Navigation]}
           className="mySwiper"

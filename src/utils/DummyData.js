@@ -71,3 +71,20 @@ export const dataVideoImages = [
         src: "https://www.youtube.com/watch?v=2GWqd_tRslM&ab_channel=FerryIrwandi"  
     }  
   ]
+
+export const comments = [
+    {
+        id: 1,
+        profilePic: "https://picsum.photos/id/237/200/300",
+        name: "Jamal",
+        username: "jamal123",
+        description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quisquam.",
+    },
+    {
+        id: 2,
+        profilePic: "https://picsum.photos/id/237/200/300",
+        name: "Not Jamal",
+        username: "jamal1234",
+        description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quisquam.",
+    },
+]  

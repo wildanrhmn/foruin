@@ -63,18 +63,19 @@
   .menuPost a{
     position: relative;
   }
-
+  
   .subMenu{
     position: absolute;
     top: 100%;
     right: 0;
     opacity: 0;
     visibility: hidden;
-    min-width: 300px;
+    min-width: max-content;
     transition: all .3s ease;
     transform: translateY(15px);
     box-shadow: 0 3px 12px 3px rgba(255,82,1,.1);
     overflow: hidden;
+    overflow-y: auto;
     z-index: 11;
     background: #fff;
     border: 2px solid #000(255,200,39,.4);
@@ -107,6 +108,66 @@
   border-radius: 0 !important;
   border-bottom: 1px solid #EBEBEB !important;
   border-right: 1px solid #EBEBEB !important;
+}
+
+.iconPost{
+  width: 23px;
+  font-size: 19px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.iconPost.liked{
+  color: var(--color-primary);
+}
+
+.iconPost:hover{
+  transform: scale(1.1);
+}
+
+.postCtaMd{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1500px;
+  margin-left: 110px;
+}
+
+.postCtaLg{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1500px;
+  margin-left: 200px;
+}
+
+.DetailpostCtaLg{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1500px;
+  margin-left: 350px;
+}
+
+.DetailpostCtaMd{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1500px;
+  margin-left: 250px;
+}
+
+.postCta li span{
+  font-size: 14px;
+}
+
+.buttonReply{
+  width: 83px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border-radius: 18px;
+  border: 1px solid var(--color-primary);
+  color: #EBEBEB;
 }
 
   

@@ -31,6 +31,8 @@ const LandingPage = () => {
               imageSrc={dataVideoImages}
               description={post.body}
               category={post.category}
+              totalLikes={1.234}
+              totalComments={12}
             />
             </>
           ))}
