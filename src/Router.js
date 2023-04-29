@@ -10,36 +10,45 @@ import OrganizationList from "./pages/organization_list/OrganizationList";
 import CreatePost from "./pages/create_edit_post/CreatePost";
 import EditPost from "./pages/create_edit_post/EditPost";
 import DetailPost from "./pages/detailpost/DetailPost";
+import Page404 from "./components/404/NotFoundPage";
+import DeletedPosts from "./pages/dashboard/deleted_posts/DeletedPosts";
+
 import { useSelector } from "react-redux";
 
 function AppRouter() {
-  const { auth = {} } = useSelector(states => states); 
-  const loginForumInfo = JSON.parse(sessionStorage.getItem('login_forum_info'));
+  const { auth = {} } = useSelector((states) => states);
+  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
 
   return (
     <Router>
       <Layout>
         <ScrollToTop />
-        {auth?.role || role === 'Verified' ? (
+        {auth?.role === "Verified" || role === "Verified" ? (
           <Routes>
+            <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/update-post/:id" element={<EditPost />} />
+            <Route path="/post/:id" element={<DetailPost />} />
             <Route path="/" element={<LandingPage />} />
-            <Route path= "/organization-list" element={<OrganizationList />} />
-            <Route path= "/create-post" element={<CreatePost />} />
-            <Route path= "/update-post/:id" element={<EditPost />} />
+            <Route path="/organization-list" element={<OrganizationList />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
-        ) : auth.role || role === 'SysAdmin' ? (
+        ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
           <Routes>
-            <Route path= "/organization-list" element={<OrganizationList />} />
+            <Route path="/deleted-posts" element={<DeletedPosts />} />
+            <Route path="/post/:id" element={<DetailPost />} />
             <Route path="/" element={<LandingPage />} />
+            <Route path="/organization-list" element={<OrganizationList />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         ) : (
           <Routes>
             <Route element={<Login />} path="/login" />
-            <Route path="/" element={<LandingPage />} />
-            <Route path= "/organization-list" element={<OrganizationList />} />
             <Route element={<Register />} path="/register" />
-          <Route path= "/post/:id" element={<DetailPost />} />
+            <Route path="/post/:id" element={<DetailPost />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/organization-list" element={<OrganizationList />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         )}
       </Layout>

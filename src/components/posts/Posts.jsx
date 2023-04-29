@@ -11,7 +11,6 @@ import { ReactComponent as Comment } from "../../assets/icons/comment_duotone.sv
 import { ReactComponent as Share } from "../../assets/icons/Vector.svg";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
 
-
 function Posts({
   _id,
   profilePic,
@@ -92,7 +91,13 @@ function Posts({
             </div>
             <div className={Styles.menuPost} ref={containerRef}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a href="" onClick={(e) => { e.preventDefault(); setShow(!show); }}>  
+              <a
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShow(!show);
+                }}
+              >
                 <Dots
                   style={{
                     color: "#C2C9D1",
@@ -102,7 +107,7 @@ function Posts({
                   }}
                 />
                 {/* This will be based on role */}
-                {auth.role || role === "Verified" ? (
+                {auth.role === "Verified" || role === "Verified" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
@@ -110,15 +115,26 @@ function Posts({
                     <li>Delete Post</li>
                     <li>Pin Post</li>
                   </ul>
-                ) : (
+                ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li>Tidak tertarik dengan postingan ini</li>
-                    <li>Bisukan @traveloak</li>
-                    <li>Blokir @traveloak</li>
-                    <li>Laporkan Postingan</li>
+                    <li>Force Delete Post</li>
+                    <li>Ban Post</li>
                   </ul>
+                ) : auth.role === "Common" || role === "Common" ? (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li>Bisukan @Jamal</li>
+                  </ul>
+                ) : (
+                  <div
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                    style={{display:'flex', justifyContent:'center', alignItems:'center'}}
+                  >
+                    <p style={{marginBottom: '0', color: '#1e1e1e'}}>You have to <span style={{color:'blue', cursor:'pointer'}}>Log In</span> first.</p>
+                  </div>
                 )}
               </a>
             </div>
@@ -134,11 +150,9 @@ function Posts({
               }
             >
               <p className={`${Styles.text}`}>
-                {location.pathname.includes("/post/") ? (
-                  description
-                ): (
-                  description.substring(0, 100)
-                )}
+                {location.pathname.includes("/post/")
+                  ? description
+                  : description.substring(0, 100)}
               </p>
             </div>
             {location.pathname.includes("/post/") ? (
@@ -157,7 +171,15 @@ function Posts({
           <div className="d-flex justify-content-center flex-column">
             <ImageSlider imageSrc={imageSrc} />
             <ul
-              className={`${location.pathname.includes('/post/') ? isMd ? Styles.DetailpostCtaMd : Styles.DetailpostCtaLg : isMd ? Styles.postCtaMd : Styles.postCtaLg}`}
+              className={`${
+                location.pathname.includes("/post/")
+                  ? isMd
+                    ? Styles.DetailpostCtaMd
+                    : Styles.DetailpostCtaLg
+                  : isMd
+                  ? Styles.postCtaMd
+                  : Styles.postCtaLg
+              }`}
             >
               <li
                 style={{
@@ -171,7 +193,7 @@ function Posts({
                   className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
                   onClick={() => setLikes(!likes)}
                 />
-                <span>{totalLikes}</span>
+                <span style={{ fontSize: "14px" }}>{totalLikes}</span>
               </li>
               <li
                 style={{
@@ -182,7 +204,7 @@ function Posts({
                 }}
               >
                 <Comment className={Styles.iconPost} />
-                <span>{totalComments}</span>
+                <span style={{ fontSize: "14px" }}>{totalComments}</span>
               </li>
               <li
                 style={{

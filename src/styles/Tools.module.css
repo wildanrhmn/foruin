@@ -1,0 +1,40 @@
+.radioButtonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .radioButtonLabel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #1e1e1e;
+    font-weight: 600;
+  }
+
+  .radioButtonInput {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc !important;
+    margin-right: 10px;
+    cursor: pointer;
+    border-color: #1e1e1e !important;
+  }
+  
+  .radioButtonInput:checked {
+    background-color: var(--color-primary);
+    border-color: #1e1e1e;
+    padding: 4px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    .radioButtonLabel{
+        font-size: 15px;
+    }
+    .radioButtonGroup {
+        gap: 5px;
+    }
+  }
+  

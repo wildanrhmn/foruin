@@ -2,14 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/posts/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
 
 const CommentsComponent = ({ profilePic, name, username, comment }) => {
+  const { auth } = useSelector((states) => states);
+  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
+  const { role } = loginForumInfo || {}; // Add null check here
   const containerRef = useRef(null);
-  // const { auth } = useSelector((states) => states);
-  // const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
-  // const { role } = loginForumInfo || {}; // Add null check here
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
 
@@ -71,9 +71,32 @@ const CommentsComponent = ({ profilePic, name, username, comment }) => {
                     cursor: "pointer",
                   }}
                 />             
-                  <ul className={`${Styles.subMenu} ${show ? Styles.show : ""}`}>
-                    <li>Hapus Komen</li>
-                  </ul> 
+                  {auth.role === "Verified" || role === "Verified" ? (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li>Delete Comment</li>
+                  </ul>
+                ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li>Force Delete Comment</li>
+                  </ul>
+                ) : auth.role === "Common" || role === "Common" ? (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li>Bisukan @Jamal</li>
+                  </ul>
+                ) : (
+                  <div
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                    style={{display:'flex', justifyContent:'center', alignItems:'center'}}
+                  >
+                    <p style={{marginBottom: '0', color: '#1e1e1e'}}>You have to <span style={{color:'blue', cursor:'pointer'}}>Log In</span> first.</p>
+                  </div>
+                )}
               </a>
             </div>
           </div>

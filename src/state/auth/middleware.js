@@ -3,9 +3,11 @@ import { LoginAction, RegisterAction, RefreshTokenAction, LogoutAction } from '.
 import api from "../../utils/api";
 import cookies from "./../../utils/cookie";
 import axios from "axios";
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 function AsyncLogin({ email, password }) {
   return async dispatch => {
+    dispatch(showLoading());
     try {
       const response = await api.Login(email, password);
       console.info(response)
@@ -27,6 +29,7 @@ function AsyncLogin({ email, password }) {
     } catch (err) {
       console.error(err);
     }
+    dispatch(hideLoading());
   }
 }
 
@@ -81,6 +84,7 @@ function AsyncRefreshToken() {
 
 function AsyncRegister({ email, password }) {
   return async dispatch => {
+    dispatch(showLoading());
     try {
       const response = await api.Register(email, password);
 
@@ -107,11 +111,13 @@ function AsyncRegister({ email, password }) {
     } catch (err) {
       console.error(err);
     }
+    dispatch(hideLoading());
   }
 }
 
 function AsyncLogout() {
   return async dispatch => {
+    dispatch(showLoading());
     try {
       cookies.remove("refreshToken");
       sessionStorage.clear();
@@ -124,6 +130,7 @@ function AsyncLogout() {
     } catch (err) {
       console.error(err);
     }
+    dispatch(hideLoading());
   }
 }
 

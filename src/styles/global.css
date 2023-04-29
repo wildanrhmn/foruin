@@ -82,14 +82,44 @@ a{
     text-decoration: none;
 }
 
+/*Toolbar*/
+
 .ck-editor__editable {
     min-height: 300px;
     max-height: 300px;
     min-width: 860px;
 }
-/*Toolbar*/
 .ck-editor__top {
     min-width: 860px;
+}
+
+.error-page {
+    z-index: 100;
+    position: relative;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 115px;
+}
+
+.error-btn {
+    background-color: var(--color-primary);
+    padding: 15px 70px;
+    color: #fff;
+    font-size: 1.8em;
+    border: 2px solid var(--color-primary);
+    transition: .3s;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.error-btn:hover {
+    border: 2px solid var(--color-primary);
+    background-color: transparent;
+    color: var(--color-primary);
 }
 
 button{

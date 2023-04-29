@@ -60,6 +60,13 @@
     border-radius: 30px;    
   }
 
+  .menuPost{
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    z-index: 10;
+  }
+
   .menuPost a{
     position: relative;
   }
@@ -84,19 +91,45 @@
     border-radius: 0px 0px 10px 10px;
 }
 
+.subMenuDeletedPosts{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  min-width: 200px;
+  transition: all .3s ease;
+  transform: translateY(15px);
+  box-shadow: 0 3px 12px 3px rgba(255,82,1,.1);
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 11;
+  background: #fff;
+  border: 2px solid #000(255,200,39,.4);
+  padding: 5px 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 10px 10px;
+}
+
 .subMenu li{
-  padding: 7px 0;
+  padding: 7px 15px;
   color: #000;
-  transition: padding .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .subMenu li:hover{
-  padding-left: 20px !important;
+  transform: translateX(5px);
   background: var(--color-primary);
   color: #fff !important;
 }
 
  .subMenu.show{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+ .subMenuDeletedPosts.show{
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
@@ -138,7 +171,7 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1500px;
-  margin-left: 200px;
+  margin-left: 270px;
 }
 
 .DetailpostCtaLg{
@@ -146,7 +179,7 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1500px;
-  margin-left: 350px;
+  margin-left: 430px;
 }
 
 .DetailpostCtaMd{
@@ -154,11 +187,18 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1500px;
-  margin-left: 250px;
+  margin-left: 230px;
 }
 
 .postCta li span{
   font-size: 14px;
+}
+
+.PostsCta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
 .buttonReply{

@@ -60,11 +60,7 @@ export const dataTopik = [
 export const dataVideoImages = [
     {
         type: 'image',
-        src: "https://res.cloudinary.com/dr00ghniy/image/upload/v1674266340/iqeekqxymmifjmilbgoo.jpg"   
-    },
-    {
-        type: 'image',
-        src: "https://res.cloudinary.com/dr00ghniy/image/upload/v1674262655/ad6q1aoufczk2mbjlzoj.png"   
+        src: "https://res.cloudinary.com/dr00ghniy/image/upload/v1674269388/bfxxot4bqre7esnmfjut.jpg"   
     },
     {
         type: 'video',
@@ -87,4 +83,25 @@ export const comments = [
         username: "jamal1234",
         description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quisquam.",
     },
-]  
+]
+
+export const dataPosts = [
+    {
+        id: 1,
+        profilePic: "https://picsum.photos/id/237/200/300",
+        name: "Jamal",
+        username: "jamal123",
+        description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quisquam.",
+        likes: 10,
+        comments: 5,
+    },
+    {
+        id: 2,
+        profilePic: "https://picsum.photos/id/237/200/300",
+        name: "Jamal",
+        username: "jamal123",
+        description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quisquam.",
+        likes: 10,
+        comments: 5,
+    },
+]

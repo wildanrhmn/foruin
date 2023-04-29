@@ -8,16 +8,45 @@ import Posts from "../../components/posts/Posts";
 import { dataVideoImages, comments } from "../../utils/DummyData";
 import CommentsComponent from "../../components/comments/PostComments";
 import ModalPostComment from "../../components/comments/ModalPostComment";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { useSelector } from "react-redux";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const DetailPost = () => {
   const { id } = useParams();
+  const [openSnackBar, setOpenSnackBar] = useState(false);
   const [detail, setDetail] = useState(null);
   const [replyText, setReplyText] = useState("");
   const [showReplyForm, setShowReplyForm] = useState(false);
 
+  const { auth } = useSelector((states) => states);
+  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
+  const { role } = loginForumInfo || {}; // Add null check here
+
+ //For Snackbar Close
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackBar(false);
+  };
+
   async function getDetailArticle(id) {
     const data = await api.GetDetailPost(id);
     setDetail(data);
+  }
+
+  const handleReplyOpen = () => {
+    if(auth.role !== undefined || role !== undefined){
+      setShowReplyForm(true);
+      return;
+    }
+    setOpenSnackBar(true);
   }
 
   const handleReplySubmit = (e) => {
@@ -44,8 +73,8 @@ const DetailPost = () => {
         description={detail?.body}
         name={detail?.username}
         category={detail?.category}
-        totalLikes={detail?.likes[0]}
-        totalComments={detail?.total_comments}
+        totalLikes={1.234}
+        totalComments={5}
         _id={detail?._id}
         imageSrc={dataVideoImages}
       />
@@ -87,7 +116,7 @@ const DetailPost = () => {
           </div>
           <button
             className={Styles.buttonReply}
-            onClick={() => setShowReplyForm(true)}
+            onClick={handleReplyOpen}
           >
             Reply
           </button>
@@ -108,6 +137,11 @@ const DetailPost = () => {
           setValue={(e) => setReplyText(e.target.value)}
           onHide={() => setShowReplyForm(false)}
         />
+      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleClose} style={{ zIndex: 9999 }}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Please Log In to Comment.
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
