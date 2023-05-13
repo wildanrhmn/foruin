@@ -3,7 +3,8 @@ import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/posts/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { AsyncLikePost } from "../../state/posts/middleware";
 import ImageSlider from "../tools/PostSlider";
 import { useNavigate } from "react-router-dom";
 import { FiThumbsUp } from "react-icons/fi";
@@ -28,6 +29,7 @@ function Posts({
   const navigate = useNavigate();
   const location = useLocation();
   const { auth } = useSelector((states) => states);
+  const dispatch = useDispatch();
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
   const [show, setShow] = useState(false);
@@ -48,9 +50,17 @@ function Posts({
     navigate(`/update-post/${_id}`);
   };
 
-  const handleLikes = () => {
-    
+  const handleLike = (_id) => {
+    setLikes(!likes);
+    if(likes) {
+      try{
+        dispatch(AsyncLikePost(_id));
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -259,7 +269,7 @@ function Posts({
                 >
                   <FiThumbsUp
                     className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
-                    onClick={() => setLikes(!likes)}
+                    onClick={() => handleLike(_id)}
                   />
                   <span style={{ fontSize: "14px" }}>{totalLikes}</span>
                 </li>
@@ -270,6 +280,7 @@ function Posts({
                     alignItems: "center",
                     gap: "5px",
                   }}
+                  onClick={() => navigate(`/post/${_id}`)}
                 >
                   <Comment className={Styles.iconPost} />
                   <span style={{ fontSize: "14px" }}>{totalComments}</span>

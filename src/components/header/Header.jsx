@@ -11,7 +11,6 @@ import { ReactComponent as Notification } from "../../assets/icons/notification-
 import { ReactComponent as AddSquare } from "../../assets/icons/Add_square.svg";
 import { ReactComponent as Person } from "../../assets/icons/profile-2.svg";
 import { ReactComponent as Trash } from "../../assets/icons/Trash.svg";
-import { ReactComponent as Permission } from "../../assets/icons/Permission.svg";
 import { ReactComponent as Submission } from "../../assets/icons/Submission.svg";
 import { ReactComponent as Reports } from "../../assets/icons/Reports.svg";
 import { BiLogOut } from "react-icons/bi";
@@ -153,73 +152,57 @@ function Navigation() {
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
-                    Hapus Posting
+                    Deleted Posts
                   </a.span>
                 )}
               </div>
               <div
                 className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/banned-account" ? Styles.active : ""
+                  } ${location.pathname === "/banned-accounts" ? Styles.active : ""
                   }`}
+                  onClick={() => navigate('/banned-accounts')}
               >
                 <Banned
-                  className={`${Styles.sideLink} ${location.pathname === "/banned-account" ? Styles.active : ""
+                  className={`${Styles.sideLink} ${location.pathname === "/banned-accounts" ? Styles.active : ""
                     }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
-                    Akun Banned
+                    Banned Accounts
                   </a.span>
                 )}
               </div>
               <div
                 className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/reported-post" ? Styles.active : ""
+                  } ${location.pathname === "/reported-accounts" ? Styles.active : ""
                   }`}
+                  onClick={() => navigate('/reported-accounts')}
               >
                 <Reports
-                  className={`${Styles.sideLink} ${location.pathname === "/reported-post" ? Styles.active : ""
+                  className={`${Styles.sideLink} ${location.pathname === "/reported-accounts" ? Styles.active : ""
                     }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
-                    Persetujuan Akun
+                    Reported Accounts
                   </a.span>
                 )}
               </div>
               <div
                 className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/account-permission"
-                    ? Styles.active
-                    : ""
+                  } ${location.pathname === "/account-submissions" ? Styles.active : ""
                   }`}
-              >
-                <Permission
-                  className={`${Styles.sideLink} ${location.pathname === "/account-permission"
-                    ? Styles.active
-                    : ""
-                    }`}
-                />
-                {sidebarToggle && (
-                  <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
-                    Form Submisi
-                  </a.span>
-                )}
-              </div>
-              <div
-                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/submission-form" ? Styles.active : ""
-                  }`}
+                  onClick={() => navigate('/account-submissions')}
               >
                 <Submission
-                  className={`${Styles.sideLink} ${location.pathname === "/submission-form"
+                  className={`${Styles.sideLink} ${location.pathname === "/account-submissions"
                     ? Styles.active
                     : ""
                     }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
-                    Form Submisi
+                    Submission Form
                   </a.span>
                 )}
               </div>

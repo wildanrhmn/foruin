@@ -115,3 +115,51 @@ export const dataPosts = [
         comments: 5,
     },
 ]
+
+export const dataBannedAccount = [
+    {
+        id: 1,
+        username: "demaulala",
+        name: "Dema U",
+        profilePic: "https://picsum.photos/id/237/200/300",
+        banned_category:"Spam/Spammer, Harassment"
+    },
+    {
+        id: 2,
+        username: "demaulala",
+        name: "Dema E",
+        profilePic: "https://picsum.photos/id/237/200/300",
+        banned_category:"Spam/Spammer, Harassment"
+    },
+    {
+        id: 3,
+        username: "demaulala",
+        name: "Dema O",
+        profilePic: "https://picsum.photos/id/237/200/300",
+        banned_category:"Spam/Spammer, Harassment"
+    }
+]
+
+export const dataSubmissionAccounts = [
+    {
+        id: 1,
+        username: "demaulala",
+        name: "Dema U",
+        profilePic: "https://picsum.photos/id/237/200/300",
+        account_status:"Warga Sipil"
+    },
+    {
+        id: 2,
+        username: "demaulala",
+        name: "Dema E",
+        profilePic: "https://picsum.photos/id/237/200/300",
+        account_status:"Warga Sipil"
+    },
+    {
+        id: 3,
+        username: "demaulala",
+        name: "Dema O",
+        profilePic: "https://picsum.photos/id/237/200/300",
+        account_status:"Warga Sipil"
+    }
+]
