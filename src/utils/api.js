@@ -179,10 +179,10 @@ const api = (() => {
     return response.data.data
   }
 
-  async function LikeUnlikePost(data) {
-    const url = baseUrl + '/post/like/' + data._id;
+  async function LikeUnlikePost(id) {
+    const url = baseUrl + '/post/like/' + id;
 
-    const response = await axios.put(url, data);
+    const response = await axios.put(url, id);
     return response.data.data;
   }
 
@@ -432,7 +432,7 @@ const api = (() => {
     UpdateProfilePicture,
     GetAllPosts,
     GetDetailPost,
-    CreatePost,
+    createPost,
     EditPost,
     LikeUnlikePost,
     TakedownPostAdmin,

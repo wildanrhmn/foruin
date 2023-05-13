@@ -2,7 +2,7 @@ import { ActionType } from "./action"
 
 export default function PostReducer(posts = [], action = {}) {
     switch (action.type) {
-        case ActionType.GET_POSTS:
+        case ActionType.GET_ALL_POSTS:
             return posts = action.payload.posts
         case ActionType.LIKE_UNLIKE_POST:
             const id_user = action.payload.id_user
