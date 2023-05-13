@@ -38,14 +38,16 @@ const api = (() => {
     return response;
   }
 
-  async function Register(email, password) {
+  async function Register(payload) {
     const url = baseUrl + "/auth/register";
     const formRegister = new FormData();
 
-    formRegister.append("email", email);
-    formRegister.append("password", password);
-
+    formRegister.append("username", payload.username);
+    formRegister.append("email", payload.email);
+    formRegister.append("password", payload.password);
+    formRegister.append("name", payload.name);
     const response = await axios.post(url, formRegister);
+    
     return response;
   }
 

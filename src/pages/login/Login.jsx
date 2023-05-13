@@ -91,7 +91,7 @@ const Login = () => {
                 className={`${Styles.btnInLogin} ${Styles.btnDaftar}`}
                 type="button"
               >
-                <Link to={`/register`}>Sign Up</Link>
+                <Link to={`/register`} className="text-decoration-none" style={{color: '#1e1e1e'}}>Sign Up</Link>
               </Button>
             </div>
           </Form>

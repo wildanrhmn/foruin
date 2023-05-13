@@ -384,15 +384,18 @@ function Navigation() {
               className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
                 } 
                 ${location.pathname === "/login" ||
-                  location.pathname === "/profile"
+                  location.pathname === "/profile" ||
+                  location.pathname === "/register"
                   ? Styles.active
                   : ""
                 }`}
               onClick={handleNavigate}
             >
               <Person
-                className={`${Styles.sideLink} ${location.pathname === "/login" ||
-                  location.pathname === "/profile"
+                className={`${Styles.sideLink} ${
+                  location.pathname === "/login" ||
+                  location.pathname === "/profile" ||
+                  location.pathname === "/register"
                   ? Styles.active
                   : ""
                   }`}

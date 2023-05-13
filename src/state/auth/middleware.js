@@ -82,11 +82,11 @@ function AsyncRefreshToken() {
   }
 }
 
-function AsyncRegister({ email, password }) {
+function AsyncRegister(payload) {
   return async dispatch => {
     dispatch(showLoading());
     try {
-      const response = await api.Register(email, password);
+      const response = await api.Register(payload);
 
       if (response.info !== undefined) {
         throw new Error()

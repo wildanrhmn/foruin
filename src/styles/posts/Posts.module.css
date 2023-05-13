@@ -176,18 +176,15 @@
 
 .DetailpostCtaLg{
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1500px;
-  margin-left: 430px;
+  gap: 50px;
+  
 }
 
 .DetailpostCtaMd{
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1500px;
-  margin-left: 230px;
+  gap: 50px;
 }
 
 .postCta li span{

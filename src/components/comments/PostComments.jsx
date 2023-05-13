@@ -35,7 +35,7 @@ const CommentsComponent = ({ profilePic, name, username, comment }) => {
 
   return (
     <Card className={Styles.cardPosts}>
-      <Card.Body className="d-flex p-3">
+      <Card.Body className="d-flex p-3" style={{paddingRight: '55px !important'}}>
         <div className="flex-shrink-0 me-3">
           <Image
             src={profilePic}
@@ -61,7 +61,7 @@ const CommentsComponent = ({ profilePic, name, username, comment }) => {
               </small>
             </div>
 
-            <div className={Styles.menuPost} ref={containerRef}>
+            <div className={Styles.menuPost} ref={containerRef} style={{transform: 'translateX(-50px)'}}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" onClick={handleToggleMenu}>
                 <Dots

@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from '../../styles/posts/Posts.module.css';
+import Styles from "../../styles/posts/Posts.module.css";
 import { Card, Image } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,9 +8,11 @@ import Posts from "../../components/posts/Posts";
 import { dataVideoImages, comments } from "../../utils/DummyData";
 import CommentsComponent from "../../components/comments/PostComments";
 import ModalPostComment from "../../components/comments/ModalPostComment";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { useSelector } from "react-redux";
+import { ReactComponent as Back } from "../../assets/icons/back.svg";
+import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -18,6 +20,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const DetailPost = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [detail, setDetail] = useState(null);
   const [replyText, setReplyText] = useState("");
@@ -27,9 +30,9 @@ const DetailPost = () => {
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
 
- //For Snackbar Close
+  //For Snackbar Close
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -40,14 +43,15 @@ const DetailPost = () => {
     const data = await api.GetDetailPost(id);
     setDetail(data);
   }
+  console.info(detail)
 
   const handleReplyOpen = () => {
-    if(auth.role !== undefined || role !== undefined){
+    if (auth.role !== undefined || role !== undefined) {
       setShowReplyForm(true);
       return;
     }
     setOpenSnackBar(true);
-  }
+  };
 
   const handleReplySubmit = (e) => {
     e.preventDefault();
@@ -67,14 +71,26 @@ const DetailPost = () => {
 
   return (
     <div className="container-fluid">
+      <div style={{padding: '20px 0 20px 20px'}}>
+        <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => navigate('/')}>
+          <Back
+            style={{
+              color: "#1e1e1e",
+              width: '26px',
+              height: '26px',     
+            }}
+          />
+          <span style={{fontSize: '18px', fontWeight: 600, paddingLeft: '20px'}}>Topic</span>
+        </div>
+      </div>
       <Posts
         username={detail?.display_name}
         profilePic={detail?.profile_pic}
         description={detail?.body}
         name={detail?.username}
         category={detail?.category}
-        totalLikes={1.234}
-        totalComments={5}
+        totalLikes={detail?.likes.length}
+        totalComments={detail?.discussion.length}
         _id={detail?._id}
         imageSrc={dataVideoImages}
       />
@@ -83,7 +99,9 @@ const DetailPost = () => {
         <Card.Body className="d-flex p-3">
           <div className="flex-shrink-0 me-3">
             <Image
-              src={'https://ih1.redbubble.net/image.4372059190.7849/st,small,507x507-pad,600x600,f8f8f8.jpg'}
+              src={
+                "https://ih1.redbubble.net/image.4372059190.7849/st,small,507x507-pad,600x600,f8f8f8.jpg"
+              }
               alt="Profile Pic"
               roundedCircle
               style={{ width: "50px", height: "50px" }}
@@ -114,31 +132,35 @@ const DetailPost = () => {
               Give your opinion
             </small>
           </div>
-          <button
-            className={Styles.buttonReply}
-            onClick={handleReplyOpen}
-          >
-            Reply
-          </button>
+          <div style={{ paddingTop: "5px", paddingRight: "55px" }}>
+            <button className={Styles.buttonReply} onClick={handleReplyOpen}>
+              Reply
+            </button>
+          </div>
         </Card.Body>
       </Card>
-     {comments.map((comment) => (
+      {comments.map((comment) => (
         <CommentsComponent
-            profilePic={comment.profilePic}
-            name={comment.name}
-            username={comment.username}
-            comment={comment.description}
+          profilePic={comment.profilePic}
+          name={comment.name}
+          username={comment.username}
+          comment={comment.description}
         />
-     ))}
-       {/* Modal Input Comment */}
+      ))}
+      {/* Modal Input Comment */}
       <ModalPostComment
-          show={showReplyForm}
-          handleSubmit={handleReplySubmit}
-          setValue={(e) => setReplyText(e.target.value)}
-          onHide={() => setShowReplyForm(false)}
-        />
-      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleClose} style={{ zIndex: 9999 }}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+        show={showReplyForm}
+        handleSubmit={handleReplySubmit}
+        setValue={(e) => setReplyText(e.target.value)}
+        onHide={() => setShowReplyForm(false)}
+      />
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        style={{ zIndex: 9999 }}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           Please Log In to Comment.
         </Alert>
       </Snackbar>

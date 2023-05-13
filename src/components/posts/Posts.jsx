@@ -31,12 +31,9 @@ function Posts({
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
   const [show, setShow] = useState(false);
-  const isMd = useMediaQuery({
-    query: "(max-width: 1400px)",
-  });
-
+  const isMd = useMediaQuery({query: "(max-width: 1400px)"});
   const containerRef = useRef(null);
-
+  const [dateTime, setDateTime] = useState('');
   const handleNavigate = () => {
     const bundle = {
       _id,
@@ -50,6 +47,10 @@ function Posts({
     localStorage.setItem("postData", JSON.stringify(bundle));
     navigate(`/update-post/${_id}`);
   };
+
+  const handleLikes = () => {
+    
+  }
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -64,6 +65,28 @@ function Posts({
       window.removeEventListener("click", handleClickOutside);
     };
   }, [containerRef]);
+
+  useEffect(() => {
+    // Get the current date and time
+    const currentDate = new Date();
+
+    // Convert the date and time to the desired format
+    const formattedDate = currentDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+
+    const formattedTime = currentDate.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+
+    // Set the formatted date and time
+    const formattedDateTime = `${formattedTime} - ${formattedDate}`;
+    setDateTime(formattedDateTime);
+  }, []);
 
   return (
     <Card className={Styles.cardPosts}>
@@ -170,54 +193,100 @@ function Posts({
           </div>
           <div className="d-flex justify-content-center flex-column">
             <ImageSlider imageSrc={imageSrc} />
-            <ul
-              className={`${
-                location.pathname.includes("/post/")
-                  ? isMd
-                    ? Styles.DetailpostCtaMd
-                    : Styles.DetailpostCtaLg
-                  : isMd
-                  ? Styles.postCtaMd
-                  : Styles.postCtaLg
-              }`}
-            >
-              <li
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "5px",
-                }}
+            {location.pathname.includes("/post/") ? (
+              <div className="d-flex align-items-center justify-content-center" style={{width:'100%'}}>
+                <div style={{transform: 'translateX(-50%)'}}>
+                  <p className="text-mute" style={{fontSize: '14px', color: '#808080'}}>{dateTime}</p>
+                </div>
+                <ul
+                  className={`${ 
+                      isMd
+                      ? Styles.DetailpostCtaMd
+                      : Styles.DetailpostCtaLg
+                  }`}
+                >
+                  <li
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <FiThumbsUp
+                      className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
+                      onClick={() => setLikes(!likes)}
+                    />
+                    <span style={{ fontSize: "14px" }}>{totalLikes}</span>
+                  </li>
+                  <li
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <Comment className={Styles.iconPost} />
+                    <span style={{ fontSize: "14px" }}>{totalComments}</span>
+                  </li>
+                  <li
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Share className={Styles.iconPost} />
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <ul
+                className={`${ 
+                    isMd
+                    ? Styles.postCtaMd
+                    : Styles.postCtaLg
+                }`}
               >
-                <FiThumbsUp
-                  className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
-                  onClick={() => setLikes(!likes)}
-                />
-                <span style={{ fontSize: "14px" }}>{totalLikes}</span>
-              </li>
-              <li
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "5px",
-                }}
-              >
-                <Comment className={Styles.iconPost} />
-                <span style={{ fontSize: "14px" }}>{totalComments}</span>
-              </li>
-              <li
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Share className={Styles.iconPost} />
-              </li>
-              <li></li>
-              <li></li>
-            </ul>
+                <li
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <FiThumbsUp
+                    className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
+                    onClick={() => setLikes(!likes)}
+                  />
+                  <span style={{ fontSize: "14px" }}>{totalLikes}</span>
+                </li>
+                <li
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <Comment className={Styles.iconPost} />
+                  <span style={{ fontSize: "14px" }}>{totalComments}</span>
+                </li>
+                <li
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Share className={Styles.iconPost} />
+                </li>
+                <li></li>
+                <li></li>
+              </ul>
+            )}
           </div>
         </div>
       </Card.Body>

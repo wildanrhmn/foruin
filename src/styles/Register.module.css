@@ -1,5 +1,12 @@
 .registerWrapper {
-    padding: 40px 0 100px 0;
+    padding-top: 130px;
+}
+
+@media screen and (max-width: 1400px) {
+    .registerWrapper {
+        padding-top: 80px;
+    }
+    
 }
 
 .registerForm {
@@ -7,10 +14,14 @@
     margin: 0 auto;
 }
 
+.registerFormControl {
+    border: 1px solid #000 !important;
+}
+
 .btnInRegister {
     font-weight: 600 !important;
     height: 50px !important;
-    font-size: 24px !important;
+    font-size: 16px !important;
 }
 
 .btnRegister {
