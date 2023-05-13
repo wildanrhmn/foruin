@@ -124,9 +124,8 @@ function Navigation() {
             ref={ref}
           >
             <div
-              className={`${Styles.logoContainer} ${
-                sidebarToggle ? Styles.expanded : ""
-              }`}
+              className={`${Styles.logoContainer} ${sidebarToggle ? Styles.expanded : ""
+                }`}
               style={{ cursor: "pointer" }}
             >
               <Logo
@@ -143,17 +142,14 @@ function Navigation() {
             </div>
             <div className={Styles.iconContainer}>
               <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                } ${
-                  location.pathname === "/deleted-posts" ? Styles.active : ""
-                }`}
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/deleted-posts" ? Styles.active : ""
+                  }`}
                 onClick={() => navigate('/deleted-posts')}
               >
                 <Trash
-                  className={`${Styles.sideLink} ${
-                    location.pathname === "/deleted-posts" ? Styles.active : ""
-                  }`}
+                  className={`${Styles.sideLink} ${location.pathname === "/deleted-posts" ? Styles.active : ""
+                    }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
@@ -162,16 +158,13 @@ function Navigation() {
                 )}
               </div>
               <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                } ${
-                  location.pathname === "/banned-account" ? Styles.active : ""
-                }`}
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/banned-account" ? Styles.active : ""
+                  }`}
               >
                 <Banned
-                  className={`${Styles.sideLink} ${
-                    location.pathname === "/banned-account" ? Styles.active : ""
-                  }`}
+                  className={`${Styles.sideLink} ${location.pathname === "/banned-account" ? Styles.active : ""
+                    }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
@@ -180,16 +173,13 @@ function Navigation() {
                 )}
               </div>
               <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                } ${
-                  location.pathname === "/reported-post" ? Styles.active : ""
-                }`}
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/reported-post" ? Styles.active : ""
+                  }`}
               >
                 <Reports
-                  className={`${Styles.sideLink} ${
-                    location.pathname === "/reported-post" ? Styles.active : ""
-                  }`}
+                  className={`${Styles.sideLink} ${location.pathname === "/reported-post" ? Styles.active : ""
+                    }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
@@ -198,20 +188,17 @@ function Navigation() {
                 )}
               </div>
               <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                } ${
-                  location.pathname === "/account-permission"
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/account-permission"
                     ? Styles.active
                     : ""
-                }`}
+                  }`}
               >
                 <Permission
-                  className={`${Styles.sideLink} ${
-                    location.pathname === "/account-permission"
-                      ? Styles.active
-                      : ""
-                  }`}
+                  className={`${Styles.sideLink} ${location.pathname === "/account-permission"
+                    ? Styles.active
+                    : ""
+                    }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
@@ -220,18 +207,15 @@ function Navigation() {
                 )}
               </div>
               <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                } ${
-                  location.pathname === "/submission-form" ? Styles.active : ""
-                }`}
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/submission-form" ? Styles.active : ""
+                  }`}
               >
                 <Submission
-                  className={`${Styles.sideLink} ${
-                    location.pathname === "/submission-form"
-                      ? Styles.active
-                      : ""
-                  }`}
+                  className={`${Styles.sideLink} ${location.pathname === "/submission-form"
+                    ? Styles.active
+                    : ""
+                    }`}
                 />
                 {sidebarToggle && (
                   <a.span style={{ ...springProps, whiteSpace: "nowrap" }}>
@@ -241,31 +225,30 @@ function Navigation() {
               </div>
 
               {(auth && role) && (
-              <>
-                <hr />
-                <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                }`}
-                onClick={handleLogout}
-                >
-                  <BiLogOut
-                    className={`${Styles.sideLink}`}
-                  />
-                  {sidebarToggle && (
-                    <a.span
-                      style={{
-                        ...springProps,
-                        whiteSpace: "nowrap",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Keluar
-                    </a.span>
-                  )}
-                </div>
-              </>
-            )}
+                <>
+                  <hr />
+                  <div
+                    className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                      }`}
+                    onClick={handleLogout}
+                  >
+                    <BiLogOut
+                      className={`${Styles.sideLink}`}
+                    />
+                    {sidebarToggle && (
+                      <a.span
+                        style={{
+                          ...springProps,
+                          whiteSpace: "nowrap",
+                          fontSize: "16px",
+                        }}
+                      >
+                        Keluar
+                      </a.span>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </a.div>
 
@@ -351,7 +334,7 @@ function Navigation() {
     );
   }
 
-   /* ====================== If User/Organization ====================================*/
+  /* ====================== If User/Organization ====================================*/
 
   return (
     <header>
@@ -359,9 +342,8 @@ function Navigation() {
       <div className={Styles.navContainer}>
         <a.div className={Styles.verticalNav} style={navAnimation} ref={ref}>
           <div
-            className={`${Styles.logoContainer} ${
-              sidebarToggle ? Styles.expanded : ""
-            }`}
+            className={`${Styles.logoContainer} ${sidebarToggle ? Styles.expanded : ""
+              }`}
             style={{ cursor: "pointer" }}
           >
             <Logo
@@ -378,15 +360,13 @@ function Navigation() {
           </div>
           <div className={Styles.iconContainer}>
             <div
-              className={`${Styles.sideIcon} ${
-                sidebarToggle ? Styles.expanded : ""
-              } ${location.pathname === "/" ? Styles.active : ""}`}
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } ${location.pathname === "/" ? Styles.active : ""}`}
               onClick={() => navigate("/")}
             >
               <Home
-                className={`${Styles.sideLink} ${
-                  location.pathname === "/" ? Styles.active : ""
-                }`}
+                className={`${Styles.sideLink} ${location.pathname === "/" ? Styles.active : ""
+                  }`}
               />
               {sidebarToggle && (
                 <a.span
@@ -401,46 +381,21 @@ function Navigation() {
               )}
             </div>
             <div
-              className={`${Styles.sideIcon} ${
-                sidebarToggle ? Styles.expanded : ""
-              } ${location.pathname === "/notification" ? Styles.active : ""}`}
-            >
-              <Notification
-                className={`${Styles.sideLink} ${
-                  location.pathname === "/notification" ? Styles.active : ""
-                }`}
-              />
-              {sidebarToggle && (
-                <a.span
-                  style={{
-                    ...springProps,
-                    whiteSpace: "nowrap",
-                    fontSize: "16px",
-                  }}
-                >
-                  Notifikasi
-                </a.span>
-              )}
-            </div>
-            <div
-              className={`${Styles.sideIcon} ${
-                sidebarToggle ? Styles.expanded : ""
-              } 
-                ${
-                  location.pathname === "/login" ||
+              className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                } 
+                ${location.pathname === "/login" ||
                   location.pathname === "/profile"
-                    ? Styles.active
-                    : ""
+                  ? Styles.active
+                  : ""
                 }`}
               onClick={handleNavigate}
             >
               <Person
-                className={`${Styles.sideLink} ${
-                  location.pathname === "/login" ||
+                className={`${Styles.sideLink} ${location.pathname === "/login" ||
                   location.pathname === "/profile"
-                    ? Styles.active
-                    : ""
-                }`}
+                  ? Styles.active
+                  : ""
+                  }`}
               />
               {sidebarToggle && (
                 <a.span
@@ -454,37 +409,59 @@ function Navigation() {
                 </a.span>
               )}
             </div>
-            <div
-              className={`${Styles.sideIcon} ${
-                sidebarToggle ? Styles.expanded : ""
-              } ${location.pathname === "/create-post" ? Styles.active : ""}`}
-              onClick={() => navigate("/create-post")}
-            >
-              <AddSquare
-                className={`${Styles.sideLink} ${
-                  location.pathname === "/create-post" ? Styles.active : ""
-                }`}
-              />
-              {sidebarToggle && (
-                <a.span
-                  style={{
-                    ...springProps,
-                    whiteSpace: "nowrap",
-                    fontSize: "16px",
-                  }}
-                >
-                  Buat Posting
-                </a.span>
-              )}
-            </div>
+            {(auth && role) && (
+              <div
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/notification" ? Styles.active : ""}`}
+              >
+                <Notification
+                  className={`${Styles.sideLink} ${location.pathname === "/notification" ? Styles.active : ""
+                    }`}
+                />
+                {sidebarToggle && (
+                  <a.span
+                    style={{
+                      ...springProps,
+                      whiteSpace: "nowrap",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Notifikasi
+                  </a.span>
+                )}
+              </div>
+            )}
+            {(auth.role === 'Verified' || role === 'Verified') && (
+
+              <div
+                className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                  } ${location.pathname === "/create-post" ? Styles.active : ""}`}
+                onClick={() => navigate("/create-post")}
+              >
+                <AddSquare
+                  className={`${Styles.sideLink} ${location.pathname === "/create-post" ? Styles.active : ""
+                    }`}
+                />
+                {sidebarToggle && (
+                  <a.span
+                    style={{
+                      ...springProps,
+                      whiteSpace: "nowrap",
+                      fontSize: "16px",
+                    }}
+                  >
+                    Buat Posting
+                  </a.span>
+                )}
+              </div>
+            )}
             {(auth && role) && (
               <>
                 <hr />
                 <div
-                className={`${Styles.sideIcon} ${
-                  sidebarToggle ? Styles.expanded : ""
-                }`}
-                onClick={handleLogout}
+                  className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
+                    }`}
+                  onClick={handleLogout}
                 >
                   <BiLogOut
                     className={`${Styles.sideLink}`}
@@ -513,16 +490,7 @@ function Navigation() {
               to="/"
               style={location.pathname === "/" ? { color: "#444BF2" } : {}}
             >
-              Beranda
-            </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to="/terbaru"
-              style={
-                location.pathname === "/terbaru" ? { color: "#444BF2" } : {}
-              }
-            >
-              Terbaru
+              Home
             </Nav.Link>
             <Nav.Link
               as={NavLink}
@@ -533,10 +501,10 @@ function Navigation() {
                   : {}
               }
             >
-              Organisasi
+              Organization
             </Nav.Link>
             <Nav.Link as={NavLink} className={Styles.hasSubMenu}>
-              Topik
+              Topic
               <ul className={Styles.subMenu}>
                 <li>
                   <Nav.Link as={NavLink} to="">

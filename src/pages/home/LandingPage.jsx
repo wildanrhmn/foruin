@@ -14,7 +14,7 @@ const LandingPage = () => {
   const isLarge = useMediaQuery({
     query: "(max-width: 1400px)",
   });
-  
+
   const { posts = [] } = useSelector(states => states);
 
   return (
@@ -23,17 +23,17 @@ const LandingPage = () => {
         <div className={`${isLarge ? "col-lg-9" : "col-lg-9"}`}>
           {posts?.map(post => (
             <>
-            <Posts
-              _id={post.id}
-              profilePic="https://picsum.photos/id/237/200/300"
-              name={post.display_name}
-              username={post.username}
-              imageSrc={dataVideoImages}
-              description={post.body}
-              category={post.category}
-              totalLikes={1.234}
-              totalComments={12}
-            />
+              <Posts
+                _id={post.id}
+                profilePic="https://picsum.photos/id/237/200/300"
+                name={post.display_name}
+                username={post.username}
+                imageSrc={dataVideoImages}
+                description={post.body}
+                category={post.category}
+                totalLikes={1.234}
+                totalComments={12}
+              />
             </>
           ))}
         </div>

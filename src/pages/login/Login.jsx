@@ -34,9 +34,9 @@ const Login = () => {
         <div className={Styles.loginForm}>
           <p
             className="mb-4 text-center"
-            style={{ fontSize: "20px", fontWeight: "bold" }}
+            style={{ fontSize: "26px", fontWeight: "bold", color: '#444BF2' }}
           >
-            Login Organization
+            Log In
           </p>
           <Form onSubmit={handleLogin}>
             <FloatingLabel
@@ -85,13 +85,13 @@ const Login = () => {
                 className={`${Styles.btnInLogin} ${Styles.btnLogin}`}
                 type="submit"
               >
-                Login
+                Log in
               </Button>
               <Button
                 className={`${Styles.btnInLogin} ${Styles.btnDaftar}`}
                 type="button"
               >
-                <Link to={`/register`}>Daftar Organisasi</Link>
+                <Link to={`/register`}>Sign Up</Link>
               </Button>
             </div>
           </Form>

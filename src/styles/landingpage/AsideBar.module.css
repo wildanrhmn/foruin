@@ -1,4 +1,4 @@
-.organizationListContainer{
+.organizationListContainer {
     background-color: #fff;
     border: 2px solid #C9CBFF;
     padding: 10px;
@@ -6,18 +6,18 @@
     position: sticky;
 }
 
-.listOrganization{
+.listOrganization {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.imageOrganization{
+.imageOrganization {
     width: 45px;
     height: 45px;
 }
 
-.buttonVisit{
+.buttonVisit {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -32,13 +32,12 @@
     transition: all .3s ease-in-out !important;
 }
 
-.list{
+.list {
     border-bottom: 2px solid rgba(201, 203, 255, 0.5);
 }
 
-.buttonVisit:hover{
+.buttonVisit:hover {
     background-color: var(--color-primary) !important;
     color: #fff !important;
     transform: scale(1.1) translateY(-5px);
 }
-
