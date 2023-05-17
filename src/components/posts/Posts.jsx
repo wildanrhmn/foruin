@@ -8,6 +8,8 @@ import { AsyncLikePost } from "../../state/posts/middleware";
 import ImageSlider from "../tools/PostSlider";
 import { useNavigate } from "react-router-dom";
 import { FiThumbsUp } from "react-icons/fi";
+import SimpleDialog from "../tools/DialogShare";
+
 import { ReactComponent as Comment } from "../../assets/icons/comment_duotone.svg";
 import { ReactComponent as Share } from "../../assets/icons/Vector.svg";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
@@ -24,18 +26,29 @@ function Posts({
   totalComments,
 }) {
   const [likes, setLikes] = useState(false);
-  // const [comments, setComments] = useState(false);
-  // const [shared, setShared] = useState(false);
+  const [shared, setShared] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
   const { auth } = useSelector((states) => states);
   const dispatch = useDispatch();
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
+
   const [show, setShow] = useState(false);
-  const isMd = useMediaQuery({query: "(max-width: 1400px)"});
+  const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
   const containerRef = useRef(null);
-  const [dateTime, setDateTime] = useState('');
+  const [dateTime, setDateTime] = useState("");
+
+  const handleClickOpen = () => {
+    setShared(true);
+  };
+
+  const handleClose = (value) => {
+    setShared(false);
+    setSelectedValue(value);
+  };
   const handleNavigate = () => {
     const bundle = {
       _id,
@@ -52,14 +65,14 @@ function Posts({
 
   const handleLike = (_id) => {
     setLikes(!likes);
-    if(likes) {
-      try{
+    if (likes) {
+      try {
         dispatch(AsyncLikePost(_id));
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -81,16 +94,16 @@ function Posts({
     const currentDate = new Date();
 
     // Convert the date and time to the desired format
-    const formattedDate = currentDate.toLocaleDateString('en-US', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
+    const formattedDate = currentDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     });
 
-    const formattedTime = currentDate.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
+    const formattedTime = currentDate.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
     });
 
     // Set the formatted date and time
@@ -164,9 +177,19 @@ function Posts({
                 ) : (
                   <div
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
-                    style={{display:'flex', justifyContent:'center', alignItems:'center'}}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
-                    <p style={{marginBottom: '0', color: '#1e1e1e'}}>You have to <span style={{color:'blue', cursor:'pointer'}}>Log In</span> first.</p>
+                    <p style={{ marginBottom: "0", color: "#1e1e1e" }}>
+                      You have to{" "}
+                      <span style={{ color: "blue", cursor: "pointer" }}>
+                        Log In
+                      </span>{" "}
+                      first.
+                    </p>
                   </div>
                 )}
               </a>
@@ -204,15 +227,21 @@ function Posts({
           <div className="d-flex justify-content-center flex-column">
             <ImageSlider imageSrc={imageSrc} />
             {location.pathname.includes("/post/") ? (
-              <div className="d-flex align-items-center justify-content-center" style={{width:'100%'}}>
-                <div style={{transform: 'translateX(-50%)'}}>
-                  <p className="text-mute" style={{fontSize: '14px', color: '#808080'}}>{dateTime}</p>
+              <div
+                className="d-flex align-items-center justify-content-center"
+                style={{ width: "100%" }}
+              >
+                <div style={{ transform: "translateX(-50%)" }}>
+                  <p
+                    className="text-mute"
+                    style={{ fontSize: "14px", color: "#808080" }}
+                  >
+                    {dateTime}
+                  </p>
                 </div>
                 <ul
-                  className={`${ 
-                      isMd
-                      ? Styles.DetailpostCtaMd
-                      : Styles.DetailpostCtaLg
+                  className={`${
+                    isMd ? Styles.DetailpostCtaMd : Styles.DetailpostCtaLg
                   }`}
                 >
                   <li
@@ -224,7 +253,9 @@ function Posts({
                     }}
                   >
                     <FiThumbsUp
-                      className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
+                      className={`${Styles.iconPost} ${
+                        likes ? Styles.liked : ""
+                      }`}
                       onClick={() => setLikes(!likes)}
                     />
                     <span style={{ fontSize: "14px" }}>{totalLikes}</span>
@@ -246,19 +277,19 @@ function Posts({
                       justifyContent: "center",
                       alignItems: "center",
                     }}
+                    onClick={handleClickOpen}
                   >
                     <Share className={Styles.iconPost} />
                   </li>
+                  <SimpleDialog
+                    selectedValue={selectedValue}
+                    open={shared}
+                    onClose={handleClose}
+                  />
                 </ul>
               </div>
             ) : (
-              <ul
-                className={`${ 
-                    isMd
-                    ? Styles.postCtaMd
-                    : Styles.postCtaLg
-                }`}
-              >
+              <ul className={`${isMd ? Styles.postCtaMd : Styles.postCtaLg}`}>
                 <li
                   style={{
                     display: "flex",
@@ -268,7 +299,9 @@ function Posts({
                   }}
                 >
                   <FiThumbsUp
-                    className={`${Styles.iconPost} ${likes ? Styles.liked : ""}`}
+                    className={`${Styles.iconPost} ${
+                      likes ? Styles.liked : ""
+                    }`}
                     onClick={() => handleLike(_id)}
                   />
                   <span style={{ fontSize: "14px" }}>{totalLikes}</span>
@@ -291,9 +324,15 @@ function Posts({
                     justifyContent: "center",
                     alignItems: "center",
                   }}
+                  onClick={handleClickOpen}
                 >
                   <Share className={Styles.iconPost} />
                 </li>
+                  <SimpleDialog
+                    selectedValue={selectedValue}
+                    open={shared}
+                    onClose={handleClose}
+                  />
                 <li></li>
                 <li></li>
               </ul>

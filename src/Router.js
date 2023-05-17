@@ -15,6 +15,9 @@ import DeletedPosts from "./pages/dashboard/deleted_posts/DeletedPosts";
 import BannedAccounts from "./pages/dashboard/banned_accounts/BannedAccounts";
 import ReportedAccounts from "./pages/dashboard/report_accounts/ReportedAccounts";
 import SubmissionAccounts from "./pages/dashboard/submission_accounts/SubmissionAccounts";
+import DetailBanned from "./pages/dashboard/details/DetailBanned";
+import DetailSubmission from "./pages/dashboard/details/DetailSubmission";
+import DetailReport from "./pages/dashboard/details/DetailReport";
 
 import { useSelector } from "react-redux";
 
@@ -45,6 +48,9 @@ function AppRouter() {
             <Route path="/post/:id" element={<DetailPost />} />
             <Route path="/" element={<LandingPage />} />
             <Route path="/organization-list" element={<OrganizationList />} />
+            <Route path="/detail-report" element={<DetailReport />} />
+            <Route path="/detail-banned" element={<DetailBanned />} />
+            <Route path="/detail-submission" element={<DetailSubmission />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         ) : (

@@ -558,3 +558,59 @@ textarea:focus-visible {
 .deleteIcon{
     filter: invert(23%) sepia(31%) saturate(7400%) hue-rotate(236deg) brightness(98%) contrast(94%) !important;
 }
+
+.formDetailedItem{
+    display: flex !important;
+    align-items: center;
+}
+
+.formDetailedItems{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.formDetailedItem h5{
+    padding-right: 100px;
+    width: 250px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.formDetailed{
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+    padding: 50px;
+}
+
+.btnDetailed{
+    width: 75px;
+    height: 43px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    border: 1px solid #90BE6D;
+    transition: .3s;
+}
+
+.btnDetailed:first-of-type{
+    background-color: #90BE6D;
+    border: 1px solid #90BE6D;
+}
+
+.btnDetailed:first-of-type:hover{
+    background-color: #fff;
+    color: #90BE6D;
+    border: 1px solid #90BE6D;
+}
+
+.btnDetailed:nth-child(2):hover{
+    background-color: #fff;
+    color: #F94144;
+    border: 1px solid #F94144;
+}
+
+.btnDetailed:nth-child(2){
+    background-color: #F94144;
+    border: 1px solid #F94144;
+}

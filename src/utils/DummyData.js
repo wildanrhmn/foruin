@@ -9,31 +9,31 @@ export const dataOrganisasi = [
     },
     {
         id: 2,
-        namaOrganisasi: "Dema I",
+        namaOrganisasi: "Dema U",
         username: "demaulili",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
     {
         id: 3,
-        namaOrganisasi: "Dema E",
+        namaOrganisasi: "Dema U",
         username: "demaulele",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
     {
         id: 3,
-        namaOrganisasi: "Dema E",
+        namaOrganisasi: "Dema U",
         username: "demaulele",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
     {
         id: 3,
-        namaOrganisasi: "Dema E",
+        namaOrganisasi: "Dema U",
         username: "demaulele",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
     {
         id: 3,
-        namaOrganisasi: "Dema E",
+        namaOrganisasi: "Dema U",
         username: "demaulele",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit?"
     },
@@ -42,28 +42,28 @@ export const dataOrganisasi = [
 export const dataTopik = [
     {
         id: 1,
-        judulTopik: "Haerin",
-        jumlah: 9999
+        judulTopik: "Webinar",
+        jumlah: 1000
     },
     {
         id: 2,
-        judulTopik: "Hanni",
-        jumlah: 9999
+        judulTopik: "Magang",
+        jumlah: 1000
     },
     {
         id: 3,
-        judulTopik: "Minji",
-        jumlah: 9999
+        judulTopik: "KKN",
+        jumlah: 1000
     },
     {
         id: 3,
-        judulTopik: "Minji",
-        jumlah: 9999
+        judulTopik: "Penelitian",
+        jumlah: 1000
     },
     {
         id: 3,
-        judulTopik: "Minji",
-        jumlah: 9999
+        judulTopik: "Olahraga",
+        jumlah: 1000
     },
 ]
 
@@ -163,3 +163,19 @@ export const dataSubmissionAccounts = [
         account_status:"Warga Sipil"
     }
 ]
+
+export const dataDetailBanned ={
+    id: 1,
+    username: "@demaulala",
+    name: "Dema U",
+    admin_name: "Jamal",
+    category:"Spam/Spammer, Harassment"
+}
+
+export const dataDetailSubs ={
+    id: 1,
+    username: "@demaulala",
+    name: "Dema U",
+    email: "dema@ajaja.com",
+    status:"Organisasi"
+}

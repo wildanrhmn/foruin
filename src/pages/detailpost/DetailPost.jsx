@@ -85,7 +85,7 @@ const DetailPost = () => {
       </div>
       <Posts
         username={detail?.display_name}
-        profilePic={detail?.profile_pic}
+        profilePic="https://picsum.photos/id/237/200/300"
         description={detail?.body}
         name={detail?.username}
         category={detail?.category}

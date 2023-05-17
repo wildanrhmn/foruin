@@ -156,14 +156,18 @@ function Navigation() {
                   </a.span>
                 )}
               </div>
+
               <div
                 className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/banned-accounts" ? Styles.active : ""
+                  } ${(location.pathname === "/banned-accounts" || location.pathname === "/detail-banned") 
+                  ? Styles.active : ""
                   }`}
                   onClick={() => navigate('/banned-accounts')}
               >
                 <Banned
-                  className={`${Styles.sideLink} ${location.pathname === "/banned-accounts" ? Styles.active : ""
+                  className={`${Styles.sideLink} 
+                  ${(location.pathname === "/banned-accounts" || location.pathname === "/detail-banned" ) 
+                  ? Styles.active : ""
                     }`}
                 />
                 {sidebarToggle && (
@@ -172,14 +176,18 @@ function Navigation() {
                   </a.span>
                 )}
               </div>
+
               <div
                 className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/reported-accounts" ? Styles.active : ""
+                  } ${(location.pathname === "/reported-accounts" || location.pathname === "/detail-report") 
+                  ? Styles.active : ""
                   }`}
                   onClick={() => navigate('/reported-accounts')}
               >
                 <Reports
-                  className={`${Styles.sideLink} ${location.pathname === "/reported-accounts" ? Styles.active : ""
+                  className={`${Styles.sideLink} 
+                  ${(location.pathname === "/reported-accounts" || location.pathname === "/detail-report") 
+                  ? Styles.active : ""
                     }`}
                 />
                 {sidebarToggle && (
@@ -190,12 +198,14 @@ function Navigation() {
               </div>
               <div
                 className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
-                  } ${location.pathname === "/account-submissions" ? Styles.active : ""
+                  } ${(location.pathname === "/account-submissions" || location.pathname === '/detail-submission') 
+                  ? Styles.active : ""
                   }`}
                   onClick={() => navigate('/account-submissions')}
               >
                 <Submission
-                  className={`${Styles.sideLink} ${location.pathname === "/account-submissions"
+                  className={`${Styles.sideLink}
+                   ${(location.pathname === "/account-submissions" || location.pathname === '/detail-submission')
                     ? Styles.active
                     : ""
                     }`}
@@ -242,16 +252,7 @@ function Navigation() {
                 to="/"
                 style={location.pathname === "/" ? { color: "#444BF2" } : {}}
               >
-                Beranda
-              </Nav.Link>
-              <Nav.Link
-                as={NavLink}
-                to="/terbaru"
-                style={
-                  location.pathname === "/terbaru" ? { color: "#444BF2" } : {}
-                }
-              >
-                Terbaru
+                Home
               </Nav.Link>
               <Nav.Link
                 as={NavLink}
@@ -262,10 +263,10 @@ function Navigation() {
                     : {}
                 }
               >
-                Organisasi
+                Organization
               </Nav.Link>
               <Nav.Link as={NavLink} className={Styles.hasSubMenu}>
-                Topik
+                Topic
                 <ul className={Styles.subMenu}>
                   <li>
                     <Nav.Link as={NavLink} to="">

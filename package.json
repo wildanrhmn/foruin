@@ -7,6 +7,7 @@
     "@ckeditor/ckeditor5-react": "^6.0.0",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
     "@react-spring/web": "^9.7.1",
     "@reduxjs/toolkit": "^1.9.3",
