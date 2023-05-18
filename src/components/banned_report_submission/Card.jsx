@@ -1,10 +1,12 @@
 import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/organizationlist/OrganizationList.module.css";
 import { useMediaQuery } from "react-responsive";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CardDashboard = ({ data }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+
     const isLarge = useMediaQuery({
         query: '(max-width: 1400px)'
     })
@@ -15,7 +17,7 @@ const CardDashboard = ({ data }) => {
           <Card.Body className="d-flex p-3">
             <div className="flex-shrink-0 me-3">
               <Image
-                src={item.profilePic}
+                src="https://picsum.photos/id/237/200/300"
                 alt="Profile Pic"
                 roundedCircle
                 style={{ width: "75px", height: "75px" }}
@@ -38,14 +40,14 @@ const CardDashboard = ({ data }) => {
                     {item.name}
                   </h3>
                   <small className="text-muted" style={{ cursor: "pointer" }}>
-                    @{item.username}
+                    @{item.organization}
                   </small>
                 </div>
               </div>
               <div>
                 <div style={isLarge ? {maxWidth: '600px', lineHeight: '25px'}: {}}>
                   <p>
-                    {location.pathname === '/account-submissions' ? <span>Status Akun: {item.account_status}</span> : item.banned_category }
+                    {location.pathname === '/account-submissions' ? <span>Status Akun: {item.status}</span> : item.banned_category }
                     </p>
                 </div>
               </div>
@@ -58,7 +60,7 @@ const CardDashboard = ({ data }) => {
                 paddingRight: "150px",
               }}
             >
-              <button className={Styles.buttonKunjungi} style={isLarge ? {fontSize: '12px'} : {}}>
+              <button onClick={() => navigate(`/detail-submission/${item._id}`)} className={Styles.buttonKunjungi} style={isLarge ? {fontSize: '12px'} : {}}>
                 See Details
               </button>
             </div>

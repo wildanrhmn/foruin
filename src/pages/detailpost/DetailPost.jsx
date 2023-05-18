@@ -43,7 +43,6 @@ const DetailPost = () => {
     const data = await api.GetDetailPost(id);
     setDetail(data);
   }
-  console.info(detail)
 
   const handleReplyOpen = () => {
     if (auth.role !== undefined || role !== undefined) {

@@ -1,11 +1,7 @@
 import { Form } from "react-bootstrap";
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import {
-//   AsyncCreateBerita,
-//   AsyncEditBerita,
-// } from "../../state/berita/middleware";
-// import InfoModal from "../InfoModal";
+import { useDispatch } from "react-redux";
+import { AsyncUpdatePost } from "../../state/posts/middleware";
 
 import KategoriFilterForm from "../tools/KategoriFilterForm";
 import InputVideo from "../tools/InputVideo";
@@ -15,7 +11,7 @@ import Editor from "../tools/Editor";
 import Styles from "../../styles/FormLayout.module.css";
 
 export default function FormEditPost({ showForm }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const postData = JSON.parse(localStorage.getItem('postData'));
   const filteredDataVideo = postData.imageSrc.filter(item => item.type === 'video');
   const filteredDataImage = postData.imageSrc.filter(item => item.type === 'image').map(data => data.src);
@@ -24,42 +20,22 @@ export default function FormEditPost({ showForm }) {
   const [kategoriPost, setKategoriPost] = useState(postData?.category || []);
   const [isiPost, setIsiPost] = useState(postData?.description || '');
 
-
-  // const [error, setError] = useState(false);
-
-//   const timestamp = new Date(Date.now());
-
-  // function handleManageBerita(e) {
-  //   e.preventDefault();
-  //   if (currentData !== null){
-  //       dispatch(AsyncEditBerita({
-  //         _id: currentData._id,
-  //         video_berita: uploadedVideo || currentData?.video_url,
-  //         kategori_berita: kategoriBerita,
-  //         isi_post: isiPost,
-  //         gambar_post: gambarPost || currentData?.gambar_post.url,
-  //         link_post: linkPost,
-  //       }))
-  //       showForm(false)
-  //   } else {
-  //       if (gambarPost !== null && uploadedVideo !== null) {
-  //         dispatch(
-  //           AsyncCreateBerita({
-  //             video_berita: uploadedVideo,
-  //             kategori_berita: kategoriBerita,
-  //             isi_post: isiPost,
-  //             gambar_post: gambarPost,
-  //             link_post: linkPost,
-  //           }));
-  //           showForm(false)
-  //       } else {
-  //         setError(true);
-  //       }
-  //   }
-  // }
+  function handleChangePost(e){
+    e.preventDefault();
+    if(postData !== null){
+      dispatch(AsyncUpdatePost({
+        _id: postData._id,
+        kategori_berita: kategoriPost || postData?.category,
+        isi_post:  isiPost || postData?.description,
+        video_berita: uploadedVideo || postData?.video_url,
+        gambar_post: gambarPost || postData?.gambar_post.url,
+      }))
+      showForm(false)  
+    }
+  } 
 
   return (
-    <Form>
+    <Form onSubmit={handleChangePost}>
       <Form.Group>
         <InputVideo
           getData={setUploadedVideo}

@@ -48,9 +48,9 @@ function AppRouter() {
             <Route path="/post/:id" element={<DetailPost />} />
             <Route path="/" element={<LandingPage />} />
             <Route path="/organization-list" element={<OrganizationList />} />
-            <Route path="/detail-report" element={<DetailReport />} />
-            <Route path="/detail-banned" element={<DetailBanned />} />
-            <Route path="/detail-submission" element={<DetailSubmission />} />
+            <Route path="/detail-report/:id" element={<DetailReport />} />
+            <Route path="/detail-banned/:id" element={<DetailBanned />} />
+            <Route path="/detail-submission/:id" element={<DetailSubmission />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         ) : (

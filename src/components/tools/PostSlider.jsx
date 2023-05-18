@@ -27,9 +27,9 @@ const ImageSlider = ({ imageSrc }) => {
           {imageSrc?.map((item) => (
             <SwiperSlide>
               {item.type === "video" ? (
-                <VideoPlayer url={item.src} />
+                <VideoPlayer url={item.url} />
               ) : (
-                <img src={item.src} alt="pict-slider" />
+                <img src={item.url} alt="pict-slider" />
               )}
             </SwiperSlide>
           ))}

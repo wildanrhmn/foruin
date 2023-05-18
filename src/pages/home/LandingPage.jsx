@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import AsideBarOrganisasi from "../../components/landingpage/AsideBarOrganisasi";
 import AsideBarTopik from './../../components/landingpage/AsideBarTopik';
 
-import { dataOrganisasi, dataTopik, dataVideoImages } from "../../utils/DummyData";
+import { dataOrganisasi, dataTopik  } from "../../utils/DummyData";
 
 const LandingPage = () => {
   const isLarge = useMediaQuery({
@@ -16,7 +16,6 @@ const LandingPage = () => {
   });
 
   const { posts = [] } = useSelector(states => states);
-
   return (
     <div className="container-fluid">
       <div className="row">
@@ -28,7 +27,7 @@ const LandingPage = () => {
                 profilePic="https://picsum.photos/id/237/200/300"
                 name={post.display_name}
                 username={post.username}
-                imageSrc={dataVideoImages}
+                imageSrc={post.attachments}
                 description={post.body}
                 category={post.category}
                 totalLikes={post.likes.length}

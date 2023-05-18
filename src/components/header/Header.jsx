@@ -17,6 +17,7 @@ import { BiLogOut } from "react-icons/bi";
 
 import { useSelector, useDispatch } from "react-redux";
 import { AsyncGetPosts } from "../../state/posts/middleware";
+import { AsyncCheckLogin } from "../../state/auth/middleware";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -58,6 +59,7 @@ function Navigation() {
 
   useEffect(() => {
     dispatch(AsyncGetPosts());
+    dispatch(AsyncCheckLogin());
   }, [dispatch]);
 
   const handleNavigate = () => {

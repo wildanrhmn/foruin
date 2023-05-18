@@ -146,22 +146,25 @@ export const dataSubmissionAccounts = [
         username: "demaulala",
         name: "Dema U",
         profilePic: "https://picsum.photos/id/237/200/300",
+        email: "dema@ajaja.com",
         account_status:"Warga Sipil"
     },
     {
         id: 2,
         username: "demaulala",
-        name: "Dema E",
+        name: "Dema U",
         profilePic: "https://picsum.photos/id/237/200/300",
+        email: "dema@ajaja.com",
         account_status:"Warga Sipil"
     },
     {
         id: 3,
         username: "demaulala",
-        name: "Dema O",
+        name: "Dema U",
         profilePic: "https://picsum.photos/id/237/200/300",
+        email: "dema@ajaja.com",
         account_status:"Warga Sipil"
-    }
+    },
 ]
 
 export const dataDetailBanned ={

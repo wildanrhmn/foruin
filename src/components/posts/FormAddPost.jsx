@@ -1,11 +1,7 @@
 import { Form } from "react-bootstrap";
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import {
-//   AsyncCreateBerita,
-//   AsyncEditBerita,
-// } from "../../state/berita/middleware";
-// import InfoModal from "../InfoModal";
+import { useDispatch } from "react-redux";
+import { AsyncCreatePost } from "../../state/posts/middleware";
 
 import KategoriFilterForm from "../tools/KategoriFilterForm";
 import InputVideo from "../tools/InputVideo";
@@ -14,47 +10,22 @@ import Editor from "../tools/Editor";
 
 import Styles from "../../styles/FormLayout.module.css";
 export default function FormAddPost({ showForm }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [gambarPost, setGambarPost] = useState([]);
   const [kategoriPost, setKategoriPost] = useState([]);
   const [isiPost, setIsiPost] = useState('');
 
-  // const [error, setError] = useState(false);
-
-//   const timestamp = new Date(Date.now());
-
-  // function handleManageBerita(e) {
-  //   e.preventDefault();
-  //   if (currentData !== null){
-  //       dispatch(AsyncEditBerita({
-  //         _id: currentData._id,
-  //         video_berita: uploadedVideo || currentData?.video_url,
-  //         kategori_berita: kategoriBerita,
-  //         isi_post: isiPost,
-  //         gambar_post: gambarPost || currentData?.gambar_post.url,
-  //         link_post: linkPost,
-  //       }))
-  //       showForm(false)
-  //   } else {
-  //       if (gambarPost !== null && uploadedVideo !== null) {
-  //         dispatch(
-  //           AsyncCreateBerita({
-  //             video_berita: uploadedVideo,
-  //             kategori_berita: kategoriBerita,
-  //             isi_post: isiPost,
-  //             gambar_post: gambarPost,
-  //             link_post: linkPost,
-  //           }));
-  //           showForm(false)
-  //       } else {
-  //         setError(true);
-  //       }
-  //   }
-  // }
-
+  const handleAddPost = (e) => {
+    e.preventDefault();
+    try{
+      dispatch(AsyncCreatePost({uploadedVideo, gambarPost, kategoriPost, isiPost}));
+    } catch(err){
+      console.log(err);
+    }
+  }
   return (
-    <Form>
+    <Form onSubmit={handleAddPost}>
       <Form.Group>
         <InputVideo
           getData={setUploadedVideo}

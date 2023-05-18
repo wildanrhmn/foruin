@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import CardDashboard from "../../../components/banned_report_submission/Card";
 import RadioButtonGroup from "./../../../components/tools/RadioButtonGroup";
-import { dataSubmissionAccounts } from "../../../utils/DummyData";
-import { ReactComponent as Filter } from "../../../assets/icons/Filter_alt_fill.svg";
 
+import { ReactComponent as Filter } from "../../../assets/icons/Filter_alt_fill.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { AsyncAdminGetSubmissions } from "../../../state/submission/middleware";
 import Styles from "../../../styles/posts/Posts.module.css";
 const SubmissionAccounts = () => {
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const [radioValue, setRadioValue] = useState('');
+
+  const { submission = {} } = useSelector((states) => states);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -24,6 +28,10 @@ const SubmissionAccounts = () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, [containerRef]);
+
+  useEffect(() => {
+    dispatch(AsyncAdminGetSubmissions());
+  }, [dispatch])
   return (
     <>
     <div style={{position: 'relative'}}>
@@ -63,7 +71,7 @@ const SubmissionAccounts = () => {
         </a>
       </div>
     </div>
-      <CardDashboard data={dataSubmissionAccounts} />
+      <CardDashboard data={submission} />
     </>
   );
 };

@@ -17,14 +17,27 @@ function AsyncGetPosts(page = 1, category = null) {
 }
 
 function AsyncCreatePost(data) {
-    return async () => {
+    return async () => {    
         try {
             if (data.body === "") {
                 throw new Error()
             }
-
-            const result = await api.createPost(data);
-
+            //set up attachment data
+            const dataAttachments = [];
+            if(data.gambarPost){
+                for(let i = 0; i <= data.gambarPost.length - 1; i++){
+                    dataAttachments.push(data.gambarPost[i])
+                }
+            }
+            if(data.uploadedVideo){
+                dataAttachments.push(data.uploadedVideo.file)
+            }
+            const postData = {
+                body: data.isiPost,
+                category: data.kategoriPost,
+                attachments: dataAttachments,
+            }
+            const result = await api.createPost(postData);
             if (result.info !== undefined) {
                 throw new Error()
             }

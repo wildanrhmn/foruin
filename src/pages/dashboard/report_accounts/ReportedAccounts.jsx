@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import CardDashboard from "../../../components/banned_report_submission/Card";
 import RadioButtonGroup from "./../../../components/tools/RadioButtonGroup";
-import { dataBannedAccount } from "../../../utils/DummyData";
 import { ReactComponent as Filter } from "../../../assets/icons/Filter_alt_fill.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { AsyncAdminGetReports } from "../../../state/report/middleware";
 
 import Styles from "../../../styles/posts/Posts.module.css";
 const ReportedAccounts = () => {
+  const dispatch = useDispatch();
+  const { report = {} } = useSelector((states) => states);
+
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const [radioValue, setRadioValue] = useState('');
@@ -24,6 +28,10 @@ const ReportedAccounts = () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, [containerRef]);
+
+  useEffect(() => {
+    dispatch(AsyncAdminGetReports());
+  }, [dispatch]);
   return (
     <>
     <div style={{position: 'relative'}}>
@@ -67,7 +75,7 @@ const ReportedAccounts = () => {
         </a>
       </div>
     </div>
-      <CardDashboard data={dataBannedAccount} />
+      <CardDashboard data={report} />
     </>
   );
 };

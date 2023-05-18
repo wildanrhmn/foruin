@@ -2,7 +2,7 @@
     padding-top: 55px;
     padding-right: 75px !important;
     width: 400px;
-    position: sticky;
+    position: sticky !important;
 }
 
 @media screen and (max-width: 1400px) {
