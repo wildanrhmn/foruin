@@ -64,7 +64,7 @@ const DetailAdmin = ({ banned, reported, submission, data }) => {
                                         <ul className={Styles.attachmentsList}>
                                             {data ?
                                                 <>
-                                                    {data?.attachments.map((attachment, index) => (
+                                                    {data?.attachments?.map((attachment, index) => (
                                                         <>
                                                         <li key={index} style={{paddingBottom: '10px'}}>
                                                             <a href={attachment.url} target="_blank" rel="noopener noreferrer">
