@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Styles from "../../styles/posts/Posts.module.css";
 import { Card, Image } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import api from "../../utils/api";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { AsyncGetDetailPost } from "../../state/detailPost/middleware";
+
 import Posts from "../../components/posts/Posts";
-import { dataVideoImages, comments } from "../../utils/DummyData";
+import { comments } from "../../utils/DummyData";
 import CommentsComponent from "../../components/comments/PostComments";
 import ModalPostComment from "../../components/comments/ModalPostComment";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { useSelector } from "react-redux";
 import { ReactComponent as Back } from "../../assets/icons/back.svg";
-import { useNavigate } from "react-router-dom";
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -20,29 +20,23 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const DetailPost = () => {
   const { id } = useParams();
+  const { auth } = useSelector((states) => states);
+  const { detailPost = {} } = useSelector((states) => states);
+  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
+  const { role } = loginForumInfo || {};
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  const [detail, setDetail] = useState(null);
   const [replyText, setReplyText] = useState("");
   const [showReplyForm, setShowReplyForm] = useState(false);
-
-  const { auth } = useSelector((states) => states);
-  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
-  const { role } = loginForumInfo || {}; // Add null check here
-
   //For Snackbar Close
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSnackBar(false);
   };
-
-  async function getDetailArticle(id) {
-    const data = await api.GetDetailPost(id);
-    setDetail(data);
-  }
 
   const handleReplyOpen = () => {
     if (auth.role !== undefined || role !== undefined) {
@@ -51,22 +45,23 @@ const DetailPost = () => {
     }
     setOpenSnackBar(true);
   };
-
+  
   const handleReplySubmit = (e) => {
     e.preventDefault();
-    // Add logic to submit the reply comment to the backend or perform any other actions
     console.log("Reply submitted:", replyText);
     setReplyText("");
     setShowReplyForm(false);
   };
 
   useEffect(() => {
-    getDetailArticle(id);
-  }, [id]);
-
+    dispatch(AsyncGetDetailPost(id));
+  }, [dispatch, id]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [detail]);
+  }, [detailPost]);
+
+  console.info(detailPost)
 
   return (
     <div className="container-fluid">
@@ -83,17 +78,17 @@ const DetailPost = () => {
         </div>
       </div>
       <Posts
-        username={detail?.display_name}
-        profilePic="https://picsum.photos/id/237/200/300"
-        description={detail?.body}
-        name={detail?.username}
-        category={detail?.category}
-        totalLikes={detail?.likes.length}
-        totalComments={detail?.discussion.length}
-        _id={detail?._id}
-        imageSrc={dataVideoImages}
+        username={detailPost?.display_name}
+        profilePic={detailPost?.profile_picture?.url}
+        description={detailPost?.body}
+        name={detailPost?.username}
+        category={detailPost?.category}
+        totalLikes={detailPost?.likes?.length}
+        totalComments={detailPost?.discussion?.length}
+        _id={detailPost?._id}
+        imageSrc={detailPost?.attachments}
+        date={detailPost?.updated_at}
       />
-
       <Card className={Styles.cardPosts}>
         <Card.Body className="d-flex p-3">
           <div className="flex-shrink-0 me-3">

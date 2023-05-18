@@ -137,7 +137,6 @@ const api = (() => {
 
   async function GetDetailPost(_id) {
     const url = baseUrl + "/post/" + _id;
-
     const response = await axios.get(url);
 
     return response.data.data;
@@ -415,8 +414,6 @@ const api = (() => {
     const response = await axios.put(url, data);
     return response.data.data;
   }
-
-
   return {
     Login,
     Refresh,

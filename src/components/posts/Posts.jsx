@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FiThumbsUp } from "react-icons/fi";
 import SimpleDialog from "../tools/DialogShare";
 
+
 import { ReactComponent as Comment } from "../../assets/icons/comment_duotone.svg";
 import { ReactComponent as Share } from "../../assets/icons/Vector.svg";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
@@ -24,8 +25,8 @@ function Posts({
   category,
   totalLikes,
   totalComments,
+  date,
 }) {
-  const [likes, setLikes] = useState(false);
   const [shared, setShared] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -34,12 +35,30 @@ function Posts({
   const { auth } = useSelector((states) => states);
   const dispatch = useDispatch();
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
-  const { role } = loginForumInfo || {}; // Add null check here
+  const { role } = loginForumInfo || {}; 
 
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
   const containerRef = useRef(null);
-  const [dateTime, setDateTime] = useState("");
+  const [likes, setLikes] = useState(localStorage.getItem(`liked_${_id}`) === 'true');
+  const [likeCount, setLikeCount] = useState(parseInt(localStorage.getItem(`likeCount_${_id}`), 10) || 0);
+  const formattedDate = formatDateTime(date);
+
+  function formatDateTime(dateTimeStr) {
+    // Assuming `dateTimeStr` is in ISO 8601 format like "2023-05-18T04:12:06.147Z"
+    const dateTime = new Date(dateTimeStr);
+
+    // Format the date and time
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    return dateTime.toLocaleString("en-US", options);
+  }
 
   const handleClickOpen = () => {
     setShared(true);
@@ -64,16 +83,25 @@ function Posts({
   };
 
   const handleLike = (_id) => {
-    setLikes(!likes);
-    if (likes) {
-      try {
-        dispatch(AsyncLikePost(_id));
-      } catch (error) {
-        console.log(error);
-      }
+    if(!auth.token){
+      navigate("/login");
+      return;
+    }
+    const updatedLikes = !likes;
+    const updatedLikeCount = updatedLikes ? likeCount + 1 : likeCount - 1;
+  
+    setLikes(updatedLikes);
+    setLikeCount(updatedLikeCount);
+  
+    localStorage.setItem(`liked_${_id}`, updatedLikes);
+    localStorage.setItem(`likeCount_${_id}`, updatedLikeCount.toString());
+  
+    try {
+      dispatch(AsyncLikePost(_id));
+    } catch (error) {
+      console.log(error);
     }
   };
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -88,28 +116,6 @@ function Posts({
       window.removeEventListener("click", handleClickOutside);
     };
   }, [containerRef]);
-
-  useEffect(() => {
-    // Get the current date and time
-    const currentDate = new Date();
-
-    // Convert the date and time to the desired format
-    const formattedDate = currentDate.toLocaleDateString("en-US", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-
-    const formattedTime = currentDate.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-
-    // Set the formatted date and time
-    const formattedDateTime = `${formattedTime} - ${formattedDate}`;
-    setDateTime(formattedDateTime);
-  }, []);
 
   return (
     <Card className={Styles.cardPosts}>
@@ -236,7 +242,7 @@ function Posts({
                     className="text-mute"
                     style={{ fontSize: "14px", color: "#808080" }}
                   >
-                    {dateTime}
+                    {formattedDate}
                   </p>
                 </div>
                 <ul
@@ -256,7 +262,7 @@ function Posts({
                       className={`${Styles.iconPost} ${
                         likes ? Styles.liked : ""
                       }`}
-                      onClick={() => setLikes(!likes)}
+                      onClick={() => handleLike(_id)}
                     />
                     <span style={{ fontSize: "14px" }}>{totalLikes}</span>
                   </li>

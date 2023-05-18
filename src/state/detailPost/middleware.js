@@ -1,23 +1,25 @@
 import { GetDetailPostAction } from "./action";
+import axios from "axios";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
 
 function AsyncGetDetailPost(id = null) {
     return async dispatch => {
+        dispatch(showLoading());
         try {
             if (id === null) {
                 throw new Error()
             }
-
-            const result = await api.getDetailPost(id);
-
-            if (!result) {
-                throw new Error()
-            }
-
-            dispatch(GetDetailPostAction(result))
+            // const result = await api.getDetailPost(id);
+            // console.info(result)
+                const baseUrl = "https://forum-himsi-api.vercel.app";        
+                const url = baseUrl + "/post/" + id;
+                const response = await axios.get(url);
+            dispatch(GetDetailPostAction(response.data.data))
         } catch (err) {
             console.error(err);
         }
+        dispatch(hideLoading());
     }
 }
 

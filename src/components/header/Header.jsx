@@ -38,8 +38,8 @@ function Navigation() {
   const ref = useRef(null);
 
   const handleLogout = () => {
-    localStorage.removeItem("postData");
-    sessionStorage.removeItem("login_forum_info");
+    localStorage.clear();
+    sessionStorage.clear();
     cookies.remove("refreshToken");
 
     navigate("/login");

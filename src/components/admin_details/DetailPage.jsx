@@ -84,10 +84,16 @@ const DetailAdmin = ({ banned, reported, submission, data }) => {
                                 </>
                             )
                         }
-                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px'}}>
-                            <button className={Styles.btnDetailed}>Accept</button>
-                            <button className={Styles.btnDetailed}>Decline</button>
-                        </div>
+                        {data?.status === 'Approved' ? (
+                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px'}}>
+                                <button className={Styles.btnApproved}>Already Approved</button>
+                            </div>
+                        ) : (
+                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px'}}>
+                                <button className={Styles.btnDetailed} disabled>Accept</button>
+                                <button className={Styles.btnDetailed}>Decline</button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

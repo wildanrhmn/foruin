@@ -588,6 +588,17 @@ textarea:focus-visible {
     transition: .3s;
 }
 
+.btnApproved{
+    padding: 18px 23px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    border: 1px solid #90BE6D;
+    transition: .3s;
+    background-color: #90BE6D;
+    cursor: help;
+}
+
 .btnDetailed:first-of-type{
     background-color: #90BE6D;
     border: 1px solid #90BE6D;
