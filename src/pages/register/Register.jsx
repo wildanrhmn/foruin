@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Form, FloatingLabel, Button } from "react-bootstrap";
+import { Form, FloatingLabel, Button, Image } from "react-bootstrap";
 import Styles from "../../styles/Register.module.css";
 import { Link } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { AsyncRegister } from '../../state/auth/middleware';
+
+import eye from '../../assets/images/view_light.png';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -14,6 +16,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Register = () => {
     const [isAgreeTerms, setIsAgreeTerms] = useState(false);
     const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
 
     const [name, setName] = useState("");
@@ -110,13 +113,14 @@ const Register = () => {
                         style={{ fontSize: "15px", fontWeight: "600" }}
                     >
                         <Form.Control
-                            type="password"
+                            type={  showPassword ? "text" : "password"}
                             placeholder="Password"
-                            style={{ height: "50px", fontSize: "14px" }}
+                            style={{ height: "50px", fontSize: "14px", position: "relative" }}
                             className={Styles.registerFormControl}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                        <Image src={eye} className={Styles.eye} alt="eye" onClick={() => setShowPassword(!showPassword)} />
                     </FloatingLabel>
                     
                     <Form.Group

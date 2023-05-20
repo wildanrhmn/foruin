@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Form, FloatingLabel, Button } from "react-bootstrap";
+import { Form, FloatingLabel, Button, Image } from "react-bootstrap";
 import Styles from "../../styles/Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AsyncLogin } from "../../state/auth/middleware";
 import { useNavigate, Link } from 'react-router-dom';
+
+import eye from '../../assets/images/view_light.png';
 
 
 const Login = () => {
@@ -12,7 +14,7 @@ const Login = () => {
   // const [error, setError] = useState(false);
   const { auth } = useSelector(states => states);
   const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,10 +60,10 @@ const Login = () => {
             <FloatingLabel
               controlId="floatingPassword"
               label="Password"
-              style={{ fontSize: "15px", fontWeight: "600" }}
+              style={{ fontSize: "15px", fontWeight: "600", position: "relative" }}
             >
               <Form.Control
-                type="password"
+                type={  showPassword ? "text" : "password"}
                 placeholder="Password"
                 style={{ height: "50px", fontSize: "14px" }}
                 className={Styles.loginFormControl}
@@ -69,6 +71,7 @@ const Login = () => {
                 value={password}
                 required
               />
+          <Image src={eye} className={Styles.eye} alt="eye" onClick={() => setShowPassword(!showPassword)} />
             </FloatingLabel>
             <Form.Group
               className={`${Styles.checkbox} ms-1 mb-4 mt-3`}

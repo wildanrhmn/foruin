@@ -57,3 +57,11 @@
     -webkit-transform: scale(1.1);
     border: 2px solid #000;
 }
+
+.eye{
+    position: absolute;
+    top: 25%;
+    right: 5%;
+    cursor: pointer;
+
+}
