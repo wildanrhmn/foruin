@@ -24,7 +24,7 @@ const LandingPage = () => {
             <>
               <Posts
                 _id={post.id}
-                profilePic={post.profile_picture.url}
+                profilePic={post.profile_picture?.url}
                 name={post.display_name}
                 username={post.username}
                 imageSrc={post.attachments}
