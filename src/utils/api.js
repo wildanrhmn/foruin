@@ -40,14 +40,13 @@ const api = (() => {
 
   async function Register(payload) {
     const url = baseUrl + "/auth/register";
-    const formRegister = new FormData();
 
-    formRegister.append("username", payload.username);
-    formRegister.append("email", payload.email);
-    formRegister.append("password", payload.password);
-    formRegister.append("name", payload.name);
-    const response = await axios.post(url, formRegister);
-    
+    const response = await axios.post(url, {
+      name: payload.name,
+      email: payload.email,
+      password: payload.password,
+      username: payload.username
+    });
     return response;
   }
 
@@ -148,15 +147,25 @@ const api = (() => {
     const form = new FormData();
     form.append("body", data.body);
 
-    data.category.forEach(kategori => {
-      form.append('category[]', kategori)
+    form.append("category", JSON.stringify(data.category));
+
+    data.picture_attachments.forEach(attach => {
+      form.append('picture_attachments', attach)
+      console.info(attach)
     })
 
-    data.attachments.forEach(attach => {
-      form.append('attachments[]', attach)
+    data.video_attachments?.forEach(attach => {
+      form.append('video_attachments', attach)
+      console.info(attach)
     })
 
-    const response = await axios.post(url, form);
+    const response = await axios.post(url, form, {
+      timeout: 1000000,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Connection' : 'keep-alive'
+      }
+    });
     return response.data.data
   }
 
@@ -388,8 +397,7 @@ const api = (() => {
   }
 
   async function userGetAllOrganization(page) {
-    const url = `${baseUrl}/profile/users?page=${page}?organizational=true`
-
+    const url = `${baseUrl}/profile/users?page=${page}&organizational=true`
     const response = await axios.get(url);
     return response.data.data;
   }

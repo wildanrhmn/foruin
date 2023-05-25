@@ -10,7 +10,7 @@ function AsyncLogin({ email, password }) {
     dispatch(showLoading());
     try {
       const response = await api.Login(email, password);
-      console.info(response)
+      console.info(response);
       cookies.remove("refreshToken");
       cookies.add("refreshToken", response.data.access_token, 7);
 
@@ -18,6 +18,7 @@ function AsyncLogin({ email, password }) {
         role: response.data.role,
         username: response.data.username,
         token: response.data.access_token,
+        id_user: response.data.id
       };
 
       axios.defaults.headers.common[
@@ -99,6 +100,7 @@ function AsyncRegister(payload) {
         role: response.data.role,
         username: response.data.username,
         token: response.data.access_token,
+        id_user: response.data.id
       };
 
       axios.defaults.headers.common[

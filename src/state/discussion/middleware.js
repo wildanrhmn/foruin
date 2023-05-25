@@ -36,12 +36,6 @@ function AsyncCreateDiscussion(data, id_topic) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // const discussions = await api.CreateDiscussion(data, id_topic);
-
-            // if (result.info !== undefined) {
-            //     throw new Error()
-            // }
         } catch (err) {
             console.error(err);
         }

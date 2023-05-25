@@ -4,7 +4,7 @@ import Styles from "../../styles/posts/Posts.module.css";
 import { useMediaQuery } from "react-responsive";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { AsyncLikePost } from "../../state/posts/middleware";
+import { AsyncLikePost, AsyncVerifiedTakedownPost, AsyncAdminTakedownPost } from "../../state/posts/middleware";
 import ImageSlider from "../tools/PostSlider";
 import { useNavigate } from "react-router-dom";
 import { FiThumbsUp } from "react-icons/fi";
@@ -82,6 +82,21 @@ function Posts({
     navigate(`/update-post/${_id}`);
   };
 
+function createMarkup(value) {
+  if (location.pathname.includes("/post/")) {
+    return {
+      __html: value
+    };
+  } else {
+    const maxLength = 200;
+    const truncatedValue = value.length > maxLength ? value.substring(0, maxLength) + "..." : value;
+
+    return {
+      __html: truncatedValue
+    };
+  }
+}
+
   const handleLike = (_id) => {
     if(!auth.token){
       navigate("/login");
@@ -97,7 +112,7 @@ function Posts({
     localStorage.setItem(`likeCount_${_id}`, updatedLikeCount.toString());
   
     try {
-      dispatch(AsyncLikePost(_id));
+      dispatch(AsyncLikePost(_id, auth.id_user));
     } catch (error) {
       console.log(error);
     }
@@ -116,6 +131,26 @@ function Posts({
       window.removeEventListener("click", handleClickOutside);
     };
   }, [containerRef]);
+
+  const handleDeletePost = (_id) => {
+    if(auth.role === 'SysAdmin'){
+      try{
+        dispatch(AsyncAdminTakedownPost(_id));
+      }
+      catch(err){
+        console.log(err);
+      }
+      return;
+    }
+    else{
+        try{
+          dispatch(AsyncVerifiedTakedownPost(_id));
+        }
+        catch(err){
+          console.log(err);
+        }
+      }
+  }
 
   return (
     <Card className={Styles.cardPosts}>
@@ -164,21 +199,21 @@ function Posts({
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
                     <li onClick={handleNavigate}>Edit Post</li>
-                    <li>Delete Post</li>
+                    <li onClick={() => handleDeletePost(_id)}>Delete Post</li>
                     <li>Pin Post</li>
                   </ul>
                 ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li>Force Delete Post</li>
+                    <li onClick={() => handleDeletePost(_id)}>Force Delete Post</li>
                     <li>Ban Post</li>
                   </ul>
                 ) : auth.role === "Common" || role === "Common" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li>Bisukan @Jamal</li>
+                    <li>Bisukan @{username}</li>
                   </ul>
                 ) : (
                   <div
@@ -203,7 +238,7 @@ function Posts({
           </div>
           <div>
             <div
-              className={`${Styles.description} 
+              className={`${location.pathname.includes("/post/") ? Styles.description : ""} ${Styles.descriptionHome} 
               ${`${Styles.descriptionText}`}`}
               style={
                 isMd
@@ -211,11 +246,7 @@ function Posts({
                   : { fontSize: "16px", lineHeight: "30px" }
               }
             >
-              <p className={`${Styles.text}`}>
-                {location.pathname.includes("/post/")
-                  ? description
-                  : description.substring(0, 100)}
-              </p>
+              <p className={`${Styles.text}`} dangerouslySetInnerHTML={createMarkup(description)}></p>
             </div>
             {location.pathname.includes("/post/") ? (
               ""

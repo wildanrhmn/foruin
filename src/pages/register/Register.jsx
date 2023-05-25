@@ -68,7 +68,7 @@ const Register = () => {
                     >
                         <Form.Control
                             type="input"
-                            placeholder="Account Name"
+                            placeholder="Name"
                             style={{ height: "50px", fontSize: "14px" }}
                             className={Styles.registerFormControl}
                             onChange={(e) => setName(e.target.value)}
@@ -77,13 +77,13 @@ const Register = () => {
                     </FloatingLabel>
                     <FloatingLabel
                         controlId="floatingInput"
-                        label="Account Name"
+                        label="Username"
                         className="mb-3"
                         style={{ fontSize: "15px", fontWeight: "600" }}
                     >
                         <Form.Control
                             type="input"
-                            placeholder="Nama Akun"
+                            placeholder="Username"
                             style={{ height: "50px", fontSize: "14px" }}
                             className={Styles.registerFormControl}
                             onChange={(e) => setUsername(e.target.value)}

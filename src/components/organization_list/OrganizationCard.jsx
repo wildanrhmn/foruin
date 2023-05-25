@@ -1,6 +1,5 @@
 import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/organizationlist/OrganizationList.module.css";
-import ImagePic from "../../assets/images/anya.jpg";
 import { useMediaQuery } from "react-responsive";
 
 const OrganizationCard = ({ data }) => {
@@ -14,7 +13,7 @@ const OrganizationCard = ({ data }) => {
           <Card.Body className="d-flex p-3">
             <div className="flex-shrink-0 me-3">
               <Image
-                src={ImagePic}
+                src={item.profile_picture.url}
                 alt="Profile Pic"
                 roundedCircle
                 style={{ width: "75px", height: "75px" }}
@@ -34,10 +33,10 @@ const OrganizationCard = ({ data }) => {
                     className="mb-0"
                     style={{ fontWeight: 600, fontSize: "18px" }}
                   >
-                    {item.namaOrganisasi}
+                    {item.username}
                   </h3>
                   <small className="text-muted" style={{ cursor: "pointer" }}>
-                    @{item.username}
+                    @{item.display_name}
                   </small>
                 </div>
               </div>

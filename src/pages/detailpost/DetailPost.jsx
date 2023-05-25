@@ -61,8 +61,6 @@ const DetailPost = () => {
     window.scrollTo(0, 0);
   }, [detailPost]);
 
-  console.info(detailPost)
-
   return (
     <div className="container-fluid">
       <div style={{padding: '20px 0 20px 20px'}}>

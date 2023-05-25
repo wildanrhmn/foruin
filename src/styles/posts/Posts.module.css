@@ -1,21 +1,11 @@
-.descriptionText {
-  max-height: 155px;
-  overflow: hidden;
-  transition: max-height 0.3s cubic-bezier(0,1,0,1);
-  }
-
-  .descriptionText.open {
-    max-height: 100rem;
-    transition: max-height 0.3s cubic-bezier(0.9, 0, 0.8, 0.2);
-  }
-
-  .text {
+.text {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
     margin: 0;
     animation: close 0.1s linear 0.1s forwards;
+    
   }
   
   @media screen and (max-width: 1400px) {
@@ -52,7 +42,14 @@
 
   .description {
     margin-bottom: 0px !important;
-    max-width: 1200px;
+    margin-top: 25px;
+    padding-right: 25px;
+  }
+
+  .descriptionHome {
+    margin-bottom: 0px !important;
+    margin-top: 5px;
+    padding-right: 100px;
   }
 
   .imagePost{

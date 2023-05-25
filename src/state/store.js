@@ -30,7 +30,8 @@ const store = configureStore({
     profile: ProfileReducer, //done
     report: ReportReducer, //done
     submission: SubmissionReducer, //done
-    users: UsersReducer //done
+    users: UsersReducer, //done
+    organization: UsersReducer //done
   }
 });
 

@@ -1,4 +1,4 @@
-import { GetAllPostsAction } from "./action";
+import { GetAllPostsAction, LikeUnlikeAction } from "./action";
 import { GetDetailPostAction } from "../detailPost/action";
 import api from "../../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
@@ -17,27 +17,19 @@ function AsyncGetPosts(page = 1, category = null) {
 }
 
 function AsyncCreatePost(data) {
-    return async () => {    
+    return async dispatch => {    
         try {
             if (data.body === "") {
                 throw new Error()
             }
-            //set up attachment data
-            const dataAttachments = [];
-            if(data.gambarPost){
-                for(let i = 0; i <= data.gambarPost.length - 1; i++){
-                    dataAttachments.push(data.gambarPost[i])
-                }
-            }
-            if(data.uploadedVideo){
-                dataAttachments.push(data.uploadedVideo.file)
-            }
             const postData = {
                 body: data.isiPost,
                 category: data.kategoriPost,
-                attachments: dataAttachments,
+                video_attachments: [data.uploadedVideo?.file] || [],
+                picture_attachments: data.gambarPost || [],
             }
             const result = await api.createPost(postData);
+            dispatch(GetAllPostsAction());
             if (result.info !== undefined) {
                 throw new Error()
             }
@@ -76,19 +68,16 @@ function AsyncUpdatePost(id = null, data) {
     }
 }
 
-function AsyncLikePost(id = null) {
-    return async () => {
+function AsyncLikePost(id = null, id_user = null) {
+    return async dispatch => {
         try {
             if (id === null) {
                 throw new Error()
             }
 
             const result = await api.LikeUnlikePost(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-
+            console.info(result)
+            dispatch(LikeUnlikeAction(id, id_user));
             // Like Unlike Setup
         } catch (err) {
             console.error(err);
@@ -117,14 +106,15 @@ function AsyncAdminTakedownPost(id = null) {
 }
 
 function AsyncVerifiedTakedownPost(id = null) {
-    return async () => {
+    console.info(id)
+    return async dispatch => {
         try {
             if (id === null) {
                 throw new Error()
             }
 
             const result = await api.TakedownPostVerified(id);
-
+            dispatch(AsyncGetPosts());
             if (result.info !== undefined) {
                 throw new Error()
             }

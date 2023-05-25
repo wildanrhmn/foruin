@@ -13,9 +13,9 @@ import Styles from "../../styles/FormLayout.module.css";
 export default function FormEditPost({ showForm }) {
   const dispatch = useDispatch();
   const postData = JSON.parse(localStorage.getItem('postData'));
-  const filteredDataVideo = postData.imageSrc.filter(item => item.type === 'video');
-  const filteredDataImage = postData.imageSrc.filter(item => item.type === 'image').map(data => data.src);
-  const [uploadedVideo, setUploadedVideo] = useState(filteredDataVideo[0].src || null);
+  const filteredDataVideo = postData.imageSrc.filter(item => item.url?.endsWith('.mp4'));
+  const filteredDataImage = postData.imageSrc.filter(item => item.url?.endsWith('.png')).map(data => data.url);
+  const [uploadedVideo, setUploadedVideo] = useState(filteredDataVideo[0]?.src || null);
   const [gambarPost, setGambarPost] = useState(filteredDataImage || []);
   const [kategoriPost, setKategoriPost] = useState(postData?.category || []);
   const [isiPost, setIsiPost] = useState(postData?.description || '');
@@ -27,8 +27,8 @@ export default function FormEditPost({ showForm }) {
         _id: postData._id,
         kategori_berita: kategoriPost || postData?.category,
         isi_post:  isiPost || postData?.description,
-        video_berita: uploadedVideo || postData?.video_url,
-        gambar_post: gambarPost || postData?.gambar_post.url,
+        video_berita: uploadedVideo || filteredDataVideo,
+        gambar_post: gambarPost || postData?.imageSrc?.filter(item => item.url?.endsWith('.png')),
       }))
       showForm(false)  
     }

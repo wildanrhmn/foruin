@@ -26,7 +26,7 @@ const ImageSlider = ({ imageSrc }) => {
         >
           {imageSrc?.map((item) => (
             <SwiperSlide>
-              {item.type === "video" ? (
+            {item.url.endsWith(".mp4") ? (
                 <VideoPlayer url={item.url} />
               ) : (
                 <img src={item.url} alt="pict-slider" />

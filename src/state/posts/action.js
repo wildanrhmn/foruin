@@ -14,10 +14,11 @@ function GetAllPostsAction(posts) {
     }
 }
 
-function LikeUnlikeAction(id_user) {
+function LikeUnlikeAction(id_post, id_user) {
     return {
         type: ActionType.LIKE_UNLIKE_POST,
         payload: {
+            id_post,
             id_user
         }
     }
