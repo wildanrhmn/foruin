@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { Card, Image } from "react-bootstrap";
-import Styles from "../../styles/posts/Posts.module.css";
+import Styles from "../../styles/posts/Comment.module.css";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
+import { useDispatch } from "react-redux";
+import { AsyncDeleteComments } from "../../state/discussion/middleware";
 
-const CommentsComponent = ({ profilePic, name, username, comment }) => {
+const CommentsComponent = ({ profilePic, name, username, comment, id_comment, id_post }) => {
   const { auth } = useSelector((states) => states);
+  const dispatch = useDispatch();
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
   const containerRef = useRef(null);
@@ -17,6 +20,16 @@ const CommentsComponent = ({ profilePic, name, username, comment }) => {
     e.preventDefault();
     setShow(!show); // toggle the menu visibility for this component
   };
+
+  const handleDeleteComment = () => {
+    if(id_comment !== null && id_post !== null){
+      try{
+        dispatch(AsyncDeleteComments(id_comment, id_post));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -75,7 +88,7 @@ const CommentsComponent = ({ profilePic, name, username, comment }) => {
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li>Delete Comment</li>
+                    <li onClick={handleDeleteComment}>Delete Comment</li>
                   </ul>
                 ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
                   <ul

@@ -16,11 +16,12 @@ const LandingPage = () => {
   });
 
   const { posts = [] } = useSelector(states => states);
+  console.info(posts)
   return (
     <div className="container-fluid">
       <div className="row">
         <div className={`${isLarge ? "col-lg-9" : "col-lg-9"}`}>
-          {posts?.map(post => (
+          {posts && posts?.map(post => (
             <>
               <Posts
                 _id={post.id}
@@ -32,6 +33,7 @@ const LandingPage = () => {
                 category={post.category}
                 totalLikes={post.likes.length}
                 totalComments={post.discussion.length}
+                likes={post.likes}
               />
             </>
           ))}

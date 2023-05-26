@@ -1,0 +1,207 @@
+.text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin: 0;
+        animation: close 0.1s linear 0.1s forwards;
+        
+      }
+      
+      @media screen and (max-width: 1400px) {
+        .text{
+          font-size: 15px;   
+        }
+        
+      }
+    
+      .open .text {
+        animation: open 0.1s linear 0s forwards;
+      }
+    
+      @keyframes open {
+        from {
+          line-clamp: 5;
+          -webkit-line-clamp: 5;
+        }
+        to {
+          line-clamp: initial;
+          -webkit-line-clamp: initial;
+        }
+      }
+      @keyframes close {
+        from {
+          line-clamp: initial;
+          -webkit-line-clamp: initial;
+        }
+        to {
+          line-clamp: 5;
+          -webkit-line-clamp: initial;
+        }
+      }
+    
+      .description {
+        margin-bottom: 0px !important;
+        margin-top: 5px;
+        padding-right: 25px;
+      }
+    
+      .descriptionHome {
+        margin-bottom: 0px !important;
+        margin-top: 5px;
+        padding-right: 100px;
+      }
+    
+      .imagePost{
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 30px;    
+      }
+    
+      .menuPost{
+        position: absolute;
+        top: 30px;
+        right: 50px;
+        z-index: 10;
+      }
+    
+      .menuPost a{
+        position: relative;
+      }
+      
+      .subMenu{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        min-width: max-content;
+        transition: all .3s ease;
+        transform: translateY(15px);
+        box-shadow: 0 3px 12px 3px rgba(255,82,1,.1);
+        overflow: hidden;
+        overflow-y: auto;
+        z-index: 11;
+        background: #fff;
+        border: 2px solid #000(255,200,39,.4);
+        padding: 10px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 0px 0px 10px 10px;
+    }
+    
+    .subMenuDeletedPosts{
+      position: absolute;
+      top: 100%;
+      right: 0;
+      opacity: 0;
+      visibility: hidden;
+      min-width: 200px;
+      transition: all .3s ease;
+      transform: translateY(15px);
+      box-shadow: 0 3px 12px 3px rgba(255,82,1,.1);
+      overflow: hidden;
+      overflow-y: auto;
+      z-index: 11;
+      background: #fff;
+      border: 2px solid #000(255,200,39,.4);
+      padding: 5px 15px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 0px 0px 10px 10px;
+    }
+    
+    .subMenu li{
+      padding: 7px 15px;
+      color: #000;
+      transition: all .3s ease-in-out;
+    }
+    
+    .subMenu li:hover{
+      transform: translateX(5px);
+      background: var(--color-primary);
+      color: #fff !important;
+    }
+    
+     .subMenu.show{
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+     .subMenuDeletedPosts.show{
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .cardPosts{
+      border-top: none !important;
+      border-left: none !important;
+      border-radius: 0 !important;
+      border-bottom: 1px solid #EBEBEB !important;
+      border-right: 1px solid #EBEBEB !important;
+    }
+    
+    .iconPost{
+      width: 23px;
+      font-size: 19px;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+    }
+    
+    .iconPost.liked{
+      color: var(--color-primary);
+    }
+    
+    .iconPost:hover{
+      transform: scale(1.1);
+    }
+    
+    .postCtaMd{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1500px;
+      margin-left: 110px;
+    }
+    
+    .postCtaLg{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1500px;
+      margin-left: 270px;
+    }
+    
+    .DetailpostCtaLg{
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      
+    }
+    
+    .DetailpostCtaMd{
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    
+    .postCta li span{
+      font-size: 14px;
+    }
+    
+    .PostsCta{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+    }
+    
+    .buttonReply{
+      width: 83px;
+      height: 40px;
+      background-color: var(--color-primary);
+      border-radius: 18px;
+      border: 1px solid var(--color-primary);
+      color: #EBEBEB;
+    }
+    
+      

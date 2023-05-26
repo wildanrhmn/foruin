@@ -6,12 +6,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AsyncGetDetailPost } from "../../state/detailPost/middleware";
 
 import Posts from "../../components/posts/Posts";
-import { comments } from "../../utils/DummyData";
 import CommentsComponent from "../../components/comments/PostComments";
 import ModalPostComment from "../../components/comments/ModalPostComment";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { ReactComponent as Back } from "../../assets/icons/back.svg";
+import { AsyncGetComments, AsyncCreateComments } from "../../state/discussion/middleware";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -22,11 +22,11 @@ const DetailPost = () => {
   const { id } = useParams();
   const { auth } = useSelector((states) => states);
   const { detailPost = {} } = useSelector((states) => states);
+  const { discussions = [] } = useSelector((states) => states);
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {};
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [showReplyForm, setShowReplyForm] = useState(false);
@@ -45,22 +45,28 @@ const DetailPost = () => {
     }
     setOpenSnackBar(true);
   };
-  
+
   const handleReplySubmit = (e) => {
     e.preventDefault();
-    console.log("Reply submitted:", replyText);
+    try{
+      if(replyText !== ''){
+        dispatch(AsyncCreateComments(id, replyText));
+      }
+    } catch (error) {
+      console.log(error);
+    }
     setReplyText("");
     setShowReplyForm(false);
   };
 
   useEffect(() => {
     dispatch(AsyncGetDetailPost(id));
+    dispatch(AsyncGetComments(id));
   }, [dispatch, id]);
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [detailPost]);
-
   return (
     <div className="container-fluid">
       <div style={{padding: '20px 0 20px 20px'}}>
@@ -83,16 +89,17 @@ const DetailPost = () => {
         category={detailPost?.category}
         totalLikes={detailPost?.likes?.length}
         totalComments={detailPost?.discussion?.length}
-        _id={detailPost?._id}
+        _id={detailPost?.id}
         imageSrc={detailPost?.attachments}
         date={detailPost?.updated_at}
+        likes={detailPost?.likes}
       />
       <Card className={Styles.cardPosts}>
         <Card.Body className="d-flex p-3">
           <div className="flex-shrink-0 me-3">
             <Image
               src={
-                "https://ih1.redbubble.net/image.4372059190.7849/st,small,507x507-pad,600x600,f8f8f8.jpg"
+                auth.profile_picture
               }
               alt="Profile Pic"
               roundedCircle
@@ -106,10 +113,10 @@ const DetailPost = () => {
                   className="mb-0"
                   style={{ fontWeight: 600, fontSize: "18px" }}
                 >
-                  Jamal
+                  {auth.username}
                 </h3>
                 <small className="text-muted" style={{ cursor: "pointer" }}>
-                  @Jamal123
+                  @{auth.display_name}
                 </small>
               </div>
             </div>
@@ -131,12 +138,14 @@ const DetailPost = () => {
           </div>
         </Card.Body>
       </Card>
-      {comments.map((comment) => (
+      {discussions?.map((comment) => (
         <CommentsComponent
-          profilePic={comment.profilePic}
-          name={comment.name}
-          username={comment.username}
-          comment={comment.description}
+          profilePic={comment.profile_picture.url}
+          name={comment.username}
+          username={comment.display_name}
+          comment={comment.body}
+          id_comment={comment.id}
+          id_post={comment.topic}
         />
       ))}
       {/* Modal Input Comment */}

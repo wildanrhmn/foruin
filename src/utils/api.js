@@ -203,58 +203,30 @@ const api = (() => {
 
   async function TakedownPostVerified(_id) {
     const url = baseUrl + "/post/" + _id;
-
     const response = await axios.delete(url);
+
     return response.data.data;
   }
 
   // DISCUSSION
-  async function GetAllDiscussionTopic(page = 1, id_topic = null) {
-    let url = baseUrl + "/discussion/topic/" + id_topic + "?page=" + page;
+  async function GetAllDiscussionTopic(id) {
+    let url = baseUrl + "/discussion/topic/" + id;
 
     const response = await axios.get(url);
-    const failTemplate = {
-      Posts: [],
-      page: 0,
-      total: 0,
-    };
 
     if (response.data.data.length === 0) {
-      return failTemplate;
+      return [];
     }
-
-    return response.data.data;
-  }
-
-  async function GetAllDiscussionLayer(page = 1, id_layer = null) {
-    let url = baseUrl + "/discussion/layer/" + id_layer + "?page=" + page;
-
-    const response = await axios.get(url);
-    const failTemplate = {
-      Posts: [],
-      page: 0,
-      total: 0,
-    };
-
-    if (response.data.data.length === 0) {
-      return failTemplate;
-    }
-
-    return response.data.data;
-  }
-
-  async function GetDetailDiscussion(id_dicussion) {
-    const url = baseUrl + "/discussion/" + id_dicussion;
-
-    const response = await axios.get(url);
 
     return response.data.data;
   }
 
   async function CreateDiscussion(data, id_topic) {
     const url = baseUrl + "/discussion/" + id_topic;
-
-    const response = await axios.post(url, data);
+    const dataComment = {
+      body: data
+    }
+    const response = await axios.post(url, dataComment);
     return response.data.data
   }
 
@@ -443,8 +415,6 @@ const api = (() => {
     TakedownPostAdmin,
     TakedownPostVerified,
     GetAllDiscussionTopic,
-    GetAllDiscussionLayer,
-    GetDetailDiscussion,
     CreateDiscussion,
     EditDiscussion,
     TakedownDiscussionAdmin,

@@ -18,7 +18,9 @@ function AsyncLogin({ email, password }) {
         role: response.data.role,
         username: response.data.username,
         token: response.data.access_token,
-        id_user: response.data.id
+        id_user: response.data.id,
+        display_name: response.data.display_name,
+        profile_picture: response.data.profile_picture.url
       };
 
       axios.defaults.headers.common[

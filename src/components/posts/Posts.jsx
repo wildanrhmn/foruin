@@ -10,10 +10,14 @@ import { useNavigate } from "react-router-dom";
 import { FiThumbsUp } from "react-icons/fi";
 import SimpleDialog from "../tools/DialogShare";
 
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 import { ReactComponent as Comment } from "../../assets/icons/comment_duotone.svg";
 import { ReactComponent as Share } from "../../assets/icons/Vector.svg";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
+import { AsyncLikePostDetail } from "../../state/detailPost/middleware";
 
 function Posts({
   _id,
@@ -26,6 +30,7 @@ function Posts({
   totalLikes,
   totalComments,
   date,
+  likes
 }) {
   const [shared, setShared] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -40,8 +45,7 @@ function Posts({
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
   const containerRef = useRef(null);
-  const [likes, setLikes] = useState(localStorage.getItem(`liked_${_id}`) === 'true');
-  const [likeCount, setLikeCount] = useState(parseInt(localStorage.getItem(`likeCount_${_id}`), 10) || 0);
+  const [liked, setLiked] = useState();
   const formattedDate = formatDateTime(date);
 
   function formatDateTime(dateTimeStr) {
@@ -102,21 +106,29 @@ function createMarkup(value) {
       navigate("/login");
       return;
     }
-    const updatedLikes = !likes;
-    const updatedLikeCount = updatedLikes ? likeCount + 1 : likeCount - 1;
-  
-    setLikes(updatedLikes);
-    setLikeCount(updatedLikeCount);
-  
-    localStorage.setItem(`liked_${_id}`, updatedLikes);
-    localStorage.setItem(`likeCount_${_id}`, updatedLikeCount.toString());
-  
-    try {
-      dispatch(AsyncLikePost(_id, auth.id_user));
-    } catch (error) {
-      console.log(error);
+
+    if(location.pathname.includes("/post/")){
+      try{
+        dispatch(AsyncLikePostDetail(_id, auth.id_user));
+      }
+      catch(err){
+        console.log(err);
+      }
+    } else {
+      try {
+        dispatch(AsyncLikePost(_id, auth.id_user));
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
+
+  useEffect(() => {
+    // Check if user ID exists in the likes array
+    const isLiked = likes && likes.includes(auth.id_user);
+    setLiked(isLiked || false);
+  }, [auth.id_user, likes]);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -133,23 +145,46 @@ function createMarkup(value) {
   }, [containerRef]);
 
   const handleDeletePost = (_id) => {
-    if(auth.role === 'SysAdmin'){
-      try{
-        dispatch(AsyncAdminTakedownPost(_id));
-      }
-      catch(err){
-        console.log(err);
-      }
-      return;
-    }
-    else{
-        try{
-          dispatch(AsyncVerifiedTakedownPost(_id));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to retrieve the post!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#444BF2',
+      cancelButtonColor: '#F94144',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(auth.role === 'SysAdmin'){
+          try{
+            dispatch(AsyncAdminTakedownPost(_id));
+            Swal.fire(
+              'Deleted!',
+              'Your post has been deleted.',
+              'success'
+            )
+          }
+          catch(err){
+            console.log(err);
+          }
+          return;
         }
-        catch(err){
-          console.log(err);
-        }
-      }
+        else{
+            try{
+              dispatch(AsyncVerifiedTakedownPost(_id));
+              Swal.fire(
+                'Deleted!',
+                'The post has been terminated.',
+                'success'
+              )
+            }
+              catch(err){
+                console.log(err);
+              }
+            }
+          }
+    })
+
   }
 
   return (
@@ -291,7 +326,7 @@ function createMarkup(value) {
                   >
                     <FiThumbsUp
                       className={`${Styles.iconPost} ${
-                        likes ? Styles.liked : ""
+                        liked ? Styles.liked : ""
                       }`}
                       onClick={() => handleLike(_id)}
                     />
@@ -337,7 +372,7 @@ function createMarkup(value) {
                 >
                   <FiThumbsUp
                     className={`${Styles.iconPost} ${
-                      likes ? Styles.liked : ""
+                      liked ? Styles.liked : ""
                     }`}
                     onClick={() => handleLike(_id)}
                   />

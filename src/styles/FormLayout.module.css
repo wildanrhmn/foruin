@@ -42,6 +42,18 @@ textarea:focus-visible {
     transition: all .3s ease;
 }
 
+.formCancelButton {
+    font-size: 1.6em;
+    font-weight: 700;
+    padding: 16px 48px;
+    border: none;
+    border: 2px solid var(--color-secondary);
+    background-color: #fff;
+    color: var(--color-secondary);
+    border-radius: 10px;
+    transition: all .3s ease;
+}
+
 .formSubmitComment{
     font-size: 1em !important;
     font-weight: 700 !important;
@@ -61,6 +73,11 @@ textarea:focus-visible {
 .formSubmitButton:hover {
     background-color: #fff;
     color: var(--color-primary);
+}
+
+.formCancelButton:hover {
+    background-color: var(--color-secondary);
+    color: #fff;
 }
 
 .formSubmitComment:hover {

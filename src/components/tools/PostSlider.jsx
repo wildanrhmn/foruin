@@ -12,6 +12,9 @@ import "../../styles/ImageSlider.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 const ImageSlider = ({ imageSrc }) => {
+  // const filterVideo = imageSrc.filter((item) => item.url.endsWith(".mp4"));
+  // const filterImage = imageSrc.filter((item) => !item.url.endsWith(".mp4"));
+
   return (
     <div className="img-slider">
       <div className="layout">
@@ -24,15 +27,22 @@ const ImageSlider = ({ imageSrc }) => {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {imageSrc?.map((item) => (
-            <SwiperSlide>
-            {item.url.endsWith(".mp4") ? (
-                <VideoPlayer url={item.url} />
-              ) : (
-                <img src={item.url} alt="pict-slider" />
-              )}
-            </SwiperSlide>
-          ))}
+          {imageSrc &&
+            imageSrc
+              .filter((item) => !item.url.endsWith('.mp4'))
+              .map((item) => (
+                <SwiperSlide key={item.public_id}>
+                  <img src={item.url} alt="pict-slider" />
+                </SwiperSlide>
+              ))}
+          {imageSrc &&
+            imageSrc
+              .filter((item) => item.url.endsWith('.mp4'))
+              .map((item) => (
+                <SwiperSlide key={item.public_id}>
+                  <VideoPlayer url={item.url} />
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </div>

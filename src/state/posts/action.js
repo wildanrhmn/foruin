@@ -5,7 +5,6 @@ const ActionType = {
 }
 
 function GetAllPostsAction(posts) {
-    console.info(posts)
     return {
         type: ActionType.GET_ALL_POSTS,
         payload: {

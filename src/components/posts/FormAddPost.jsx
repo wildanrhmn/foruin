@@ -1,6 +1,7 @@
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { AsyncCreatePost } from "../../state/posts/middleware";
 
 import KategoriFilterForm from "../tools/KategoriFilterForm";
@@ -9,8 +10,11 @@ import InputManyImage from "../tools/InputManyImage";
 import Editor from "../tools/Editor";
 
 import Styles from "../../styles/FormLayout.module.css";
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.min.css';
 export default function FormAddPost({ showForm }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [uploadedVideo, setUploadedVideo] = useState(null);
   const [gambarPost, setGambarPost] = useState([]);
   const [kategoriPost, setKategoriPost] = useState([]);
@@ -20,8 +24,24 @@ export default function FormAddPost({ showForm }) {
     e.preventDefault();
     try{
       dispatch(AsyncCreatePost({uploadedVideo, gambarPost, kategoriPost, isiPost}));
+      Swal.fire({
+        icon: 'success',
+        title: 'Successfully Posted!',
+        text: 'Your post may take a while to show up.',
+        showConfirmButton: false,
+        timer: 3000
+      }).then(() => {
+        navigate('/');
+      })
     } catch(err){
       console.log(err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Cannot Post!',
+        text: 'Please make sure you are putting the correct inputs.',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
   }
   return (
@@ -48,9 +68,12 @@ export default function FormAddPost({ showForm }) {
                 <Form.Label style={{fontWeight: '600', fontSize: '20px'}}>Teks{' '}<span className={Styles.required}>*</span></Form.Label>
                 <Editor defaultData={isiPost} setData={setIsiPost} />
             </Form.Group>
-      <div className={`${Styles.formCta} gap-3 d-flex justify-content-center`}>
+      <div className={`${Styles.formCta} gap-3 d-flex justify-content-flex-end `} style={{padding: '50px'}}>
+      <button className={Styles.formCancelButton} onClick={() => navigate('/')}> 
+          Cancel
+        </button>
         <button className={Styles.formSubmitButton} type="submit">
-          Simpan
+          Upload
         </button>
       </div>
       {/* Error Modal */}

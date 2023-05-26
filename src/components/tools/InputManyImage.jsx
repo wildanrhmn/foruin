@@ -8,7 +8,6 @@ import Styles from '../../styles/FormLayout.module.css'
 
 export default function InputManyImage({ getData, currentData }) {
     const [showImage, setShowImage] = useState(currentData?.detail || currentData || [])
-
     const fileInputRef = useRef(null);
 
     const handleDragOver = (e) => {
@@ -86,7 +85,7 @@ export default function InputManyImage({ getData, currentData }) {
                             <div className={Styles.imageDisplayCard}>
                                 <FileOrg width={30} />
                                 <span style={{fontSize: '14px'}}>
-                                    {image.name || image}
+                                    {image.url || image.name || image}
                                 </span>
                                 <button onClick={() => deleteImage(index)} type='button'>
                                     <Delete className={Styles.deleteIcon} />

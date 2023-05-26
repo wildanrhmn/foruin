@@ -1,4 +1,4 @@
-import { GetDetailPostAction } from "./action";
+import { GetDetailPostAction, LikeUnlikeDetailPostAction  } from "./action";
 import axios from "axios";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
@@ -23,7 +23,8 @@ function AsyncGetDetailPost(id = null) {
     }
 }
 
-function AsyncLikePost(id = null) {
+function AsyncLikePostDetail(id = null, id_user = null) {
+    console.info(id, id_user)
     return async dispatch => {
         try {
             if (id === null) {
@@ -31,22 +32,17 @@ function AsyncLikePost(id = null) {
             }
 
             const result = await api.LikeUnlikePost(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-
-            const details = await api.getDetailPost(id);
-
-            if (!details) {
-                throw new Error()
-            }
-
-            dispatch(GetDetailPostAction(details))
+            dispatch(LikeUnlikeDetailPostAction(id, id_user))
+            console.info(result)
+            // const details = await pi.getDetailPost(id);a
+            // if (!details) {
+            //     throw new Error()
+            // }
+            // dispatch(GetDetailPostAction(details))
         } catch (err) {
             console.error(err);
         }
     }
 }
 
-export { AsyncGetDetailPost, AsyncLikePost }
+export { AsyncGetDetailPost, AsyncLikePostDetail }

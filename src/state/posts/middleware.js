@@ -29,11 +29,10 @@ function AsyncCreatePost(data) {
                 picture_attachments: data.gambarPost || [],
             }
             const result = await api.createPost(postData);
-            dispatch(GetAllPostsAction());
+            dispatch(AsyncGetPosts());
             if (result.info !== undefined) {
                 throw new Error()
             }
-
             // Redirect to Profile
         } catch (err) {
             console.error(err);
@@ -106,7 +105,6 @@ function AsyncAdminTakedownPost(id = null) {
 }
 
 function AsyncVerifiedTakedownPost(id = null) {
-    console.info(id)
     return async dispatch => {
         try {
             if (id === null) {
@@ -118,7 +116,7 @@ function AsyncVerifiedTakedownPost(id = null) {
             if (result.info !== undefined) {
                 throw new Error()
             }
-
+            
             // Refresh Profile
         } catch (err) {
             console.error(err);
