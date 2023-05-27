@@ -117,7 +117,7 @@ const api = (() => {
     let url = baseUrl + "/posts?page=" + page;
 
     if (category) {
-      url += `?category=${category}`
+      url += `&category=${category}`
     }
 
     const response = await axios.get(url);
@@ -253,9 +253,9 @@ const api = (() => {
 
 
   // CATEGORY
-  async function getAllCategory(page) {
-    const url = baseUrl + "/category?page=" + page;
-
+  async function getAllCategory() {
+    const url = baseUrl + "/category";
+    console.info(url);
     const response = await axios.get(url);
     return response.data.data;
   }

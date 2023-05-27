@@ -21,7 +21,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(AsyncLogin({ email, password }));
-    navigate('/');
   };
 
   useEffect(() => {

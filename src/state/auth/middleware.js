@@ -5,12 +5,14 @@ import cookies from "./../../utils/cookie";
 import axios from "axios";
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 function AsyncLogin({ email, password }) {
   return async dispatch => {
     dispatch(showLoading());
     try {
       const response = await api.Login(email, password);
-      console.info(response);
       cookies.remove("refreshToken");
       cookies.add("refreshToken", response.data.access_token, 7);
 
@@ -27,10 +29,16 @@ function AsyncLogin({ email, password }) {
         "Authorization"
       ] = `Bearer ${response.data.access_token}`;
       sessionStorage.setItem("login_forum_info", JSON.stringify(data));
-
       dispatch(LoginAction(data));
+      window.location.replace("/");
     } catch (err) {
-      console.error(err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Cannot Login!',
+        text: 'Check your email and password.',
+        showConfirmButton: false,
+        timer: 3000
+      })
     }
     dispatch(hideLoading());
   }

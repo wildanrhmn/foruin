@@ -1,10 +1,11 @@
 import React from "react";
 
 import Styles from "../../styles/landingpage/AsideBar.module.css";
-import { Button } from "react-bootstrap";
-import Image from "../../assets/logo/LogoUin.png";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const AsideBarOrganisasi = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <div className={`mb-4 ${Styles.organizationListContainer}`}>
       <h3 className="mt-3 mb-3" style={{ fontWeight: "600", fontSize: "16px" }}>
@@ -18,10 +19,10 @@ const AsideBarOrganisasi = ({ data }) => {
               style={{ display: "flex", gap: "10px" }}
             >
               <img
-                src={Image}
+                src={item.profile_picture.url}
                 className={`mr-3 ${Styles.imageOrganization}`}
-                lassName={`mr-3 ${Styles.imageOrganization}`}
                 alt="..."
+                style={{borderRadius: '50%'}}
               />
               <div
                 style={{
@@ -34,24 +35,27 @@ const AsideBarOrganisasi = ({ data }) => {
                   className="mt-0 mb-1"
                   style={{ fontWeight: "600", fontSize: "15px" }}
                 >
-                  {item.namaOrganisasi}
+                  {item.username}
                 </h6>
                 <span className="text-muted" style={{ fontSize: "13px" }}>
-                  @{item.username}
+                  @{item.display_name}
                 </span>
               </div>
             </div>
-            <Button className={Styles.buttonVisit}>Kunjungi</Button>
+           <Link className={Styles.buttonVisit} 
+           style={{textDecoration: 'none'}}
+            to={`/profile/${item._id}`}>Kunjungi</Link>
           </li>
         ))}
       </ul>
-
       <h3
         style={{
           textAlign: "center",
           fontSize: "13px",
           color: "#444BF2",
+          cursor: "pointer",
         }}
+        onClick={() => navigate("/organization-list")}
       >
         Tampilkan lebih banyak
       </h3>
