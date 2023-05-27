@@ -18,6 +18,7 @@ import SubmissionAccounts from "./pages/dashboard/submission_accounts/Submission
 import DetailBanned from "./pages/dashboard/details/DetailBanned";
 import DetailSubmission from "./pages/dashboard/details/DetailSubmission";
 import DetailReport from "./pages/dashboard/details/DetailReport";
+import Profile from "./pages/profile/Profile";
 
 import { useSelector } from "react-redux";
 
@@ -36,6 +37,7 @@ function AppRouter() {
             <Route path="/update-post/:id" element={<EditPost />} />
             <Route path="/post/:id" element={<DetailPost />} />
             <Route path="/" element={<LandingPage />} />
+            {/* <Route path="/profile" element={<Profile />} /> */}
             <Route path="/organization-list" element={<OrganizationList />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
@@ -57,6 +59,7 @@ function AppRouter() {
           <Routes>
             <Route element={<Login />} path="/login" />
             <Route element={<Register />} path="/register" />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/post/:id" element={<DetailPost />} />
             <Route path="/" element={<LandingPage />} />
             <Route path="/organization-list" element={<OrganizationList />} />

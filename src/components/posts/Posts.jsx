@@ -40,7 +40,7 @@ function Posts({
   const { auth } = useSelector((states) => states);
   const dispatch = useDispatch();
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
-  const { role } = loginForumInfo || {}; 
+  const { role } = loginForumInfo || {};
 
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
@@ -86,32 +86,32 @@ function Posts({
     navigate(`/update-post/${_id}`);
   };
 
-function createMarkup(value) {
-  if (location.pathname.includes("/post/")) {
-    return {
-      __html: value
-    };
-  } else {
-    const maxLength = 200;
-    const truncatedValue = value.length > maxLength ? value.substring(0, maxLength) + "..." : value;
+  function createMarkup(value) {
+    if (location.pathname.includes("/post/")) {
+      return {
+        __html: value
+      };
+    } else {
+      const maxLength = 200;
+      const truncatedValue = value.length > maxLength ? value.substring(0, maxLength) + "..." : value;
 
-    return {
-      __html: truncatedValue
-    };
+      return {
+        __html: truncatedValue
+      };
+    }
   }
-}
 
   const handleLike = (_id) => {
-    if(!auth.token){
+    if (!auth.token) {
       navigate("/login");
       return;
     }
 
-    if(location.pathname.includes("/post/")){
-      try{
+    if (location.pathname.includes("/post/")) {
+      try {
         dispatch(AsyncLikePostDetail(_id, auth.id_user));
       }
-      catch(err){
+      catch (err) {
         console.log(err);
       }
     } else {
@@ -155,8 +155,8 @@ function createMarkup(value) {
       confirmButtonText: 'Delete'
     }).then((result) => {
       if (result.isConfirmed) {
-        if(auth.role === 'SysAdmin'){
-          try{
+        if (auth.role === 'SysAdmin') {
+          try {
             dispatch(AsyncAdminTakedownPost(_id));
             Swal.fire(
               'Deleted!',
@@ -164,25 +164,25 @@ function createMarkup(value) {
               'success'
             )
           }
-          catch(err){
+          catch (err) {
             console.log(err);
           }
           return;
         }
-        else{
-            try{
-              dispatch(AsyncVerifiedTakedownPost(_id));
-              Swal.fire(
-                'Deleted!',
-                'The post has been terminated.',
-                'success'
-              )
-            }
-              catch(err){
-                console.log(err);
-              }
-            }
+        else {
+          try {
+            dispatch(AsyncVerifiedTakedownPost(_id));
+            Swal.fire(
+              'Deleted!',
+              'The post has been terminated.',
+              'success'
+            )
           }
+          catch (err) {
+            console.log(err);
+          }
+        }
+      }
     })
 
   }
@@ -312,9 +312,8 @@ function createMarkup(value) {
                   </p>
                 </div>
                 <ul
-                  className={`${
-                    isMd ? Styles.DetailpostCtaMd : Styles.DetailpostCtaLg
-                  }`}
+                  className={`${isMd ? Styles.DetailpostCtaMd : Styles.DetailpostCtaLg
+                    }`}
                 >
                   <li
                     style={{
@@ -325,9 +324,8 @@ function createMarkup(value) {
                     }}
                   >
                     <FiThumbsUp
-                      className={`${Styles.iconPost} ${
-                        liked ? Styles.liked : ""
-                      }`}
+                      className={`${Styles.iconPost} ${liked ? Styles.liked : ""
+                        }`}
                       onClick={() => handleLike(_id)}
                     />
                     <span style={{ fontSize: "14px" }}>{totalLikes}</span>
@@ -371,9 +369,8 @@ function createMarkup(value) {
                   }}
                 >
                   <FiThumbsUp
-                    className={`${Styles.iconPost} ${
-                      liked ? Styles.liked : ""
-                    }`}
+                    className={`${Styles.iconPost} ${liked ? Styles.liked : ""
+                      }`}
                     onClick={() => handleLike(_id)}
                   />
                   <span style={{ fontSize: "14px" }}>{totalLikes}</span>
@@ -400,11 +397,11 @@ function createMarkup(value) {
                 >
                   <Share className={Styles.iconPost} />
                 </li>
-                  <SimpleDialog
-                    selectedValue={selectedValue}
-                    open={shared}
-                    onClose={handleClose}
-                  />
+                <SimpleDialog
+                  selectedValue={selectedValue}
+                  open={shared}
+                  onClose={handleClose}
+                />
                 <li></li>
                 <li></li>
               </ul>
