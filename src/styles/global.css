@@ -1,7 +1,7 @@
 /*======================Google Font========================*/
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-:root{
+:root {
     /*=======================Color==================*/
     --color-primary: #444BF2;
     --color-secondary: #C9CBFF;
@@ -26,37 +26,30 @@
 
     /*=====Font Weight=====*/
     --font-normal: 400;
-    --font-semi-bold:600;
-    --font-bold:700;
+    --font-semi-bold: 600;
+    --font-bold: 700;
 }
 
 /*=======================Root Responsives======================*/
-@media screen and (max-width: 992px) {
-    
-}
-@media screen and (max-width: 768px) {
-    
-}
+@media screen and (max-width: 992px) {}
 
-@media screen and (max-width: 480px) {
-    
-}
+@media screen and (max-width: 768px) {}
 
-@media screen and (max-width: 320px) {
-    
-}
+@media screen and (max-width: 480px) {}
 
-*{
+@media screen and (max-width: 320px) {}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-.container-fluid{
+.container-fluid {
     --bs-gutter-x: 0 !important;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -70,15 +63,17 @@ textarea {
     font-size: var(--normal-font-size) !important;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-weight: var(--font-bold) !important;
-  }
+}
 
-ul{
+ul {
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -89,6 +84,7 @@ a{
     max-height: 300px;
     min-width: 860px;
 }
+
 .ck-editor__top {
     min-width: 860px;
 }
@@ -122,13 +118,13 @@ a{
     color: var(--color-primary);
 }
 
-button{
+button {
     cursor: pointer;
     outline: none;
     border: none;
 }
 
-img{
+img {
     max-width: 100%;
     height: auto;
 }

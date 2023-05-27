@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import AsideBarOrganisasi from "../../components/landingpage/AsideBarOrganisasi";
 import AsideBarTopik from './../../components/landingpage/AsideBarTopik';
 
-import { dataOrganisasi, dataTopik  } from "../../utils/DummyData";
+import { dataOrganisasi, dataTopik } from "../../utils/DummyData";
 
 const LandingPage = () => {
   const isLarge = useMediaQuery({
