@@ -148,7 +148,6 @@ const DetailPost = () => {
           id_post={comment.topic}
         />
       ))}
-      {/* Modal Input Comment */}
       <ModalPostComment
         show={showReplyForm}
         handleSubmit={handleReplySubmit}

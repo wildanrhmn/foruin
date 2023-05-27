@@ -2,11 +2,16 @@ import { GetAllPostsAction, LikeUnlikeAction } from "./action";
 import { GetDetailPostAction } from "../detailPost/action";
 import api from "../../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { AsyncGetAllCategory } from "../category/middleware";
+import { AsyncSetFlagingSearch } from "../flagsearch/middleware";
 
 function AsyncGetPosts(page = 1, category = null) {
     return async dispatch => {
         dispatch(showLoading());
         try {
+            if(category !== null){
+                dispatch(AsyncSetFlagingSearch(category));
+            }
             const data = await api.GetAllPosts(page, category);
             dispatch(GetAllPostsAction(data));
         } catch (err) {
@@ -30,6 +35,7 @@ function AsyncCreatePost(data) {
             }
             const result = await api.createPost(postData);
             dispatch(AsyncGetPosts());
+            dispatch(AsyncGetAllCategory());
             if (result.info !== undefined) {
                 throw new Error()
             }
@@ -85,14 +91,15 @@ function AsyncLikePost(id = null, id_user = null) {
 }
 
 function AsyncAdminTakedownPost(id = null) {
-    return async () => {
+    return async dispatch => {
         try {
             if (id === null) {
                 throw new Error()
             }
 
             const result = await api.TakedownPostAdmin(id);
-
+            dispatch(AsyncGetPosts());
+            dispatch(AsyncGetAllCategory());
             if (result.info !== undefined) {
                 throw new Error()
             }
@@ -113,6 +120,7 @@ function AsyncVerifiedTakedownPost(id = null) {
 
             const result = await api.TakedownPostVerified(id);
             dispatch(AsyncGetPosts());
+            dispatch(AsyncGetAllCategory());
             if (result.info !== undefined) {
                 throw new Error()
             }

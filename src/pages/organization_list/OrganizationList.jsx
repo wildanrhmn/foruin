@@ -9,16 +9,17 @@ import OrganizationCard from "../../components/organization_list/OrganizationCar
 
 import { useDispatch, useSelector } from "react-redux";
 import { AsyncGetAllOrganizations } from "../../state/users/middleware";
-
-import { dataOrganisasi, dataTopik } from "../../utils/DummyData";
+import { AsyncGetAllCategory } from "../../state/category/middleware";
 
 const OrganizationList = () => {
-  const { users = [] } = useSelector((states) => states);
-  console.info(users)
   const dispatch = useDispatch();
+
+  const { users = [] } = useSelector((states) => states);
+  const {category = [] } = useSelector(states => states);
 
   useEffect(() => {
     dispatch(AsyncGetAllOrganizations());
+    dispatch(AsyncGetAllCategory());
   }, [dispatch]);
 
   const isLarge = useMediaQuery({
@@ -32,8 +33,8 @@ const OrganizationList = () => {
         </div>
         <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`}>
           <div className={Styles.containerRightBar}>
-            <AsideBarOrganisasi data={dataOrganisasi} />
-            <AsideBarTopik data={dataTopik} />
+           <AsideBarOrganisasi data={users} />
+           <AsideBarTopik data={category} />
           </div>
         </div>
       </div>

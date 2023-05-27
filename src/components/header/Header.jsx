@@ -35,6 +35,7 @@ function Navigation() {
   const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
   const { role } = loginForumInfo || {}; // Add null check here
   const [sidebarToggle, setSidebarToggle] = useState(false);
+  const [query, setQuery] = useState("");
   const ref = useRef(null);
 
   const handleLogout = () => {
@@ -108,6 +109,17 @@ function Navigation() {
     },
   });
 
+  function handleSearchQuery(query){
+    if(query === null){
+      return;
+    }
+    try{
+      dispatch(AsyncGetPosts(1, query));
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
   /* ====================== If SysAdmin Login ====================================*/
 
   if (auth.role === "SysAdmin" || role === "SysAdmin") {
@@ -534,8 +546,11 @@ function Navigation() {
               placeholder="Cari"
               aria-label="Cari"
               className={Styles.myFormControl}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSearchQuery(query)}
+              value={query}
             />
-            <Button className={Styles.buttonForm}>
+            <Button className={Styles.buttonForm} onClick={() => handleSearchQuery(query)}>
               <Search />
             </Button>
           </InputGroup>
