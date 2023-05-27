@@ -9,11 +9,7 @@ import AsideBarTopik from './../../components/landingpage/AsideBarTopik';
 import { AsyncGetAllOrganizations } from "../../state/users/middleware";
 import { AsyncGetAllCategory } from "../../state/category/middleware";
 
-<<<<<<< HEAD
-import { dataOrganisasi, dataTopik } from "../../utils/DummyData";
-=======
 import {ReactComponent as Pinned } from '../../assets/icons/pinned.svg';
->>>>>>> wildan
 
 const LandingPage = () => {
   const isLarge = useMediaQuery({
