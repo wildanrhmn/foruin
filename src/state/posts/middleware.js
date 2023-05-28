@@ -5,6 +5,9 @@ import { AsyncGetAllCategory } from "../category/middleware";
 import { AsyncSetFlagingSearch } from "../flagsearch/middleware";
 import { AsyncGetDetailProfile } from "../profile/middleware";
 
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 function AsyncGetPosts(page = 1, category = null) {
     return async dispatch => {
         dispatch(showLoading());
@@ -42,6 +45,13 @@ function AsyncCreatePost(data) {
             // Redirect to Profile
         } catch (err) {
             console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Cannot Post!',
+                text: 'Check again the file type and size.',
+                showConfirmButton: false,
+                timer: 3000
+              })
         }
     }
 }
@@ -68,6 +78,13 @@ function AsyncUpdatePost(id = null, data) {
             }
         } catch (err) {
             console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Cannot Update Post!',
+                text: 'Check again the file type and size.',
+                showConfirmButton: false,
+                timer: 3000
+              })
         }
     }
 }

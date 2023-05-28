@@ -82,7 +82,7 @@ export default function InputVideo({ getData, label, currentData }) {
                     <div className={Styles.videoDisplayCard}>
                         <FileOrg width={30} />
                         <span style={{fontSize: '14px'}}>
-                            {showImage[0]?.url ||  showImage.name}
+                            {showImage[0]?.url ||  showImage.name || showImage}
                         </span>
                         <button onClick={() => deleteImage()}>
                             <Delete className={Styles.deleteIcon} />

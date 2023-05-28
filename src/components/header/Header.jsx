@@ -307,7 +307,7 @@ function Navigation() {
                     </Nav.Link>
                   </li>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Olahraga")}>
                       Olahraga
                     </Nav.Link>
                   </li>
@@ -488,6 +488,7 @@ function Navigation() {
             <Nav.Link
               as={NavLink}
               to="/"
+              onClick={() => handleSearchQuery("")}
               style={location.pathname === "/" ? { color: "#444BF2" } : {}}
             >
               Home
@@ -532,7 +533,7 @@ function Navigation() {
                     </Nav.Link>
                   </li>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Olahraga")}>
                       Olahraga
                     </Nav.Link>
                   </li>

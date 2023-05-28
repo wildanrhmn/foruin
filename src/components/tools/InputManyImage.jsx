@@ -38,6 +38,10 @@ export default function InputManyImage({ getData, currentData }) {
             alert('Maksimal hanya 4 gambar.');
             return;
         }
+        if(file && file.size > 6 * 1024 * 1024){ // 5MB in bytes
+            alert('Maximun size allowed is 5MB');
+            return;
+        }
         const reader = new FileReader();
         reader.onload = function () {
             const { result } = reader;
