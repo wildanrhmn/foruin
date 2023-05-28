@@ -37,11 +37,9 @@ function AsyncCreatePost(data) {
                 picture_attachments: data.gambarPost || [],
             }
             const result = await api.createPost(postData);
+            console.info(result)
             dispatch(AsyncGetPosts());
             dispatch(AsyncGetAllCategory());
-            if (result.info !== undefined) {
-                throw new Error()
-            }
             // Redirect to Profile
         } catch (err) {
             console.error(err);
@@ -57,7 +55,6 @@ function AsyncCreatePost(data) {
 }
 
 function AsyncUpdatePost(id = null, data) {
-    console.info(data.video_attachments)
     return async dispatch => {
         try {
             if (data.body === "") {
@@ -71,11 +68,9 @@ function AsyncUpdatePost(id = null, data) {
                 picture_attachments: data.picture_attachments || [],
             }
             const result = await api.EditPost(id, postData);
+            console.info(result)
             dispatch(AsyncGetPosts());
             dispatch(AsyncGetAllCategory());
-            if (result.info !== undefined) {
-                throw new Error()
-            }
         } catch (err) {
             console.error(err);
             Swal.fire({

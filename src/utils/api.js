@@ -164,7 +164,6 @@ const api = (() => {
 
   async function EditPost(_id, data) {
     const url = baseUrl + '/post/' + _id;
-    console.info(url)
     const form = new FormData();
     form.append("body", data.body);
 
