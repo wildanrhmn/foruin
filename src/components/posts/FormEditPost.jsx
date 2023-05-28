@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AsyncUpdatePost } from "../../state/posts/middleware";
@@ -13,7 +13,7 @@ import Styles from "../../styles/FormLayout.module.css";
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-export default function FormEditPost({ showForm }) {
+export default function FormEditPost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const postData = JSON.parse(localStorage.getItem('postData'));
@@ -22,17 +22,17 @@ export default function FormEditPost({ showForm }) {
   const [uploadedVideo, setUploadedVideo] = useState(filteredDataVideo || null);
   const [gambarPost, setGambarPost] = useState(filteredDataImage || []);
   const [kategoriPost, setKategoriPost] = useState(JSON.parse(postData?.category) || []);
-  const [isiPost, setIsiPost] = useState(postData?.description || '');
+  const [isiPost, setIsiPost] = useState(postData?.description);
+
   function handleChangePost(e){
     e.preventDefault();
     if(postData !== null){
       try{
-        dispatch(AsyncUpdatePost({
-          _id: postData._id,
-          kategori_berita: kategoriPost || postData?.category,
-          isi_post:  isiPost || postData?.description,
-          video_berita: uploadedVideo,
-          gambar_post: gambarPost,
+        dispatch(AsyncUpdatePost(postData._id,{
+          kategoriPost: kategoriPost,
+          body:  isiPost,
+          video_attachments: uploadedVideo,
+          picture_attachments: gambarPost,
         }))
         Swal.fire({
           icon: 'success',
@@ -53,7 +53,6 @@ export default function FormEditPost({ showForm }) {
           timer: 3000
         })
       }
-      showForm(false)  
     }
   } 
   return (

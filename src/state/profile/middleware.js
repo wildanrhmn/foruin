@@ -1,105 +1,22 @@
-import { GetPostsAction } from "./action";
+import { GetDetailProfileAction } from "./action";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
 
-function AsyncGetPosts(page = 1) {
-    return async dispatch => {
-        try {
-            const data = await api.GetAllPosts(page);
-            dispatch(GetPostsAction(data));
-        } catch (err) {
+function AsyncGetDetailProfile(id = null){
+    return async (dispatch) => {
+        dispatch(showLoading());
+        if(id === null){
+            throw new Error();
+        }
+        try{
+            const response = await api.userGetProfile(id);
+                dispatch(GetDetailProfileAction(response));     
+        }
+        catch(err){
             console.error(err);
         }
+        dispatch(hideLoading());
     }
 }
 
-function AsyncCreatePost(data) {
-    return async () => {
-        try {
-            if (data.body === "") {
-                throw new Error()
-            }
-
-            const result = await api.createPost(data);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncUpdatePost(id = null, data) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
-
-            const result = await api.EditPost(id, data);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncLikePost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
-
-            const result = await api.LikeUnlikePost(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncAdminTakedownPost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
-
-            const result = await api.TakedownPostAdmin(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-function AsyncVerifiedTakedownPost(id = null) {
-    return async () => {
-        try {
-            if (id === null) {
-                throw new Error()
-            }
-
-            const result = await api.TakedownPostVerified(id);
-
-            if (result.info !== undefined) {
-                throw new Error()
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-export { AsyncGetPosts, AsyncCreatePost, AsyncUpdatePost, AsyncLikePost, AsyncAdminTakedownPost, AsyncVerifiedTakedownPost }
+export { AsyncGetDetailProfile }

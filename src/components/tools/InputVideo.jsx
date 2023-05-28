@@ -8,7 +8,6 @@ import Styles from '../../styles/FormLayout.module.css'
 
 export default function InputVideo({ getData, label, currentData }) {
     const [showImage, setShowImage] = useState(currentData?.detail || currentData || null)
-    console.info(showImage)
     const fileInputRef = useRef(null);
 
     const handleDragOver = (e) => {
@@ -35,6 +34,10 @@ export default function InputVideo({ getData, label, currentData }) {
     };
 
     function handleFile(file) {
+        if (file && file.size > 5 * 1024 * 1024) { // 5MB in bytes
+            alert('Maximun size allowed is 5MB');
+            return;
+          }
         const reader = new FileReader();
         reader.onload = function () {
             const { result } = reader;
@@ -53,6 +56,7 @@ export default function InputVideo({ getData, label, currentData }) {
 
     function deleteImage() {
         setShowImage(null);
+        getData(null);
     }
 
     useEffect(() => {
@@ -72,6 +76,7 @@ export default function InputVideo({ getData, label, currentData }) {
                     ref={fileInputRef}
                     onChange={handleChange}
                     style={{ display: 'none' }}
+                    accept='video/*'
                 />
                 {showImage !== null ? (
                     <div className={Styles.videoDisplayCard}>

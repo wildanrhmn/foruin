@@ -58,6 +58,7 @@ export default function InputManyImage({ getData, currentData }) {
     function deleteImage(index) {
         const deleted = showImage.filter((image, idx) => index !== idx)
         setShowImage(deleted);
+        getData(deleted ? deleted : null)
     }
 
     useEffect(() => {
@@ -77,7 +78,7 @@ export default function InputManyImage({ getData, currentData }) {
                     ref={fileInputRef}
                     onChange={handleChange}
                     style={{ display: 'none' }}
-                    accept='image/jpg,image/png'
+                    accept='image/*'
                 />
                 {showImage?.length > 0 ? (
                     <>

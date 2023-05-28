@@ -1,6 +1,8 @@
 import { GetDiscussionAction } from "./action";
 import api from "../../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { AsyncGetDetailPost } from "../detailPost/middleware";
+import { AsyncGetPosts } from "../posts/middleware";
 
 function AsyncGetComments(id_post = null) {
   return async (dispatch) => {
@@ -26,6 +28,8 @@ function AsyncCreateComments(id_post = null, data = "") {
       const result = await api.CreateDiscussion(data, id_post);
       console.info(result)
       dispatch(AsyncGetComments(id_post));
+      dispatch(AsyncGetDetailPost(id_post));
+      dispatch(AsyncGetPosts());
     //   if (result.info !== undefined) {
     //     throw new Error();
     //   }
@@ -58,6 +62,8 @@ function AsyncDeleteComments(id_comment = null, id_post = null) {
     try {
       const result = await api.TakedownDiscussionUser(id_comment);
       dispatch(AsyncGetComments(id_post));
+      dispatch(AsyncGetDetailPost(id_post));
+      dispatch(AsyncGetPosts());
       if (result.info !== undefined) {
         throw new Error();
       }

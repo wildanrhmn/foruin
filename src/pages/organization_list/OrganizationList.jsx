@@ -15,7 +15,7 @@ const OrganizationList = () => {
   const dispatch = useDispatch();
 
   const { users = [] } = useSelector((states) => states);
-  const {category = [] } = useSelector(states => states);
+  const {category = [] } = useSelector(states => states); 
 
   useEffect(() => {
     dispatch(AsyncGetAllOrganizations());

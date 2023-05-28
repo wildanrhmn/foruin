@@ -1,6 +1,7 @@
 import { Card, Image } from "react-bootstrap";
 import Styles from "../../styles/organizationlist/OrganizationList.module.css";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
 const OrganizationCard = ({ data }) => {
     const isLarge = useMediaQuery({
@@ -16,7 +17,7 @@ const OrganizationCard = ({ data }) => {
                 src={item.profile_picture.url}
                 alt="Profile Pic"
                 roundedCircle
-                style={{ width: "75px", height: "75px" }}
+                style={{ width: "75px", height: "75px", }}
               />
             </div>
             <div
@@ -53,9 +54,9 @@ const OrganizationCard = ({ data }) => {
                 justifyContent: "center",
               }}
             >
-              <button className={Styles.buttonKunjungi} style={isLarge ? {fontSize: '12px'} : {}}>
+              <Link to={`/profile/${item._id}`} className={Styles.buttonKunjungi} style={isLarge ? {fontSize: '12px', textDecoration: 'none'} : {textDecoration: 'none'}}>
                 Kunjungi Profile
-              </button>
+              </Link>
             </div>
           </Card.Body>
         </Card>

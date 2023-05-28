@@ -64,8 +64,8 @@ function Navigation() {
   }, [dispatch]);
 
   const handleNavigate = () => {
-    if (auth.role || role) {
-      navigate("/profile");
+    if (auth.role) {
+      navigate(`/profile/${auth.id_user}`);
     } else {
       navigate("/login");
     }
@@ -258,7 +258,6 @@ function Navigation() {
               )}
             </div>
           </a.div>
-
           <Navbar className={Styles.horizontalNav}>
             <Nav className={`mr-auto ${Styles.navLinks}`}>
               <Nav.Link
@@ -283,27 +282,27 @@ function Navigation() {
                 Topic
                 <ul className={Styles.subMenu}>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Info Kampus")}>
                       Info Kampus
                     </Nav.Link>
                   </li>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Magang")}>
                       Magang
                     </Nav.Link>
                   </li>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Lomba")}>
                       Lomba
                     </Nav.Link>
                   </li>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Penelitian")}>
                       Penelitian
                     </Nav.Link>
                   </li>
                   <li>
-                    <Nav.Link as={NavLink} to="">
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Seminar")}>
                       Seminar
                     </Nav.Link>
                   </li>
@@ -382,7 +381,7 @@ function Navigation() {
               className={`${Styles.sideIcon} ${sidebarToggle ? Styles.expanded : ""
                 } 
                 ${location.pathname === "/login" ||
-                  location.pathname === "/profile" ||
+                  location.pathname === `/profile/${auth.id_user}` ||
                   location.pathname === "/register"
                   ? Styles.active
                   : ""
@@ -392,7 +391,7 @@ function Navigation() {
               <Person
                 className={`${Styles.sideLink} ${
                   location.pathname === "/login" ||
-                  location.pathname === "/profile" ||
+                  location.pathname === `/profile/${auth.id_user}` ||
                   location.pathname === "/register"
                   ? Styles.active
                   : ""
@@ -507,37 +506,37 @@ function Navigation() {
             <Nav.Link as={NavLink} className={Styles.hasSubMenu}>
               Topic
               <ul className={Styles.subMenu}>
-                <li>
-                  <Nav.Link as={NavLink} to="">
-                    Info Kampus
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link as={NavLink} to="">
-                    Magang
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link as={NavLink} to="">
-                    Lomba
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link as={NavLink} to="">
-                    Penelitian
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link as={NavLink} to="">
-                    Seminar
-                  </Nav.Link>
-                </li>
-                <li>
-                  <Nav.Link as={NavLink} to="">
-                    Olahraga
-                  </Nav.Link>
-                </li>
-              </ul>
+                  <li>
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Info Kampus")}>
+                      Info Kampus
+                    </Nav.Link>
+                  </li>
+                  <li>
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Magang")}>
+                      Magang
+                    </Nav.Link>
+                  </li>
+                  <li>
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Lomba")}>
+                      Lomba
+                    </Nav.Link>
+                  </li>
+                  <li>
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Penelitian")}>
+                      Penelitian
+                    </Nav.Link>
+                  </li>
+                  <li>
+                    <Nav.Link as={NavLink} to="" onClick={() => handleSearchQuery("Seminar")}>
+                      Seminar
+                    </Nav.Link>
+                  </li>
+                  <li>
+                    <Nav.Link as={NavLink} to="">
+                      Olahraga
+                    </Nav.Link>
+                  </li>
+                </ul>
             </Nav.Link>
           </Nav>
 

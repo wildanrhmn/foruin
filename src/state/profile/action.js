@@ -1,14 +1,14 @@
 const ActionType = {
-    GET_DETAIL_POST: 'GET_DETAIL_POST',
+    GET_DETAIL_PROFILE: 'GET_DETAIL_PROFILE',
 }
 
-function GetDetailPostAction(details) {
+function GetDetailProfileAction(details) {
     return {
-        type: ActionType.GET_DETAIL_POST,
+        type: ActionType.GET_DETAIL_PROFILE,
         payload: {
             details
         }
     }
 }
 
-export { ActionType, GetDetailPostAction }
+export { ActionType, GetDetailProfileAction }

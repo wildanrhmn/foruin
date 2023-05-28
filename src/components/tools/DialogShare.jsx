@@ -9,18 +9,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { green } from '@mui/material/colors';
 import React from 'react';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import { ContentCopy } from '@mui/icons-material';
 
 export default function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
-
+  
   const handleClose = () => {
     onClose(selectedValue);
   };
 
-  const handleListItemClick = (value) => {
-    onClose(value);
+  const handleListItemClick = () => {
+    onClose(selectedValue);
   };
 
   return (
@@ -30,21 +29,11 @@ export default function SimpleDialog(props) {
           <ListItem disableGutters>
             <ListItemButton onClick={handleListItemClick}>
               <ListItemAvatar>
-                <Avatar sx={{ bgcolor: green[100], color: green[600] }}>
-                  <WhatsAppIcon />
+                <Avatar sx={{  }}>
+                  <ContentCopy />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Whatsapp" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disableGutters>
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar sx={{ bgcolor: "#E1306C", color:"#fff" }}>
-                  <InstagramIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Instagram" />
+              <ListItemText primary="Copy Link" style={{fontWeight: 600}} />
             </ListItemButton>
           </ListItem>
       </List>

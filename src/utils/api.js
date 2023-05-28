@@ -121,14 +121,9 @@ const api = (() => {
     }
 
     const response = await axios.get(url);
-    const failTemplate = {
-      Posts: [],
-      page: 0,
-      total: 0,
-    };
 
     if (response.data.data.length === 0) {
-      return failTemplate;
+      return [];
     }
 
     return response.data.data;
@@ -151,12 +146,10 @@ const api = (() => {
 
     data.picture_attachments.forEach(attach => {
       form.append('picture_attachments', attach)
-      console.info(attach)
     })
 
     data.video_attachments?.forEach(attach => {
       form.append('video_attachments', attach)
-      console.info(attach)
     })
 
     const response = await axios.post(url, form, {
@@ -171,16 +164,26 @@ const api = (() => {
 
   async function EditPost(_id, data) {
     const url = baseUrl + '/post/' + _id;
-
+    console.info(url)
     const form = new FormData();
     form.append("body", data.body);
 
-    data.category.forEach(kategori => {
-      form.append('category[]', kategori)
+    form.append("category", JSON.stringify(data.category));
+
+    data.picture_attachments.forEach(attach => {
+      if(attach.url) {
+        form.append('picture_attachments[]', JSON.stringify(attach))
+      } else {
+        form.append('picture_attachments', attach)
+      }
     })
 
-    data.attachments.forEach(attach => {
-      form.append('attachments[]', attach)
+    data.video_attachments?.forEach(attach => {
+      if(attach.file) {
+        form.append('video_attachments', attach.file)
+      } else {
+        form.append('video_attachments[]', JSON.stringify(attach[0]))
+      }
     })
 
     const response = await axios.put(url, form);
@@ -255,7 +258,6 @@ const api = (() => {
   // CATEGORY
   async function getAllCategory() {
     const url = baseUrl + "/category";
-    console.info(url);
     const response = await axios.get(url);
     return response.data.data;
   }

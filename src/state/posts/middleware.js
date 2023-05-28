@@ -1,9 +1,9 @@
 import { GetAllPostsAction, LikeUnlikeAction } from "./action";
-import { GetDetailPostAction } from "../detailPost/action";
 import api from "../../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { AsyncGetAllCategory } from "../category/middleware";
 import { AsyncSetFlagingSearch } from "../flagsearch/middleware";
+import { AsyncGetDetailProfile } from "../profile/middleware";
 
 function AsyncGetPosts(page = 1, category = null) {
     return async dispatch => {
@@ -47,26 +47,25 @@ function AsyncCreatePost(data) {
 }
 
 function AsyncUpdatePost(id = null, data) {
+    console.info(data.video_attachments)
     return async dispatch => {
         try {
-            if (id === null) {
+            if (data.body === "") {
                 throw new Error()
             }
-
-            const result = await api.EditPost(id, data);
-
+    
+            const postData = {
+                body: data.body,
+                category: data.kategoriPost,
+                video_attachments: [data.video_attachments] || [],
+                picture_attachments: data.picture_attachments || [],
+            }
+            const result = await api.EditPost(id, postData);
+            dispatch(AsyncGetPosts());
+            dispatch(AsyncGetAllCategory());
             if (result.info !== undefined) {
                 throw new Error()
             }
-
-            // Get Detail Post
-            const details = await api.getDetailPost(id);
-
-            if (!result) {
-                throw new Error()
-            }
-
-            dispatch(GetDetailPostAction(details))
         } catch (err) {
             console.error(err);
         }
@@ -111,7 +110,7 @@ function AsyncAdminTakedownPost(id = null) {
     }
 }
 
-function AsyncVerifiedTakedownPost(id = null) {
+function AsyncVerifiedTakedownPost(id = null, id_user=null) {
     return async dispatch => {
         try {
             if (id === null) {
@@ -121,6 +120,7 @@ function AsyncVerifiedTakedownPost(id = null) {
             const result = await api.TakedownPostVerified(id);
             dispatch(AsyncGetPosts());
             dispatch(AsyncGetAllCategory());
+            dispatch(AsyncGetDetailProfile(id_user));
             if (result.info !== undefined) {
                 throw new Error()
             }

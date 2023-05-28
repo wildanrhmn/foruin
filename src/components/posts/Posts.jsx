@@ -21,6 +21,7 @@ import { AsyncLikePostDetail } from "../../state/detailPost/middleware";
 
 function Posts({
   _id,
+  id_user,
   profilePic,
   name,
   username,
@@ -39,8 +40,6 @@ function Posts({
   const location = useLocation();
   const { auth } = useSelector((states) => states);
   const dispatch = useDispatch();
-  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
-  const { role } = loginForumInfo || {};
 
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
@@ -144,7 +143,7 @@ function Posts({
     };
   }, [containerRef]);
 
-  const handleDeletePost = (_id) => {
+  const handleDeletePost = (_id, id_user) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to retrieve the post!",
@@ -157,7 +156,7 @@ function Posts({
       if (result.isConfirmed) {
         if (auth.role === 'SysAdmin') {
           try {
-            dispatch(AsyncAdminTakedownPost(_id));
+            dispatch(AsyncAdminTakedownPost(_id, id_user));
             Swal.fire(
               'Deleted!',
               'Your post has been deleted.',
@@ -171,7 +170,7 @@ function Posts({
         }
         else {
           try {
-            dispatch(AsyncVerifiedTakedownPost(_id));
+            dispatch(AsyncVerifiedTakedownPost(_id, id_user));
             Swal.fire(
               'Deleted!',
               'The post has been terminated.',
@@ -195,7 +194,8 @@ function Posts({
             src={profilePic}
             alt="Profile Pic"
             roundedCircle
-            style={{ width: "75px", height: "75px" }}
+            style={{ width: "75px", height: "75px", cursor: "pointer" }}
+            onClick={() => navigate(`profile/${id_user}`)}
           />
         </div>
         <div className="flex-grow-1">
@@ -205,10 +205,10 @@ function Posts({
                 className="mb-0"
                 style={{ fontWeight: 600, fontSize: "18px" }}
               >
-                {name}
+                {username}
               </h3>
-              <small className="text-muted" style={{ cursor: "pointer" }}>
-                @{username}
+              <small className="text-muted" style={{ cursor: "pointer" }} onClick={() => navigate(`profile/${id_user}`)}>
+                @{name}
               </small>
             </div>
             <div className={Styles.menuPost} ref={containerRef}>
@@ -229,22 +229,28 @@ function Posts({
                   }}
                 />
                 {/* This will be based on role */}
-                {auth.role === "Verified" || role === "Verified" ? (
+                {auth.role === "Verified" && auth.id_user === id_user ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
                     <li onClick={handleNavigate}>Edit Post</li>
-                    <li onClick={() => handleDeletePost(_id)}>Delete Post</li>
+                    <li onClick={() => handleDeletePost(_id, id_user)}>Delete Post</li>
                     <li>Pin Post</li>
                   </ul>
-                ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
+                ) : auth.role === "Verified" ? (
+                  <ul
+                    className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
+                  >
+                    <li>Bisukan @{username}</li>
+                  </ul>
+                ) : auth.role === "SysAdmin" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
                     <li onClick={() => handleDeletePost(_id)}>Force Delete Post</li>
                     <li>Ban Post</li>
                   </ul>
-                ) : auth.role === "Common" || role === "Common" ? (
+                ) : auth.role === "Common" ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
@@ -398,7 +404,7 @@ function Posts({
                   <Share className={Styles.iconPost} />
                 </li>
                 <SimpleDialog
-                  selectedValue={selectedValue}
+                  selectedValue={_id}
                   open={shared}
                   onClose={handleClose}
                 />

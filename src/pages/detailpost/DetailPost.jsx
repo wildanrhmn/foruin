@@ -12,6 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { ReactComponent as Back } from "../../assets/icons/back.svg";
 import { AsyncGetComments, AsyncCreateComments } from "../../state/discussion/middleware";
+import { Avatar } from "@mui/material";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -68,7 +69,7 @@ const DetailPost = () => {
     window.scrollTo(0, 0);
   }, [detailPost]);
   return (
-    <div className="container-fluid">
+   <div className="container-fluid" style={{paddingBottom: '55px'}}>
       <div style={{padding: '20px 0 20px 20px'}}>
         <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => navigate('/')}>
           <Back
@@ -82,6 +83,8 @@ const DetailPost = () => {
         </div>
       </div>
       <Posts
+        _id={detailPost?.id}
+        id_user={detailPost?.created_by}
         username={detailPost?.display_name}
         profilePic={detailPost?.profile_picture?.url}
         description={detailPost?.body}
@@ -89,7 +92,6 @@ const DetailPost = () => {
         category={detailPost?.category}
         totalLikes={detailPost?.likes?.length}
         totalComments={detailPost?.discussion?.length}
-        _id={detailPost?.id}
         imageSrc={detailPost?.attachments}
         date={detailPost?.updated_at}
         likes={detailPost?.likes}
@@ -97,26 +99,30 @@ const DetailPost = () => {
       <Card className={Styles.cardPosts}>
         <Card.Body className="d-flex p-3">
           <div className="flex-shrink-0 me-3">
-            <Image
-              src={
-                auth.profile_picture
-              }
-              alt="Profile Pic"
-              roundedCircle
-              style={{ width: "50px", height: "50px" }}
-            />
+            {auth.profile_picture ? (
+              <Image
+                src={
+                  auth.profile_picture
+                }
+                alt="Profile Pic"
+                roundedCircle
+                style={{ width: "50px", height: "50px" }}
+              />
+            ) : (
+              <Avatar />
+            )}
           </div>
           <div className="flex-grow-1">
             <div className="d-flex justify-content-between">
               <div className="d-flex gap-2">
                 <h3
                   className="mb-0"
-                  style={{ fontWeight: 600, fontSize: "18px" }}
+                  style={{ fontWeight: 600, fontSize: "16px" }}
                 >
-                  {auth.username}
+                  {auth.username ? auth.username : "Name"}
                 </h3>
                 <small className="text-muted" style={{ cursor: "pointer" }}>
-                  @{auth.display_name}
+                  @{auth.display_name ? auth.display_name : "username"}
                 </small>
               </div>
             </div>

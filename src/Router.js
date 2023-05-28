@@ -36,9 +36,9 @@ function AppRouter() {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/update-post/:id" element={<EditPost />} />
             <Route path="/post/:id" element={<DetailPost />} />
-            <Route path="/" element={<LandingPage />} />
-            {/* <Route path="/profile" element={<Profile />} /> */}
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/organization-list" element={<OrganizationList />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
@@ -48,21 +48,22 @@ function AppRouter() {
             <Route path="/reported-accounts" element={<ReportedAccounts />} />
             <Route path="/account-submissions" element={<SubmissionAccounts />} />
             <Route path="/post/:id" element={<DetailPost />} />
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/organization-list" element={<OrganizationList />} />
             <Route path="/detail-report/:id" element={<DetailReport />} />
             <Route path="/detail-banned/:id" element={<DetailBanned />} />
             <Route path="/detail-submission/:id" element={<DetailSubmission />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         ) : (
           <Routes>
             <Route element={<Login />} path="/login" />
             <Route element={<Register />} path="/register" />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/post/:id" element={<DetailPost />} />
-            <Route path="/" element={<LandingPage />} />
             <Route path="/organization-list" element={<OrganizationList />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         )}
