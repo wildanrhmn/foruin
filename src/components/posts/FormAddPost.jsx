@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AsyncCreatePost } from "../../state/posts/middleware";
