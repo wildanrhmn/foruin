@@ -113,7 +113,7 @@ const CommentsComponent = ({ profilePic, name, username, comment, id_comment, id
               </a>
             </div>
           </div>
-          <div>
+      <div style={{paddingRight: '250px'}}>
             <div
               className={`${Styles.description} 
                     ${`${Styles.descriptionText}`}`}

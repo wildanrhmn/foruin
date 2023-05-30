@@ -10,8 +10,6 @@ import InputManyImage from "../tools/InputManyImage";
 import Editor from "../tools/Editor";
 
 import Styles from "../../styles/FormLayout.module.css";
-import Swal from "sweetalert2";
-import 'sweetalert2/dist/sweetalert2.min.css';
 export default function FormAddPost({ showForm }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,24 +22,8 @@ export default function FormAddPost({ showForm }) {
     e.preventDefault();
     try{
       dispatch(AsyncCreatePost({uploadedVideo, gambarPost, kategoriPost, isiPost}));
-      Swal.fire({
-        icon: 'success',
-        title: 'Successfully Posted!',
-        text: 'Your post may take a while to show up.',
-        showConfirmButton: false,
-        timer: 3000
-      }).then(() => {
-        navigate('/');
-      })
     } catch(err){
       console.log(err);
-      Swal.fire({
-        icon: 'error',
-        title: 'Cannot Post!',
-        text: 'Please make sure you are putting the correct inputs.',
-        showConfirmButton: false,
-        timer: 3000
-      })
     }
   }
   return (

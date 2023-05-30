@@ -31,7 +31,7 @@ const OrganizationList = () => {
         <div className={`${isLarge ? "col-lg-9" : "col-lg-9"}`}>
           <OrganizationCard data={users} />
         </div>
-        <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`}>
+        <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`} style={{position: 'fixed', right: -50}}>
           <div className={Styles.containerRightBar}>
            <AsideBarOrganisasi data={users} />
            <AsideBarTopik data={category} />

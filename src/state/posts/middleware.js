@@ -40,7 +40,16 @@ function AsyncCreatePost(data) {
             console.info(result)
             dispatch(AsyncGetPosts());
             dispatch(AsyncGetAllCategory());
-            // Redirect to Profile
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Posted!',
+                text: 'Your post may take a while to show up.',
+                showConfirmButton: false,
+                timer: 3000
+              }).then(() => {
+                  // Redirect to home
+                window.location.replace('/');
+              })
         } catch (err) {
             console.error(err);
             Swal.fire({
@@ -71,6 +80,15 @@ function AsyncUpdatePost(id = null, data) {
             console.info(result)
             dispatch(AsyncGetPosts());
             dispatch(AsyncGetAllCategory());
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated!',
+                text: 'Your update may take a while to show up.',
+                showConfirmButton: false,
+                timer: 3000
+              }).then(() => {
+                window.location.replace('/');
+              })
         } catch (err) {
             console.error(err);
             Swal.fire({

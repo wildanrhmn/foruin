@@ -81,14 +81,14 @@ const AsideProfile = ({ data }) => {
                             }}
                         >
                             {auth.role === "Common" && auth.id_user === data.id ? (
-                                <>
+                                <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <p style={{ marginBottom: "0", color: "#1e1e1e", borderBottom: "1px solid #EBEBEB" }}>
                                         Edit Profile
                                     </p>
                                     <p style={{ marginBottom: "0", color: "#1e1e1e" }}>
                                         Verify Account
                                     </p>
-                                </>
+                                </div>
                             ) :  auth.role === "Common" ? (
                                 <p style={{ marginBottom: "0", color: "#1e1e1e" }}>
                                     Report Account
