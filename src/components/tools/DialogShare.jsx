@@ -7,16 +7,18 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ContentCopy } from '@mui/icons-material';
 
 export default function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
-  
   const handleClose = () => {
     onClose(selectedValue);
   };
-
+  
+  useEffect(() => {
+    navigator.clipboard.writeText(selectedValue);
+  }, [selectedValue])
   const handleListItemClick = () => {
     onClose(selectedValue);
   };

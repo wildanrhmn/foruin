@@ -35,8 +35,7 @@ function Posts({
   likes
 }) {
   const [shared, setShared] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
-  const [copyValue, setCopyValue] = useState("");
+  const selectedValue = `forum-uin.vercel.app/post/${_id}`;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,13 +68,9 @@ function Posts({
     setShared(true);
   };
   
-  const handleClose = (_id) => {
-    setCopyValue("forum-uin.vercel.app/post/" + _id);    
-    navigator.clipboard.writeText(copyValue);
-    setSelectedValue(copyValue);
+  const handleClose = () => {
     setShared(false);
   };
-
 
   const handleNavigate = () => {
     const bundle = {
@@ -105,8 +100,6 @@ function Posts({
       };
     }
   }
-
-
 
   const handleLike = (_id) => {
     if (!auth.token) {
@@ -418,7 +411,7 @@ function Posts({
                   <Share className={Styles.iconPost} />
                 </li>
                 <SimpleDialog
-                  selectedValue={_id}
+                  selectedValue={selectedValue}
                   open={shared}
                   onClose={handleClose}
                 />

@@ -1,14 +1,12 @@
 import React from "react";
 
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { AsyncGetPosts } from "../../state/posts/middleware";
 import { useDispatch } from "react-redux";
 import Styles from '../../styles/landingpage/AsideBar.module.css';
 
 
 const AsideBarTopik = ({ data }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const getPostsByCategory = (name) => {
@@ -27,7 +25,7 @@ const AsideBarTopik = ({ data }) => {
       <h3 className="mt-3 mb-3" style={{ fontWeight: "600", fontSize: "16px" }}>
         Topik Menarik
       </h3>
-      <ul style={{ paddingLeft: "0" }} className={Styles.list}>
+      <ul style={{ paddingLeft: "0" }}>
          {data.slice(0,5).map((item) => (
           <li className={`mb-3 ${Styles.listOrganization}`} key={item.name}>
             <div className="media-body" style={{ display: "flex", gap: "10px" }}>
@@ -53,17 +51,6 @@ const AsideBarTopik = ({ data }) => {
           </li>     
         ))}
       </ul>
-      <h3
-        style={{
-          textAlign: "center",
-          fontSize: "13px",
-          color: "#444BF2",
-          cursor: "pointer",
-        }}
-        onClick={() => navigate("/organization-list")}
-      >
-        Tampilkan lebih banyak
-      </h3>
     </div>
   );
 };

@@ -21,7 +21,6 @@ const LandingPage = () => {
   const { users = [] } = useSelector(states => states);
   const {category = [] } = useSelector(states => states);
   const { flaging = { status: false } } = useSelector(states => states);
-  console.info(category)
   useEffect(() => {
     dispatch(AsyncGetAllOrganizations());
     dispatch(AsyncGetAllCategory());
@@ -55,7 +54,10 @@ const LandingPage = () => {
             </>
           ))}
         </div>
-  <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`} style={{position: 'fixed', right: -50}}>
+  <div className={`${isLarge ? "col-lg-3" : "col-lg-3"}`} 
+       style={{ position: 'sticky',
+                paddingLeft: '25px'
+        }}>
       <div className={Styles.containerRightBar}>
             <AsideBarOrganisasi data={users} />
             <AsideBarTopik data={category} />
