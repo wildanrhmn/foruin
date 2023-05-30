@@ -2,10 +2,12 @@ import React from "react";
 
 import Styles from "../../styles/landingpage/AsideBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 
 const AsideBarOrganisasi = ({ data }) => {
   const navigate = useNavigate();
+  const isDesktop = useMediaQuery({ query: "(max-width: 1400px)" });
   return (
     <div className={`mb-4 ${Styles.organizationListContainer}`}>
       <h3 className="mt-3 mb-3" style={{ fontWeight: "600", fontSize: "16px" }}>
@@ -33,11 +35,11 @@ const AsideBarOrganisasi = ({ data }) => {
               >
                 <h6
                   className="mt-0 mb-1"
-                  style={{ fontWeight: "600", fontSize: "15px" }}
+                  style={isDesktop ? { fontWeight: "600", fontSize: "12px" } :{ fontWeight: "600", fontSize: "15px" }}
                 >
                   {item.username}
                 </h6>
-                <span className="text-muted" style={{ fontSize: "13px" }}>
+                <span className="text-muted" style={isDesktop ? { fontWeight: "600", fontSize: "11px" } :{ fontWeight: "600", fontSize: "13px" }}>
                   @{item.display_name}
                 </span>
               </div>

@@ -4,18 +4,18 @@ import { useState, useEffect, useRef } from "react";
 
 import { Image } from "react-bootstrap";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
-
+import { Avatar } from '@mui/material';
 
 
 import Styles from "../../styles/profile/AsideProfile.module.css"
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 const AsideProfile = ({ data }) => {
     const { auth } = useSelector((states) => states);
+    const isDekstop = useMediaQuery({ query: "(max-width: 1400px)" });
     const [show, setShow] = useState(false);
     const containerRef = useRef(null);
-
-    console.info(auth.id_user, data.id)
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -35,26 +35,34 @@ const AsideProfile = ({ data }) => {
     return (
         <div className={`${Styles.asideProfile}`}>
             <div className={`${Styles.bgProfile}`}>
-                <Image
-                    src={data.profile_picture?.url}
-                    alt="Profile Pic"
-                    style={{
-                        objectFit: 'cover',
-                        objectPosition: 'center',
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                    }}
-                />
+                {data.profile_picture?.url === 'none' ? (
+                    ''
+                ) : (
+                    <Image
+                        src={data.profile_picture?.url}
+                        alt="Profile Pic"
+                        style={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                        }}
+                    />
+                )}
             </div>
             <div className="d-flex justify-content-between position-relative ">
-                <Image
-                    src={data.profile_picture?.url}
-                    alt="Profile Pic"
-                    roundedCircle
-                    className={`${Styles.imgProfile} `}
-                />
-
+            {data.profile_picture?.url === 'none' ? (
+                    <Avatar style={{width: "164px" , height: "164px"}} />
+                ) : (
+                    <Image
+                        src={data.profile_picture?.url}
+                        alt="Profile Pic"
+                        roundedCircle
+                        className={`${Styles.imgProfile} `}
+                        
+                    />
+                )}
                 <div className={Styles.menuPost} ref={containerRef} >
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a
@@ -81,13 +89,15 @@ const AsideProfile = ({ data }) => {
                             }}
                         >
                             {auth.role === "Common" && auth.id_user === data.id ? (
-                                <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                                    <p style={{ marginBottom: "0", color: "#1e1e1e", borderBottom: "1px solid #EBEBEB" }}>
-                                        Edit Profile
-                                    </p>
-                                    <p style={{ marginBottom: "0", color: "#1e1e1e" }}>
-                                        Verify Account
-                                    </p>
+                                <div>
+                                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", fontSize: "14px", padding: '10px'}}>
+                                        <p style={{ marginBottom: "0", color: "#1e1e1e", borderBottom: "1px solid #EBEBEB", paddingBottom: "5px" }}>
+                                            Edit Profile
+                                        </p>
+                                        <p style={{ marginBottom: "0", color: "#1e1e1e", paddingTop: "5px" }}>
+                                            Verify Account
+                                        </p>
+                                    </div>
                                 </div>
                             ) :  auth.role === "Common" ? (
                                 <p style={{ marginBottom: "0", color: "#1e1e1e" }}>
@@ -117,9 +127,9 @@ const AsideProfile = ({ data }) => {
                 </div>
             </div>
 
-            <p style={{ fontSize: '48px', fontWeight: '700', marginBottom: '0' }}
+            <p style={ isDekstop ? { fontSize: '32px', fontWeight: '700', marginBottom: '0' } : { fontSize: '48px', fontWeight: '700', marginBottom: '0' } }
             >{data.username}</p>
-            <p style={{ fontSize: '24px', fontWeight: '700', color: '#C2C9D1' }}
+            <p style={ isDekstop ? { fontSize: '18px', fontWeight: '700', color: '#C2C9D1' } : { fontSize: '24px', fontWeight: '700', color: '#C2C9D1' } }
             >@{data.display_name}</p>
             <p style={{ marginLeft: '16px', marginRight: '16px' }}
             >{data.description}</p>

@@ -18,6 +18,7 @@ import { ReactComponent as Comment } from "../../assets/icons/comment_duotone.sv
 import { ReactComponent as Share } from "../../assets/icons/Vector.svg";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
 import { AsyncLikePostDetail } from "../../state/detailPost/middleware";
+import { AsyncLikePostProfile } from "../../state/profile/middleware";
 
 function Posts({
   _id,
@@ -35,6 +36,7 @@ function Posts({
 }) {
   const [shared, setShared] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
+  const [copyValue, setCopyValue] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,11 +68,15 @@ function Posts({
   const handleClickOpen = () => {
     setShared(true);
   };
-
-  const handleClose = (value) => {
+  
+  const handleClose = (_id) => {
+    setCopyValue("forum-uin.vercel.app/post/" + _id);    
+    navigator.clipboard.writeText(copyValue);
+    setSelectedValue(copyValue);
     setShared(false);
-    setSelectedValue(value);
   };
+
+
   const handleNavigate = () => {
     const bundle = {
       _id,
@@ -100,25 +106,33 @@ function Posts({
     }
   }
 
+
+
   const handleLike = (_id) => {
     if (!auth.token) {
       navigate("/login");
       return;
     }
-
     if (location.pathname.includes("/post/")) {
-      try {
-        dispatch(AsyncLikePostDetail(_id, auth.id_user));
-      }
-      catch (err) {
-        console.log(err);
-      }
+        try {
+          dispatch(AsyncLikePostDetail(_id, auth.id_user));
+        }
+        catch (err) {
+          console.log(err);
+        }
+    } else if (location.pathname.includes("/profile/")) {
+        try {
+          dispatch(AsyncLikePostProfile(_id, auth.id_user));
+        }
+        catch (err) {
+          console.log(err);
+        }
     } else {
-      try {
-        dispatch(AsyncLikePost(_id, auth.id_user));
-      } catch (error) {
-        console.log(error);
-      }
+        try {
+          dispatch(AsyncLikePost(_id, auth.id_user));
+        } catch (error) {
+          console.log(error);
+        }
     }
   };
 

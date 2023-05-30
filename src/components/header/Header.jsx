@@ -25,6 +25,7 @@ import Styles from "../../styles/headerfooter/Navbar.module.css";
 
 import { animated as a, useSpring } from "@react-spring/web";
 import cookies from "../../utils/cookie";
+import { AsyncGetOrganizationsWithQuery } from "../../state/organization/middleware";
 
 function Navigation() {
   const navigate = useNavigate();
@@ -113,13 +114,23 @@ function Navigation() {
     if(query === null){
       return;
     }
-    try{
-      dispatch(AsyncGetPosts(1, query));
-    }
-    catch(err){
-      console.log(err);
+    if(location.pathname.includes('/organization-list')){
+        try{
+          dispatch(AsyncGetOrganizationsWithQuery(1, query));
+        }
+        catch(err){
+          console.log(err);
+        }
+    } else {
+        try{
+          dispatch(AsyncGetPosts(1, query));
+        }
+        catch(err){
+          console.log(err);
+        }
     }
   }
+
   /* ====================== If SysAdmin Login ====================================*/
 
   if (auth.role === "SysAdmin" || role === "SysAdmin") {

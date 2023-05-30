@@ -99,7 +99,9 @@ const DetailPost = () => {
       <Card className={Styles.cardPosts}>
         <Card.Body className="d-flex p-3">
           <div className="flex-shrink-0 me-3">
-            {auth.profile_picture ? (
+            {auth.profile_picture === 'none' || !auth.profile_picture  ? (
+              <Avatar />
+              ) : (
               <Image
                 src={
                   auth.profile_picture
@@ -108,8 +110,6 @@ const DetailPost = () => {
                 roundedCircle
                 style={{ width: "50px", height: "50px" }}
               />
-            ) : (
-              <Avatar />
             )}
           </div>
           <div className="flex-grow-1">

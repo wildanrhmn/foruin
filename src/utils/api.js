@@ -369,8 +369,8 @@ const api = (() => {
     return response.data.data;
   }
 
-  async function userGetAllOrganization(page) {
-    const url = `${baseUrl}/profile/users?page=${page}&organizational=true`
+  async function userGetAllOrganization(page, query) {
+const url = `${baseUrl}/profile/users?page=${page}&organizational=true${query ? `&username=${query}` : ''}`
     const response = await axios.get(url);
     return response.data.data;
   }

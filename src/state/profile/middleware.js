@@ -1,4 +1,4 @@
-import { GetDetailProfileAction } from "./action";
+import { GetDetailProfileAction, LikeUnlikeProfileAction } from "./action";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
 
@@ -19,4 +19,22 @@ function AsyncGetDetailProfile(id = null){
     }
 }
 
-export { AsyncGetDetailProfile }
+function AsyncLikePostProfile(id = null, id_user = null) {
+    return async dispatch => {
+        try {
+            if (id === null) {
+                throw new Error()
+            }
+
+            const result = await api.LikeUnlikePost(id);
+            console.info(result)
+            dispatch(LikeUnlikeProfileAction(id, id_user));
+            // Like Unlike Setup
+        } catch (err) {
+            console.error(err);
+        }
+    }
+}
+
+
+export { AsyncGetDetailProfile, AsyncLikePostProfile }

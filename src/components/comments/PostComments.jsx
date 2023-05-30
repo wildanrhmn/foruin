@@ -4,14 +4,14 @@ import Styles from "../../styles/posts/Comment.module.css";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import { ReactComponent as Dots } from "../../assets/icons/Threedots.svg";
+import { ReactComponent as DeletePost } from '../../assets/icons/delete_post.svg'
 import { useDispatch } from "react-redux";
 import { AsyncDeleteComments } from "../../state/discussion/middleware";
+import { Avatar } from "@mui/material";
 
 const CommentsComponent = ({ profilePic, name, username, comment, id_comment, id_post }) => {
   const { auth } = useSelector((states) => states);
   const dispatch = useDispatch();
-  const loginForumInfo = JSON.parse(sessionStorage.getItem("login_forum_info"));
-  const { role } = loginForumInfo || {}; // Add null check here
   const containerRef = useRef(null);
   const [show, setShow] = useState(false);
   const isMd = useMediaQuery({ query: "(max-width: 1400px)" });
@@ -50,12 +50,18 @@ const CommentsComponent = ({ profilePic, name, username, comment, id_comment, id
     <Card className={Styles.cardPosts}>
       <Card.Body className="d-flex p-3" style={{paddingRight: '55px !important'}}>
         <div className="flex-shrink-0 me-3">
-          <Image
-            src={profilePic}
-            alt="Profile Pic"
-            roundedCircle
-            style={{ width: "45px", height: "45px" }}
-          />
+        {profilePic === 'none' ? (
+              <Avatar style={{ width: "50px", height: "50px" }} />
+              ) : (
+              <Image
+                src={
+                  profilePic
+                }
+                alt="Profile Pic"
+                roundedCircle
+                style={{ width: "50px", height: "50px" }}
+              />
+            )}
         </div>
         <div className="flex-grow-1">
           <div className="d-flex justify-content-between">
@@ -84,19 +90,21 @@ const CommentsComponent = ({ profilePic, name, username, comment, id_comment, id
                     cursor: "pointer",
                   }}
                 />             
-                  {auth.role === "Verified" || role === "Verified" ? (
+                  { auth.role === "Verified"  ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li onClick={handleDeleteComment}>Delete Comment</li>
+                      <li onClick={handleDeleteComment} className="d-flex align-items-center gap-2">
+                       <DeletePost />{' '}<span>Delete Comment</span> 
+                      </li>
                   </ul>
-                ) : auth.role === "SysAdmin" || role === "SysAdmin" ? (
+                ) : auth.role === "SysAdmin"  ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
                     <li>Force Delete Comment</li>
                   </ul>
-                ) : auth.role === "Common" || role === "Common" ? (
+                ) : auth.role === "Common"  ? (
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >

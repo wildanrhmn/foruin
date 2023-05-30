@@ -14,6 +14,7 @@ import ProfileReducer from '../state/profile/reducer'
 import ReportReducer from '../state/report/reducer'
 import SubmissionReducer from '../state/submission/reducer'
 import UsersReducer from '../state/users/reducer'
+import OrganizationReducer from "./organization/reducer";
 import QueryFlagReducer from "./flagsearch/reducer";
 
 
@@ -32,7 +33,7 @@ const store = configureStore({
     report: ReportReducer, //done
     submission: SubmissionReducer, //done
     users: UsersReducer, //done
-    organization: UsersReducer, //done
+    organization: OrganizationReducer, //done
     flaging: QueryFlagReducer
   }
 });

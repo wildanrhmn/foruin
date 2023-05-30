@@ -1,5 +1,6 @@
 const ActionType = {
     GET_DETAIL_PROFILE: 'GET_DETAIL_PROFILE',
+    LIKE_UNLIKE_PROFILE_POST: 'LIKE_UNLIKE_PROFILE'
 }
 
 function GetDetailProfileAction(details) {
@@ -11,4 +12,14 @@ function GetDetailProfileAction(details) {
     }
 }
 
-export { ActionType, GetDetailProfileAction }
+function LikeUnlikeProfileAction(id_post, id_user) {
+    return {
+        type: ActionType.LIKE_UNLIKE_PROFILE_POST,
+        payload: {
+            id_post,
+            id_user
+        }
+    }
+}
+
+export { ActionType, GetDetailProfileAction, LikeUnlikeProfileAction }

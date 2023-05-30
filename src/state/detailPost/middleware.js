@@ -24,7 +24,6 @@ function AsyncGetDetailPost(id = null) {
 }
 
 function AsyncLikePostDetail(id = null, id_user = null) {
-    console.info(id, id_user)
     return async dispatch => {
         try {
             if (id === null) {
