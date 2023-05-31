@@ -86,10 +86,10 @@ const DetailPost = () => {
       <Posts
         _id={detailPost?.id}
         id_user={detailPost?.created_by}
-        username={detailPost?.display_name}
+        username={detailPost?.username}
         profilePic={detailPost?.profile_picture?.url}
         description={detailPost?.body}
-        name={detailPost?.username}
+        name={detailPost?.display_name}
         category={detailPost?.category}
         totalLikes={detailPost?.likes?.length}
         totalComments={detailPost?.discussion?.length}
