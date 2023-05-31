@@ -21,6 +21,7 @@ const LandingPage = () => {
   const { users = [] } = useSelector(states => states);
   const {category = [] } = useSelector(states => states);
   const { flaging = { status: false } } = useSelector(states => states);
+
   useEffect(() => {
     dispatch(AsyncGetAllOrganizations());
     dispatch(AsyncGetAllCategory());

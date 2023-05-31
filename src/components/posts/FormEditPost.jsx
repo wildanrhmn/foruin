@@ -10,8 +10,6 @@ import InputManyImage from "../tools/InputManyImage";
 import Editor from "../tools/Editor";
 
 import Styles from "../../styles/FormLayout.module.css";
-import Swal from "sweetalert2";
-import 'sweetalert2/dist/sweetalert2.min.css';
 
 export default function FormEditPost() {
   const dispatch = useDispatch();
@@ -19,10 +17,11 @@ export default function FormEditPost() {
   const postData = JSON.parse(localStorage.getItem('postData'));
   const filteredDataVideo = postData.imageSrc.filter(item => item.url?.endsWith('.mp4'));
   const filteredDataImage = postData.imageSrc.filter(item => item.url?.endsWith('.jpg') || item.url?.endsWith('.png') || item.url?.endsWith('.webp'));
-  const [uploadedVideo, setUploadedVideo] = useState(filteredDataVideo || null);
+  const [uploadedVideo, setUploadedVideo] = useState(filteredDataVideo.length > 0 ? filteredDataVideo : null);
   const [gambarPost, setGambarPost] = useState(filteredDataImage || []);
   const [kategoriPost, setKategoriPost] = useState(JSON.parse(postData?.category) || []);
   const [isiPost, setIsiPost] = useState(postData?.description);
+
 
   function handleChangePost(e){
     e.preventDefault();
@@ -34,24 +33,8 @@ export default function FormEditPost() {
           video_attachments: uploadedVideo,
           picture_attachments: gambarPost,
         }))
-        Swal.fire({
-          icon: 'success',
-          title: 'Successfully Updated!',
-          text: 'Your update may take a while to show up.',
-          showConfirmButton: false,
-          timer: 3000
-        }).then(() => {
-          navigate('/');
-        })
       } catch (err){
         console.log(err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Cannot Post!',
-          text: 'Please make sure you are putting the correct inputs.',
-          showConfirmButton: false,
-          timer: 3000
-        })
       }
     }
   } 

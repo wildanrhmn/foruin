@@ -169,21 +169,25 @@ const api = (() => {
 
     form.append("category", JSON.stringify(data.category));
 
-    data.picture_attachments.forEach(attach => {
-      if(attach.url) {
-        form.append('picture_attachments[]', JSON.stringify(attach))
-      } else {
-        form.append('picture_attachments', attach)
-      }
-    })
+    if (data.picture_attachments) {
+      data.picture_attachments.forEach(attach => {
+        if (attach && attach.url) {
+          form.append('picture_attachments[]', JSON.stringify(attach));
+        } else if (attach) {
+          form.append('picture_attachments', attach);
+        }
+      });
+    }
 
-    data.video_attachments?.forEach(attach => {
-      if(attach.file) {
-        form.append('video_attachments', attach.file)
-      } else {
-        form.append('video_attachments[]', JSON.stringify(attach[0]))
+  if (data.video_attachments) {
+    data.video_attachments.forEach(attach => {
+      if (attach && attach.file) {
+        form.append('video_attachments', attach.file);
+      } else if (attach && Array.isArray(attach) && attach[0]) {
+        form.append('video_attachments[]', JSON.stringify(attach[0]));
       }
-    })
+    });
+  }
 
     const response = await axios.put(url, form);
     return response.data.data

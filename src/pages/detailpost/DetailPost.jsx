@@ -31,6 +31,7 @@ const DetailPost = () => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [showReplyForm, setShowReplyForm] = useState(false);
+
   //For Snackbar Close
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -152,6 +153,7 @@ const DetailPost = () => {
           comment={comment.body}
           id_comment={comment.id}
           id_post={comment.topic}
+          created_by={comment.created_by}
         />
       ))}
       <ModalPostComment

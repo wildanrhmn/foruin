@@ -248,7 +248,10 @@ function Posts({
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li>Bisukan @{username}</li>
+                    <li>Not interested in this post</li>
+                    <li>Mute @{username}</li>
+                    <li>Block @{username}</li>
+                    <li>Report post</li>
                   </ul>
                 ) : auth.role === "SysAdmin" ? (
                   <ul
@@ -261,7 +264,10 @@ function Posts({
                   <ul
                     className={`${Styles.subMenu} ${show ? Styles.show : ""}`}
                   >
-                    <li>Bisukan @{username}</li>
+                    <li>Not interested in this post</li>
+                    <li>Mute @{username}</li>
+                    <li>Block @{username}</li>
+                    <li>Report post</li>
                   </ul>
                 ) : (
                   <div
